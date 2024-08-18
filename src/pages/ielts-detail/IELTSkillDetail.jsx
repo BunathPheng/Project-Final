@@ -55,7 +55,6 @@ import { NavLink } from "react-router-dom";
 import IELTSSkillExerciseComponent from "./IELTSSkillExerciseComponent";
 export default function LessonDetail() {
   const param = useParams();
-  // console.log("param", param);
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
   // console.log("convert", convert);
@@ -128,6 +127,9 @@ export default function LessonDetail() {
   // console.log("skillLevelname:", skillNameLevels);
   const [audioUrl, setAudioUrl] = useState("");
   const [scoreSound, setScoreSound] = useState(null);
+  const newtitles = param.title.replace(/-/g, " ");
+  const newname = newtitles.split(" ");
+  const newstr = `b1-${newname[1]}`;
   useEffect(() => {
     dispatch(fetchUserData(getAccessToken()));
   }, []);
@@ -163,10 +165,10 @@ export default function LessonDetail() {
       dispatch(fetchExcersiceById(finaluuid));
     }
   }, [finaluuid, dispatch]);
-  const skill_level = param["skill_level-skill_name"];
+
   useEffect(() => {
-    dispatch(fetchSkillNameLevel(skill_level));
-  }, [dispatch, skill_level]);
+    dispatch(fetchSkillNameLevel(newstr));
+  }, []);
 
   useEffect(() => {
     const filteredSkills = skillNameLevels.filter((item) =>
@@ -318,26 +320,23 @@ export default function LessonDetail() {
           aria-label="Sidebar"
         >
           <div className="h-full px-3 w-[160px] overflow-y-auto bg-white pb-8 ">
-            <ul className="space-y-4 font-suwannaphum">
+            <ul className="space-y-4 font-bold text-grays">
               {skillLevels.map((selectNameLevel) =>
-                selectNameLevel.exercises.map((excersice) => {
-                  // console.log("exercise:", excersice);
-                  // console.log("excersice.title", excersice.title);
-                  const name = excersice.title.toLowerCase();
+                selectNameLevel.exercises.map((exercise) => {
+                  console.log("exercise", exercise.title);
+                  const name = exercise.title.toLowerCase();
                   const formattedTitle = name.replace(/\s+/g, "-");
                   return (
-                    <>
-                      <li key={excersice.id}>
-                        <NavLink
-                          to={`/skills/${param.skill_name}/${param["skill_level-skill_name"]}/${formattedTitle}`}
-                          className={({ isActive }) =>
-                            `${isActive ? "text-primary" : "text-black"}`
-                          }
-                        >
-                          {excersice.title}
-                        </NavLink>
-                      </li>
-                    </>
+                    <li key={exercise.id}>
+                      <NavLink
+                        to={`/ielts/${param["ielts-name"]}/${formattedTitle}`}
+                        className={({ isActive }) =>
+                          `${isActive ? "text-primary" : "text-grays"}`
+                        }
+                      >
+                        {exercise.title}
+                      </NavLink>
+                    </li>
                   );
                 })
               )}

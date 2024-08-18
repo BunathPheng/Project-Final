@@ -64,3 +64,4 @@ export default lessondetailSlice.reducer;
 //state.reducer.product(in initialState)
 export const selectExcersice = ((state) => state.excersice.excercises);
 export const  selectExcersiceById = ((state) => state.excersice.excercise);
+export const selectLoadingStatus = ((state) => state.excersice.status);

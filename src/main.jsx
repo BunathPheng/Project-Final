@@ -76,14 +76,6 @@ const router = createBrowserRouter([
         element: <IELTSkillDetail />,
       },
       {
-        path: "/ielts/:ielts-name",
-        element: <IETLSSkill />,
-      },
-      {
-        path: "/ielts/:ielts-name/:title",
-        element: <IELTSkillDetail />,
-      },
-      {
         path: "/skills",
         element: <SkillPage />,
       },

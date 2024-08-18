@@ -13,6 +13,7 @@ import {
   fetchExcersices,
   selectExcersice,
   selectExcersiceById,
+  selectLoadingStatus,
 } from "../../redux/features/lessondetail/lessondetailSlice";
 import {
   fetchSkillNameLevel,
@@ -55,6 +56,7 @@ import bag from "../../assets/img/bag.jpg";
 import loading from "../../assets/img/loading.gif";
 import bag1 from "../../assets/img/bag1.jpg";
 import { NavLink } from "react-router-dom";
+import loading2 from "../../assets/img/loding1.gif";
 import SkillExerciseComponent from "../../components/skill-exercise-component/SkillExerciseComponent";
 import LoadingLessonDetail from "../../components/common/loading/LoadingLessonDetail";
 export default function LessonDetail() {
@@ -65,6 +67,7 @@ export default function LessonDetail() {
   console.log("convert", convert);
   const excercises = useSelector(selectExcersice);
   const excersiceById = useSelector(selectExcersiceById);
+  const statuss = useSelector(selectLoadingStatus);
   console.log("excersiceById in LessonDetail:", excersiceById);
   const skillNameLevels = useSelector(selectNameLevel);
   const submits = useSelector(selectSubmit);
@@ -373,112 +376,115 @@ export default function LessonDetail() {
           </div>
         </aside>
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
-          <div>
-            {excersiceById?.thumbnail &&
-            <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
-              <div className="flex gap-4 flex-col  lg:flex-row">
-                <img
-                  src={
-                    excersiceById?.thumbnail 
-                    ||
-                    "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-                  }
-                  alt=""
-                  className="w-[350px] object-cover rounded-lg"
-                />
-                <div className="">
-                  <h2 className="w-fit  bg-[#ffc30e] md:px-20 px-10 py-2 text-white font-bold text-lg">
-                    {excersiceById?.title 
-                    || "No title"
-                    }
-                  </h2>
-                  <div className="flex gap-4 mt-4 text-grays items-center">
-                    <BsPatchCheck className=" text-[60px] lg:text-2xl md:text-xl text-second" />
-                    <p className="lg:text-xl text-[18px] md:line-clamp-none line-clamp-1">
-                      {excersiceById?.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {statuss === "Loading" ? (
+            <div className="flex justify-center h-[200px]">
+              <img src={loading2} alt="Loading..." />
             </div>
-            }
-            {console.log("exercise:", excersiceById)}
-            {excersiceById?.video && (
-              <div className="bg-gray-300 mt-7">
-                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                  វីដេអូ
-                </h2>
-                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                  <div className="px-8 py-6 border-2 bg-white rounded-xl">
-                    <div>
-                      <video width="100%" controls>
-                        <source src={excersiceById.video} type="video/mp4" />
-                      </video>
+          ) : (
+            <div>
+              {excersiceById?.thumbnail && (
+                <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
+                  <div className="flex gap-4 flex-col  lg:flex-row">
+                    <img
+                      src={
+                        excersiceById?.thumbnail ||
+                        "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                      }
+                      alt=""
+                      className="w-[350px] object-cover rounded-lg"
+                    />
+                    <div className="">
+                      <h2 className="w-fit  bg-[#ffc30e] md:px-20 px-10 py-2 text-white font-bold text-lg">
+                        {excersiceById?.title || "No title"}
+                      </h2>
+                      <div className="flex gap-4 mt-4 text-grays items-center">
+                        <BsPatchCheck className=" text-[60px] lg:text-2xl md:text-xl text-second" />
+                        <p className="lg:text-xl text-[18px] md:line-clamp-none line-clamp-1">
+                          {excersiceById?.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-            {excersiceById.voice && (
-              <div className="mt-7">
-                <audio
-                  controls
-                  className="w-full"
-                  src={excersiceById?.voice}
-                ></audio>
-              </div>
-            )}
-
-            {excersiceById?.transcript &&
-              excersiceById?.transcript !== "transcript for reading text" && (
+              )}
+              {console.log("exercise:", excersiceById)}
+              {excersiceById?.video && (
                 <div className="bg-gray-300 mt-7">
                   <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                    ការសន្ទនា
+                    វីដេអូ
+                  </h2>
+                  <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                    <div className="px-4 md:px-8 py-6 border-2 bg-white rounded-xl">
+                      <div>
+                        <video width="100%" controls>
+                          <source src={excersiceById.video} type="video/mp4" />
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {excersiceById.voice && (
+                <div className="mt-7">
+                  <audio
+                    controls
+                    className="w-full"
+                    src={excersiceById?.voice}
+                  ></audio>
+                </div>
+              )}
+
+              {excersiceById?.transcript &&
+                excersiceById?.transcript !== "transcript for reading text" && (
+                  <div className="bg-gray-300 mt-7">
+                    <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
+                      ការសន្ទនា
+                    </h2>
+                    <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                      <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                        <p className="text-[20px] leading-[3rem]">
+                          {parse(`${excersiceById?.transcript}`)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              {excersiceById?.reading_text && (
+                <div className="bg-gray-300 mt-7">
+                  <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
+                    អត្ថបទអំណាន
                   </h2>
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
                     <div className="px-8 py-6 border-2 bg-white rounded-xl">
                       <p className="text-[20px] leading-[3rem]">
-                        {parse(`${excersiceById?.transcript}`)}
+                        {parse(excersiceById?.reading_text)}
                       </p>
                     </div>
                   </div>
                 </div>
               )}
-            {excersiceById?.reading_text && (
-              <div className="bg-gray-300 mt-7">
-                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                  អត្ថបទអំណាន
-                </h2>
-                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                  <div className="px-8 py-6 border-2 bg-white rounded-xl">
-                    <p className="text-[20px] leading-[3rem]">
-                      {parse(excersiceById?.reading_text)}
-                    </p>
+              {excersiceById.tip && (
+                <div className="bg-gray-300 mt-7">
+                  <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
+                    គន្លឹះ
+                  </h2>
+                  <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                    <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                      <p className="text-[20px] leading-[3rem]">
+                        {parse(excersiceById?.tip)}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-            {excersiceById.tip && (
-              <div className="bg-gray-300 mt-7">
-                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                  គន្លឹះ
-                </h2>
-                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                  <div className="px-8 py-6 border-2 bg-white rounded-xl">
-                    <p className="text-[20px] leading-[3rem]">
-                      {parse(excersiceById?.tip)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-            {excersiceById.ex_uuid && 
-              <SkillExerciseComponent
-                key={excersiceById.ex_uuid}
-                exercise={excersiceById}
-              />
-            }
-          </div>
+              )}
+              {excersiceById.ex_uuid && (
+                <SkillExerciseComponent
+                  key={excersiceById.ex_uuid}
+                  exercise={excersiceById}
+                />
+              )}
+            </div>
+          )}
         </main>
       </div>
     </>

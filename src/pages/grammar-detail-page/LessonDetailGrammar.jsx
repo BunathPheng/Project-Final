@@ -14,6 +14,7 @@ import {
   fetchExcersices,
   selectExcersice,
   selectExcersiceById,
+  selectLoadingStatus,
 } from "../../redux/features/lessondetail/lessondetailSlice";
 import {
   fetchSkillNameLevel,
@@ -56,6 +57,7 @@ import voicewin10 from "../../assets/video/win5.mp3";
 import bag from "../../assets/img/bag.jpg";
 import loading from "../../assets/img/loading.gif";
 import bag1 from "../../assets/img/bag1.jpg";
+import loading2 from "../../assets/img/loding1.gif";
 import { selectUsers } from "../../redux/verify/verifyUserSlice";
 import { FaLess, FaRegHandPointRight } from "react-icons/fa6";
 import { fetchGrammarsByLevel } from "../../redux/features/grammar/grammarSllice";
@@ -84,6 +86,7 @@ export default function LessonDetailGrammar() {
   const dispatch = useDispatch();
   const lessons = useSelector(selectAllLessons);
   const lessonsById = useSelector(selectAllLessonsById);
+  const statss = useSelector((state) => state.lesson.status);
   const users = useSelector(selectUsers);
   const status = useSelector((state) => state.userVerify.status);
   const error = useSelector((state) => state.userVerify.error);
@@ -162,7 +165,7 @@ export default function LessonDetailGrammar() {
   useEffect(() => {
     dispatch(fetchLessons());
   }, []);
- 
+
   useEffect(() => {
     if (lessons.length > 0) {
       const matchedlessons = lessons.find(
@@ -343,7 +346,7 @@ export default function LessonDetailGrammar() {
                   return (
                     <li key={excersice.lesson_uuid}>
                       <NavLink
-                        to={`/grammar/${param["level-grammars"]}/${formattedTitle}`}
+                        to={`/grammar/${param["level-grammar"]}/${formattedTitle}`}
                         className={({ isActive }) =>
                           `${isActive ? "text-primary" : "text-grays"}`
                         }
@@ -358,121 +361,132 @@ export default function LessonDetailGrammar() {
           </div>
         </aside>
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
-          <div>
-            <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
-              <div className="">
-                <div className="flex gap-4 flex-col lg:flex-row">
-                  <img
-                    src={
-                      lessonsById?.thumbnail ||
-                      "https://i0.wp.com/thinkfirstcommunication.com/wp-content/uploads/2022/05/placeholder-1-1.png?fit=1200%2C800&ssl=1"
-                    }
-                    alt=""
-                    className="w-[350px] object-cover rounded-lg"
-                  />
+          {statss === "loading" ? (
+            <div className="flex justify-center h-[200px]">
+              <img src={loading2} alt="Loading..." />
+            </div>
+          ) : (
+            <>
+              <div>
+                <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
                   <div className="">
-                    <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-1">
-                      {lessonsById?.lesson_title || "No title available"}
-                    </h2>
-                    <div className="flex gap-4 mt-4 text-grays">
-                      <BsPatchCheck className="text-[40px] md:text-[30px] text-second" />
-                      <p className="md:text-lg md:line-clamp-none line-clamp-2">
-                        {lessonsById?.description}
-                      </p>
+                    <div className="flex gap-4 flex-col lg:flex-row">
+                      <img
+                        src={
+                          lessonsById?.thumbnail ||
+                          "https://i0.wp.com/thinkfirstcommunication.com/wp-content/uploads/2022/05/placeholder-1-1.png?fit=1200%2C800&ssl=1"
+                        }
+                        alt=""
+                        className="w-[350px] object-cover rounded-lg"
+                      />
+                      <div className="">
+                        <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-1">
+                          {lessonsById?.lesson_title || "No title available"}
+                        </h2>
+                        <div className="flex gap-4 mt-4 text-grays">
+                          <BsPatchCheck className="text-[40px] md:text-[30px] text-second" />
+                          <p className="md:text-lg md:line-clamp-none line-clamp-2">
+                            {lessonsById?.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-300">
+                  <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
+                    ការពន្យល់វេយ្យាករណ៍
+                  </h2>
+                  <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                    <div className="px-8 border-2 bg-white rounded-xl">
+                      {/* ko */}
+                      {lessonsById?.sections?.map((section, index) => {
+                        console.log("section", section);
+                        return (
+                          <>
+                            <div className="mb-5">
+                              {section?.title
+                                .toLowerCase()
+                                .includes("grammar explanation") ? (
+                                <></>
+                              ) : (
+                                <div className="flex items-center mt-8 gap-3 text-primary">
+                                  <FaRegHandPointRight />
+                                  <h1 className="font-bold lg:text-2xl  md:text-2xl  text-xl flex-1">
+                                    {parse(`${section?.title}`)}
+                                  </h1>
+                                </div>
+                              )}
+                              <p className="mt-2 leading-10 text-[1rem]">
+                                {parse(`${section?.description}`)}
+                              </p>
+                              {section?.title
+                                .toLowerCase()
+                                .includes("grammar explanation") ? (
+                                <></>
+                              ) : (
+                                <>
+                                  {section.examples.map((example, index) => {
+                                    if (example.example.includes("#")) {
+                                      const parts = example.example.split("#");
+                                      return (
+                                        <div
+                                          key={index}
+                                          className="example-container"
+                                        >
+                                          <p className="mt-5 leading-10 text-[1rem]">
+                                            {parse(parts[0])}
+                                          </p>
+                                          {parts[1] && (
+                                            <div>
+                                              <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
+                                                ឧទាហរណ៍:
+                                              </h1>
+                                              <p className="mt-3 text-[1rem]">
+                                                {parse(parts[1])}
+                                              </p>
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    } else {
+                                      return (
+                                        <div key={index}>
+                                          {index === 0 && (
+                                            <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
+                                              ឧទាហរណ៍:
+                                            </h1>
+                                          )}
+                                          <p className="mt-3 text-[1rem]">
+                                            {parse(example.example)}
+                                          </p>
+                                        </div>
+                                      );
+                                    }
+                                  })}
+                                </>
+                              )}
+                            </div>
+                          </>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-gray-300">
-              <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
-                ការពន្យល់វេយ្យាករណ៍
-              </h2>
-              <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                <div className="px-8 border-2 bg-white rounded-xl">
-                  {/* ko */}
-                  {lessonsById?.sections?.map((section, index) => {
-                    console.log("section", section);
-                    return (
-                      <>
-                        <div className="mb-5">
-                          {section?.title
-                            .toLowerCase()
-                            .includes("grammar explanation") ? (
-                            <></>
-                          ) : (
-                            <div className="flex items-center mt-8 gap-3 text-primary">
-                              <FaRegHandPointRight />
-                              <h1 className="font-bold lg:text-2xl  md:text-2xl  text-xl flex-1">
-                                {parse(`${section?.title}`)}
-                              </h1>
-                            </div>
-                          )}
-                          <p className="mt-2 leading-10 text-[1rem]">
-                            {parse(`${section?.description}`)}
-                          </p>
-                          {section?.title
-                            .toLowerCase()
-                            .includes("grammar explanation") ? (
-                            <></>
-                          ) : (
-                            <>
-                              {section.examples.map((example, index) => {
-                                if (example.example.includes("#")) {
-                                  const parts = example.example.split("#");
-                                  return (
-                                    <div
-                                      key={index}
-                                      className="example-container"
-                                    >
-                                      <p className="mt-5 leading-10 text-[1rem]">
-                                        {parse(parts[0])}
-                                      </p>
-                                      {parts[1] && (
-                                        <div>
-                                          <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
-                                            ឧទាហរណ៍:
-                                          </h1>
-                                          <p className="mt-3 text-[1rem]">
-                                            {parse(parts[1])}
-                                          </p>
-                                        </div>
-                                      )}
-                                    </div>
-                                  );
-                                } else {
-                                  return (
-                                    <div key={index}>
-                                      {index === 0 && (
-                                        <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
-                                          ឧទាហរណ៍:
-                                        </h1>
-                                      )}
-                                      <p className="mt-3 text-[1rem]">
-                                        {parse(example.example)}
-                                      </p>
-                                    </div>
-                                  );
-                                }
-                              })}
-                            </>
-                          )}
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-          {lessonsById?.exercises?.map((exercise) => {
-            console.log("Each exercise", exercise);
-            return (
-              <>
-                <ExerciseComponent key={exercise.ex_uuid} exercise={exercise} />
-              </>
-            );
-          })}
+              {lessonsById?.exercises?.map((exercise) => {
+                console.log("Each exercise", exercise);
+                return (
+                  <>
+                    <ExerciseComponent
+                      key={exercise.ex_uuid}
+                      exercise={exercise}
+                    />
+                  </>
+                );
+              })}
+            </>
+          )}
         </main>
       </div>
     </>

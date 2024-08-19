@@ -193,23 +193,23 @@ export default function Dashboard() {
   const numAllSubmitExercises = submitExercises?.payload?.length;
   const total = (numAllSubmitExercises / numAllExercises) * 100;
   const totalA1 = parseFloat(
-    ((exerciseA1Data / groupedExercises["A1"]?.length) * 100).toFixed(2)
-  );
+    ((exerciseA1Data / groupedExercises["A1"]?.length) * 100).toFixed()
+  ) ||0;
   const totalA2 = parseFloat(
-    ((exerciseA2Data / groupedExercises["A2"]?.length) * 100).toFixed(2)
-  );
+    ((exerciseA2Data / groupedExercises["A2"]?.length) * 100).toFixed()
+  ) || 0;
   const totalB1 = parseFloat(
-    ((exerciseB1Data / groupedExercises["B1"]?.length) * 100).toFixed(2)
-  );
+    ((exerciseB1Data / groupedExercises["B1"]?.length) * 100).toFixed()
+  ) || 0;
   const totalB2 = parseFloat(
-    ((exerciseB2Data / groupedExercises["B2"]?.length) * 100).toFixed(2)
-  );
+    ((exerciseB2Data / groupedExercises["B2"]?.length) * 100).toFixed()
+  ) || 0;
   const totalC1 = parseFloat(
-    ((exerciseC1Data / groupedExercises["C1"]?.length) * 100).toFixed(2)
-  );
+    ((exerciseC1Data / groupedExercises["C1"]?.length) * 100).toFixed()
+  ) || 0;
   const totalC2 = parseFloat(
-    ((exerciseC2Data / groupedExercises["C2"]?.length) * 100).toFixed(2)
-  );
+    ((exerciseC2Data / groupedExercises["C2"]?.length) * 100).toFixed()
+  ) || 0;
 
   console.log("groupedExercises['A1']: ", groupedExercises["A1"]);
 
@@ -254,7 +254,7 @@ export default function Dashboard() {
   const series = [
     {
       name: "Exercises",
-      data: [total, totalC2, totalC1, totalB2, totalB1, totalA2, totalA1],
+      data: [100, totalC2, totalC1, totalB2, totalB1, totalA2, totalA1],
       color: "#0EBC87",
     },
   ];

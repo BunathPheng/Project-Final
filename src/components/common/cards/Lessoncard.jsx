@@ -6,7 +6,6 @@ import "../cards/Lessoncard.css";
 export default function Lessoncard({ onClick, title, des, pic, uuid }) {
   const [newtitle, setNewTitle] = useState("");
   useEffect(() => {
-    // Sanitize the title once on mount or when the title prop changes
     let sanitizedTitle = title
       .replace(/ /g, "-")       
       .toLowerCase();           
@@ -15,7 +14,6 @@ export default function Lessoncard({ onClick, title, des, pic, uuid }) {
   }, [title]);
   //const newtitle = encodeURIComponent(title.replace(/ /g, "-"));
   // const convert = newtitle.toLowerCase();
-  // console.log("convert:",convert);
 
   return (
     // <div onClick={handleClick}>

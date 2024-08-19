@@ -72,15 +72,23 @@ export default function IELTSSkill() {
         </div>
         <div className="mx-auto w-[100%] my-10 px-5  md:p-0  justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10  md:w-[90%] exclude">
           {ieltsLevels?.map((selectNameLevel) => {
+            {console.log("selectNameLevel.exercises:",selectNameLevel.exercises)}
             const sortedExercises = selectNameLevel.exercises
-              .slice()
-              .sort((a, b) => {
-                console.log(a);
-                // Sort by the numeric value that determines the order
-                return a.order - b.order; // Replace 'order' with the correct property
-              });
+            .slice()
+            .sort((a, b) => {
+              // Regular expression to match the number in the title
+              const getNumberFromTitle = (title) => {
+                const match = title.match(/\d+/);
+                return match ? parseInt(match[0], 10) : 0; // Return the number or 0 if no number is found
+              };
 
-            console.log("Sorted exercises:", sortedExercises);
+              // Extract numbers from titles
+              const numberA = getNumberFromTitle(a.title);
+              const numberB = getNumberFromTitle(b.title);
+
+              // Sort in ascending order based on the number
+              return numberA - numberB;
+            });
 
             return sortedExercises.map((exercise, index) => {
               return (

@@ -192,7 +192,6 @@ const SkillExerciseComponent = ({ exercise, key }) => {
   };
   const token = getAccessToken();
   useEffect(() => {
-    console.log("token before dispatching the fetchUserData:", token);
     if (token) {
       dispatch(fetchUserData(token));
     }
@@ -200,7 +199,6 @@ const SkillExerciseComponent = ({ exercise, key }) => {
 
   const user = useSelector(selectUsers);
   const uid = user?.user_uuid;
-  console.log("user in Exercise:", user);
   const handleSubmit = async (lexerciseUuid, excersice) => {
     const unansweredQuestions = excersice?.questions?.filter(
       (question) => !selectedAnswers[question.q_uuid]
@@ -222,7 +220,6 @@ const SkillExerciseComponent = ({ exercise, key }) => {
       user_uuid: uid || "", // Replace, this with dynamic user UUID if available
       user_answer: userAnswers,
     };
-    console.log("token", getAccessToken());
 
     if (lexerciseUuid) {
       try {
@@ -234,10 +231,8 @@ const SkillExerciseComponent = ({ exercise, key }) => {
         handleShowAnswers(lexerciseUuid);
         setShowScore(true); // Ensure score is shown after submission
         setOpenModal(true);
-        console.log("response in exercise:", response);
         const points = response.payload.payload.exercises.scores;
         scoreArray[lexerciseUuid] = parseFloat(points);
-        console.log("scoreArray:", scoreArray[lexerciseUuid]);
         // Determine which sound to play based on the score
         const soundToPlay = points >= 5 ? randomVoiceWin : randomVoiceLose;
         //const scoreSound = new Audio(soundToPlay);
@@ -258,7 +253,6 @@ const SkillExerciseComponent = ({ exercise, key }) => {
     setScore(0);
     setShowScore(false); // Reset showScore
     setIsSubmitted(false); // Reset isSubmitted
-    console.log("Exercise UUID:", lexerciseUuid);
     const exercise_uuids = [lexerciseUuid];
     dispatch(
       fetchResubmitExercise({ user_uuid, exercises_uuids: exercise_uuids })
@@ -282,9 +276,7 @@ const SkillExerciseComponent = ({ exercise, key }) => {
 
   const handleShowScore = (lexerciseUuid) => {
     if (isSubmitted) {
-      console.log("exercise in handleScore:", lexerciseUuid);
       const newScore = scoreArray[lexerciseUuid];
-      console.log("new score: ", newScore);
       if (newScore !== undefined) {
         setScore(newScore);
         setShowScore(true);
@@ -651,7 +643,6 @@ const SkillExerciseComponent = ({ exercise, key }) => {
           </div>
         </div>
       </div>
-      {console.log("score: ", score)}
       <div
         id="popup-modal"
         tabIndex="-1"

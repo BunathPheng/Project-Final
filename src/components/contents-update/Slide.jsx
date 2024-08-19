@@ -28,7 +28,6 @@ export default function Slide() {
   }, [dispatch]);
   const lessons = useSelector(selectAllLessons);
   const lastFourLessons = lessons.slice(-8);
-  console.log("lessons:", lastFourLessons);
   return (
     <>
       <Swiper

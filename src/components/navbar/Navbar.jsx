@@ -52,7 +52,6 @@ export default function Navbar() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
   useEffect(() => {
-    console.log("token before dispatching the fetchUserData:", token);
     if (token) {
       dispatch(fetchUserData(token));
     }
@@ -60,8 +59,6 @@ export default function Navbar() {
 
   const user = useSelector(selectUsers);
   const userProfile = useSelector(selectUserProfile);
-  console.log("user in navbar:", user);
-  console.log("profile in navbar:", userProfile);
 
   const handleClick = () => {
     setClickCount(clickCount + 1); // Increment click count on any click
@@ -649,7 +646,7 @@ export default function Navbar() {
                 <Link
                   to="/ielts"
                   className={`block py-2 px-3 font-bold text-grays lg:p-0 ${
-                    location.pathname === "/ielts"
+                    location.pathname.includes("/ielts")
                       ? "text-primary bg-gray-100 rounded lg:bg-transparent"
                       : "hover:text-primary"
                   }`}

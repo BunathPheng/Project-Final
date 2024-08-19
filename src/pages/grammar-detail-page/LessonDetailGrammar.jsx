@@ -306,6 +306,16 @@ export default function LessonDetailGrammar() {
       setAnswersToShow(answers);
     }
   };
+
+  const sortedSections = [...(lessonsById?.sections || [])].sort((a, b) => {
+    const aIsGE = a?.title?.toLowerCase().includes("grammar explanation") || a?.title?.toLowerCase().includes("ge");
+    const bIsGE = b?.title?.toLowerCase().includes("grammar explanation") || b?.title?.toLowerCase().includes("ge");
+  
+    if (aIsGE && !bIsGE) return -1; // a comes first
+    if (!aIsGE && bIsGE) return 1;  // b comes first
+    return 0; // keep original order if both are GE or neither is GE
+  });
+
   // console.log("lessonId", lessonsById);
   const handleShowScore = () => {
     if (isSubmitted) {
@@ -423,15 +433,26 @@ export default function LessonDetailGrammar() {
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
                     <div className="px-4 border-2 bg-white rounded-xl">
                       {/* ko */}
-                      {lessonsById?.sections?.map((section, index) => {
+                      {/* {lessonsById?.sections?.map((section, index) => { */}
+                      {sortedSections
+                        .map((section, index) => {
                         // console.log("section", section);
                         return (
                           <>
                             <div className="mb-5 md:px-8 md:leading-10">
                               {section?.title
                                 .toLowerCase()
-                                .includes("grammar explanation") ? (
-                                <></>
+                                .includes("grammar explanation") ||  section?.title
+                                .toLowerCase()
+                                .includes("ge")? (
+                                <>
+                                  <div className="flex items-center mt-8 gap-3 text-primary">
+                                  <FaRegHandPointRight />
+                                  <h1 className="font-bold lg:text-[24px]  md:text-[20px]  text-[16px] flex-1">
+                                    {parse(`${section?.title.replace("GE", "Grammar Explanation")}`)}
+                                  </h1>
+                                </div>
+                                </>
                               ) : (
                                 <div className="flex items-center mt-8 gap-3 text-primary">
                                   <FaRegHandPointRight />
@@ -445,7 +466,9 @@ export default function LessonDetailGrammar() {
                               </p>
                               {section?.title
                                 .toLowerCase()
-                                .includes("grammar explanation") ? (
+                                .includes("grammar explanation") ||  section?.title
+                                .toLowerCase()
+                                .includes("ge")? (
                                 <></>
                               ) : (
                                 <>

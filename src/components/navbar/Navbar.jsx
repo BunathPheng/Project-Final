@@ -132,7 +132,7 @@ export default function Navbar() {
             <button
               data-collapse-toggle="navbar-search"
               type="button"
-              className="inline-flex items-center mt-1 p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg style-navbar2 lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center mt-1 p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" //style-navbar2 "
               aria-controls="navbar-search"
               aria-expanded="false"
             >
@@ -249,7 +249,7 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1 style-navbar"
+            className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"// style-navbar"
             id="navbar-search"
           >
             <div className="relative mt-3 lg:hidden ">
@@ -667,7 +667,7 @@ export default function Navbar() {
                   />
                 </div>
                 <h3 className="mb-5 py-4 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  តើ​អ្នក​ប្រាកដ​ជា​ចង់ចាក់​ចេញឬ?
+                  តើ​អ្នក​ប្រាកដ​ជា​ចង់ចាកចេញឬ?
                 </h3>
 
                 <button

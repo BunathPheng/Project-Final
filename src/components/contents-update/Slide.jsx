@@ -13,15 +13,21 @@ import litening from "../../assets/img/card-img2.png";
 import reading from "../../assets/img/card-img3.png";
 import img3 from "../../assets/img/card-img1.png";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExcersices, selectExcersice } from "../../redux/features/lessondetail/lessondetailSlice";
-import { fetchLessons, selectAllLessons } from "../../redux/features/lessons/LessonsSlice";
+import {
+  fetchExcersices,
+  selectExcersice,
+} from "../../redux/features/lessondetail/lessondetailSlice";
+import {
+  fetchLessons,
+  selectAllLessons,
+} from "../../redux/features/lessons/LessonsSlice";
 export default function Slide() {
   const dispatch = useDispatch();
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchLessons());
-  }, [dispatch])
+  }, [dispatch]);
   const lessons = useSelector(selectAllLessons);
-  const lastFourLessons = lessons.slice(-4);
+  const lastFourLessons = lessons.slice(-8);
   console.log("lessons:", lastFourLessons);
   return (
     <>
@@ -54,18 +60,18 @@ export default function Slide() {
         }}
       >
         <div className="">
-          {lastFourLessons.map((lesson, index)=>{
+          {lastFourLessons.map((lesson, index) => {
             return (
-            <SwiperSlide key={index}>
-            <CardContentUpdate
-              img={lesson?.thumbnail}
-              title={lesson?.lesson_title}
-              des={parse(lesson?.description)}
-            />
-          </SwiperSlide>
-            )
+              <SwiperSlide key={index}>
+                <CardContentUpdate
+                  img={lesson?.thumbnail}
+                  title={lesson?.lesson_title}
+                  des={parse(lesson?.description)}
+                />
+              </SwiperSlide>
+            );
           })}
-          
+
           {/* <SwiperSlide>
             <CardContentUpdate
               img={litening}

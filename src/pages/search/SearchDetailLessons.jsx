@@ -12,6 +12,7 @@ import {
   fetchExcersices,
   selectExcersice,
   selectExcersiceById,
+  selectLoadingStatus,
 } from "../../redux/features/lessondetail/lessondetailSlice";
 import {
   fetchSkillNameLevel,
@@ -68,7 +69,7 @@ import "../grammar-detail-page/LessonDetailGrammar.css";
 // import ExerciseComponent from "../../components/exercise-component/ExerciseComponent";
 import ExerciseComponet from "../../components/exercise-component/ExerciseComponent";
 import Search from "./Seach";
-
+import loading2 from "../../assets/img/loding1.gif";
 export default function SearchDetailLessons() {
   const param = useParams();
   console.log("param", param);
@@ -77,6 +78,8 @@ export default function SearchDetailLessons() {
   console.log("convertnew", convert);
   // const lessons = useSelector(selectAllLessons);
   const excercises = useSelector(selectExcersice);
+  const statusNew = useSelector((state) => state.lesson.status);
+  console.log("statusNew", statusNew);
   const excersiceById = useSelector(selectExcersiceById);
   const grammarLevel = useSelector((state) => state.grammar.grammarLevels);
   const submits = useSelector(selectSubmit);
@@ -353,178 +356,188 @@ export default function SearchDetailLessons() {
           aria-label="Sidebar"
         >
           <div className="h-full px-3 w-[160px] overflow-y-auto bg-white pb-8 ">
-            <ul className="space-y-4">
+            <ul className="space-y-4 font-bold text-grays">
               <li key={lessonsById.lesson_uuid}>{lessonsById.lesson_title}</li>
             </ul>
           </div>
         </aside>
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
-          <div>
-            <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
-              <div className="">
-                <div className="flex gap-4 flex-col lg:flex-row">
-                  <img
-                    src={
-                      lessonsById?.thumbnail ||
-                      "https://i0.wp.com/thinkfirstcommunication.com/wp-content/uploads/2022/05/placeholder-1-1.png?fit=1200%2C800&ssl=1"
-                    }
-                    alt=""
-                    className="w-[350px] object-cover rounded-lg"
-                  />
+          {statusNew === "loading" ? (
+            <div className="flex justify-center h-[200px]">
+              <img src={loading2} alt="Loading..." />
+            </div>
+          ) : (
+            <>
+              <div>
+                <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
                   <div className="">
-                    <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-1">
-                      {lessonsById?.lesson_title || "No title available"}
-                    </h2>
-                    <div className="flex gap-4 mt-4 text-grays">
-                      <BsPatchCheck className="text-[40px] md:text-[30px] text-second" />
-                      <p className="md:text-lg md:line-clamp-none line-clamp-2">
-                        {lessonsById?.description}
-                      </p>
+                    <div className="flex gap-4 flex-col lg:flex-row">
+                      <img
+                        src={
+                          lessonsById?.thumbnail ||
+                          "https://i0.wp.com/thinkfirstcommunication.com/wp-content/uploads/2022/05/placeholder-1-1.png?fit=1200%2C800&ssl=1"
+                        }
+                        alt=""
+                        className="w-[350px] object-cover rounded-lg"
+                      />
+                      <div className="">
+                        <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-1">
+                          {lessonsById?.lesson_title || "No title available"}
+                        </h2>
+                        <div className="flex gap-4 mt-4 text-grays">
+                          <BsPatchCheck className="text-[40px] md:text-[30px] text-second" />
+                          <p className="md:text-lg md:line-clamp-none line-clamp-2">
+                            {lessonsById?.description}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          {voiceSection ? (
-            <>
-              <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
-                ពាក្យគន្លឹះ
-              </h2>
-              <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                <div className="p-8 border-2 bg-white rounded-xl">
-                  <h1 className="text-xl ms-2 text-gray-500 mb-6">
-                    រៀននឹងស្តាប់ពាក្យខាងក្រោម៖
-                  </h1>
-                  <div className="grid gap-10 md:gap-5 lg:gap-10 md:grid-cols-2 lg:grid-cols-4 grid-cols-1 exclude-1024-vocabulary w-fit mx-auto">
-                    {lessonsById?.sections?.map((section) => {
-                      return (
-                        <div
-                          key={section.section_uuid}
-                          className="border-2 md:mx-auto border-gray-200 lg:w-[250px] p-1 rounded-xl"
-                        >
-                          <img
-                            src={section?.thumbnail_url}
-                            alt={section?.title}
-                            className="object-cover w-[250px] h-[150px] relative rounded-t-lg"
-                          />
-                          <div>
-                            {loadingSection === section.section_uuid ? (
+              {voiceSection ? (
+                <>
+                  <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
+                    ពាក្យគន្លឹះ
+                  </h2>
+                  <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                    <div className="p-8 border-2 bg-white rounded-xl">
+                      <h1 className="text-xl ms-2 text-gray-500 mb-6">
+                        រៀននឹងស្តាប់ពាក្យខាងក្រោម៖
+                      </h1>
+                      <div className="grid gap-10 md:gap-5 lg:gap-10 md:grid-cols-2 lg:grid-cols-4 grid-cols-1 exclude-1024-vocabulary w-fit mx-auto">
+                        {lessonsById?.sections?.map((section) => {
+                          return (
+                            <div
+                              key={section.section_uuid}
+                              className="border-2 md:mx-auto border-gray-200 lg:w-[250px] p-1 rounded-xl"
+                            >
                               <img
-                                src={loading}
-                                alt="Loading"
-                                className="border-2 border-gray-100 w-[30px] object-cover p-1 mt-2 rounded-md ml-2"
+                                src={section?.thumbnail_url}
+                                alt={section?.title}
+                                className="object-cover w-[250px] h-[150px] relative rounded-t-lg"
                               />
-                            ) : (
-                              <BsVolumeUp
-                                className="audio-button border-2 border-gray-200 text-3xl p-1 text-black mt-2 rounded-md ml-2"
-                                onClick={() =>
-                                  playAudio(
-                                    section.voice[0].voice_url,
-                                    section.section_uuid
-                                  )
+                              <div>
+                                {loadingSection === section.section_uuid ? (
+                                  <img
+                                    src={loading}
+                                    alt="Loading"
+                                    className="border-2 border-gray-100 w-[30px] object-cover p-1 mt-2 rounded-md ml-2"
+                                  />
+                                ) : (
+                                  <BsVolumeUp
+                                    className="audio-button border-2 border-gray-200 text-3xl p-1 text-black mt-2 rounded-md ml-2"
+                                    onClick={() =>
+                                      playAudio(
+                                        section.voice[0].voice_url,
+                                        section.section_uuid
+                                      )
+                                    }
+                                  />
+                                )}
+                              </div>
+                              <p className="text-lg border-2 border-gray-200 text-center p-1 rounded-3xl m-2">
+                                {section?.title}
+                              </p>
+                              <audio
+                                ref={(el) =>
+                                  (audioRefs.current[section.section_uuid] = el)
                                 }
                               />
-                            )}
-                          </div>
-                          <p className="text-lg border-2 border-gray-200 text-center p-1 rounded-3xl m-2">
-                            {section?.title}
-                          </p>
-                          <audio
-                            ref={(el) =>
-                              (audioRefs.current[section.section_uuid] = el)
-                            }
-                          />
-                        </div>
-                      );
-                    })}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="bg-gray-300">
-              <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
-                ការពន្យល់វេយ្យាករណ៍
-              </h2>
-              <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                <div className="px-8 border-2 bg-white rounded-xl">
-                  {lessonsById?.sections?.map((section) => {
-                    return (
-                      <div className="mb-5" key={section.section_uuid}>
-                        {!section?.title
-                          .toLowerCase()
-                          .includes("grammar explanation") && (
-                          <div className="flex items-center mt-8 gap-3 text-primary">
-                            <FaRegHandPointRight />
-                            <h1 className="font-bold lg:text-2xl md:text-2xl text-xl flex-1">
-                              {parse(section?.title)}
-                            </h1>
-                          </div>
-                        )}
-                        <p className="mt-2 leading-10 text-[1rem]">
-                          {parse(section?.description)}
-                        </p>
-                        {!section?.title
-                          .toLowerCase()
-                          .includes("grammar explanation") && (
-                          <>
-                            {section.examples.map((example, index) => {
-                              if (example.example.includes("#")) {
-                                const parts = example.example.split("#");
-                                return (
-                                  <div
-                                    key={index}
-                                    className="example-container"
-                                  >
-                                    <p className="mt-5 leading-10 text-[1rem]">
-                                      {parse(parts[0])}
-                                    </p>
-                                    {parts[1] && (
-                                      <div>
-                                        <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
-                                          ឧទាហរណ៍:
-                                        </h1>
+                </>
+              ) : (
+                <div className="bg-gray-300">
+                  <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
+                    ការពន្យល់វេយ្យាករណ៍
+                  </h2>
+                  <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                    <div className="px-8 border-2 bg-white rounded-xl">
+                      {lessonsById?.sections?.map((section) => {
+                        return (
+                          <div className="mb-5" key={section.section_uuid}>
+                            {!section?.title
+                              .toLowerCase()
+                              .includes("grammar explanation") && (
+                              <div className="flex items-center mt-8 gap-3 text-primary">
+                                <FaRegHandPointRight />
+                                <h1 className="font-bold lg:text-2xl md:text-2xl text-xl flex-1">
+                                  {parse(section?.title)}
+                                </h1>
+                              </div>
+                            )}
+                            <p className="mt-2 leading-10 text-[1rem]">
+                              {parse(section?.description)}
+                            </p>
+                            {!section?.title
+                              .toLowerCase()
+                              .includes("grammar explanation") && (
+                              <>
+                                {section.examples.map((example, index) => {
+                                  if (example.example.includes("#")) {
+                                    const parts = example.example.split("#");
+                                    return (
+                                      <div
+                                        key={index}
+                                        className="example-container"
+                                      >
+                                        <p className="mt-5 leading-10 text-[1rem]">
+                                          {parse(parts[0])}
+                                        </p>
+                                        {parts[1] && (
+                                          <div>
+                                            <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
+                                              ឧទាហរណ៍:
+                                            </h1>
+                                            <p className="mt-3 text-[1rem]">
+                                              {parse(parts[1])}
+                                            </p>
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  } else {
+                                    return (
+                                      <div key={index}>
+                                        {index === 0 && (
+                                          <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
+                                            ឧទាហរណ៍:
+                                          </h1>
+                                        )}
                                         <p className="mt-3 text-[1rem]">
-                                          {parse(parts[1])}
+                                          {parse(example.example)}
                                         </p>
                                       </div>
-                                    )}
-                                  </div>
-                                );
-                              } else {
-                                return (
-                                  <div key={index}>
-                                    {index === 0 && (
-                                      <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
-                                        ឧទាហរណ៍:
-                                      </h1>
-                                    )}
-                                    <p className="mt-3 text-[1rem]">
-                                      {parse(example.example)}
-                                    </p>
-                                  </div>
-                                );
-                              }
-                            })}
-                          </>
-                        )}
-                      </div>
-                    );
-                  })}
+                                    );
+                                  }
+                                })}
+                              </>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              )}
+              {lessonsById?.exercises?.map((exercise) => {
+                console.log("Each exercise", exercise);
+                return (
+                  <>
+                    <ExerciseComponet
+                      key={exercise.ex_uuid}
+                      exercise={exercise}
+                    />
+                  </>
+                );
+              })}
+            </>
           )}
-
-          {lessonsById?.exercises?.map((exercise) => {
-            console.log("Each exercise", exercise);
-            return (
-              <>
-                <ExerciseComponet key={exercise.ex_uuid} exercise={exercise} />
-              </>
-            );
-          })}
         </main>
       </div>
     </>

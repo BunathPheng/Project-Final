@@ -623,7 +623,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                 <img
                   src={randomImgLose}
                   alt=""
-                  className="mx-auto mb-4 h-28 w-28 object-cover"
+                  className="mx-auto mb-4 h-24 w-24 object-cover"
                 />
               )}
               <h3 className="mb-5 text-3xl font-normal text-gray-500 dark:text-gray-400">
@@ -653,5 +653,4 @@ const ExerciseComponent = ({ exercise, key }) => {
     </>
   );
 };
-
 export default ExerciseComponent;

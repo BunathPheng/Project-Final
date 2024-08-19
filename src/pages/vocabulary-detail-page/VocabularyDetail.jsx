@@ -293,7 +293,6 @@ export default function VocabularyDetail() {
                 </div>
               </div>
               {lessonsById?.exercises?.map((exercise) => {
-                console.log("Each exercise", exercise);
                 return (
                   <>
                     <ExerciseComponent

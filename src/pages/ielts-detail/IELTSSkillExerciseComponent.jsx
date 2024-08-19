@@ -328,8 +328,8 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
         <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
           លំហាត់អនុវត្តន៍
         </h2>
-        <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-          <div className="p-4 border-2 bg-white rounded-xl">
+        <div className="bg-[#faf5e6] p-[20px] md:p-[40px] lg:p-[40px]">
+          <div className="px-8 py-6 border-2 bg-white rounded-xl">
             <h1 className="text-primary text-[20px] md:text-[24px]">
               {parse(exercise?.title || "Vocabulary Exercise")}
             </h1>
@@ -556,7 +556,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                     )}
                   </>
         ))}
-            <div className="flex gap-4 mt-5 md:flex-row flex-col">
+            <div className="flex gap-4 mt-5 mb-2 md:flex-row flex-col">
               <Button
                 id={key}   
                 color="blue"            

@@ -105,7 +105,38 @@ const ExerciseComponent = ({ exercise, key }) => {
   const dispatch = useDispatch();
   const [answersToShow, setAnswersToShow] = useState({});
   const audioRefs = useRef([]);
+  const spanRefs = useRef([]);
   const [scoreArray, setScoreArray] = useState({});
+  const [correct_answer, setCorrectAnswer] = useState([]);
+  const checkCorrectAnswer = (question) => {
+    question.correct_answer.map((answer, aIndex) => {
+      correct_answer[question.q_uuid] = answer.answer;
+    });
+  };
+
+  useEffect(() => {
+    // Check if inputValues is empty, which means the "Try Again" button was clicked
+    if (Object.keys(inputValues).length === 0) {
+      // Reset all input widths to the default 100px
+      const allInputElements = document.querySelectorAll(`input[data-q_uuid]`);
+      allInputElements.forEach((input) => {
+        input.style.width = "100px";
+      });
+    } else {
+      // Update the width of each input based on its corresponding span
+      Object.keys(inputValues).forEach((q_uuid) => {
+        if (spanRefs.current[q_uuid]) {
+          const inputElements = document.querySelectorAll(
+            `input[data-q_uuid="${q_uuid}"]`
+          );
+          inputElements.forEach((input, index) => {
+            const spanWidth = spanRefs.current[q_uuid][index].offsetWidth;
+            input.style.width = `${Math.max(spanWidth + 50, 100)}px`; // 10px for padding, 50px is the minimum width
+          });
+        }
+      });
+    }
+  }, [inputValues]);
 
   useEffect(() => {
     if (openModal && scoreSound) {
@@ -304,7 +335,8 @@ const ExerciseComponent = ({ exercise, key }) => {
               <div key={question.q_uuid}>
                 {question.type === "FILL_IN_THE_BLANK" ? (
                   <>
-                    {exercise.title.toLowerCase().includes("spelling") ? (
+                    {checkCorrectAnswer(question)}
+                    {exercise.title.toLowerCase().includes("spelling") || question.voice ? (
                       <div className="flex ml-4 mt-2 items-center gap-4 flex-row text-xl">
                         <span className="flex items-center gap-3">
                           {index + 1}.
@@ -332,19 +364,44 @@ const ExerciseComponent = ({ exercise, key }) => {
                           .split("#")
                           .map((part, partIndex) => (
                             <React.Fragment key={partIndex}>
-                              <span className="text-xl">{part}</span>
-                              {partIndex <
-                                question.question_text.split("#").length -
-                                  1 && (
+                              <label htmlFor={`choice-${question.q_uuid}-${index}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
+                            <span className="text-xl me-4 mt-2">{part}</span>
+                            {partIndex <
+                              question.question_text.split("#").length -
+                                1 && (
+                              <>
+                                <span
+                                  ref={(el) => {
+                                    if (!spanRefs.current[question.q_uuid])
+                                      spanRefs.current[question.q_uuid] =
+                                        [];
+                                    spanRefs.current[question.q_uuid][
+                                      partIndex
+                                    ] = el;
+                                  }}
+                                  className="invisible absolute whitespace-pre"
+                                >
+                                  {inputValues[question.q_uuid]?.[
+                                    partIndex
+                                  ] || " "}
+                                </span>
                                 <input
+                                  id={`choice-${question.q_uuid}-${index}`}
                                   type="text"
-                                  className="w-[85px] text-xl border rounded-md border-gray-200 focus:border-pink-200 focus:ring-pink-20 text-center"
+                                  className={`px-3 w-[100px] lg:text-[20px] border rounded-md text-center ml-4 ${
+                                    showResult
+                                      ? inputValues[question.q_uuid]?.[
+                                          partIndex
+                                        ] ===
+                                        correct_answer[question.q_uuid]
+                                        ? "text-green-500 border-green-500"
+                                        : "text-red-500 border-red-500"
+                                      : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
+                                  }`}
                                   value={
-                                    (inputValues[question.q_uuid] &&
-                                      inputValues[question.q_uuid][
-                                        partIndex
-                                      ]) ||
-                                    ""
+                                    inputValues[question.q_uuid]?.[
+                                      partIndex
+                                    ] || ""
                                   }
                                   onChange={(e) =>
                                     onAnswerChange(
@@ -354,8 +411,20 @@ const ExerciseComponent = ({ exercise, key }) => {
                                     )
                                   }
                                 />
-                              )}
-                            </React.Fragment>
+                                {showResult &&
+                                  inputValues[question.q_uuid]?.[
+                                    partIndex
+                                  ] !== correct_answer[question.q_uuid] && (
+                                    <p className="text-green-500 mt-2 ml-2">
+                                      {`(${
+                                        correct_answer[question.q_uuid]
+                                      })`}
+                                    </p>
+                                  )}
+                              </>
+                            )}
+                            </label>
+                          </React.Fragment>
                           ))}
                       </div>
                     ) : (
@@ -367,30 +436,69 @@ const ExerciseComponent = ({ exercise, key }) => {
                           .split("#")
                           .map((part, partIndex) => (
                             <React.Fragment key={partIndex}>
-                              <span>{part}</span>
-                              {partIndex <
-                                question.question_text.split("#").length -
-                                  1 && (
-                                <input
-                                  type="text"
-                                  className="w-[110px] border rounded-md border-gray-200 focus:border-pink-200 focus:ring-pink-200"
-                                  value={
-                                    (inputValues[question.q_uuid] &&
-                                      inputValues[question.q_uuid][
+                              <label htmlFor={`choice-${question.q_uuid}-${index}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
+                                <span className="md:text-[18px] lg:text-xl mt-2">
+                                  {part}
+                                </span>
+                                {partIndex <
+                                  question.question_text.split("#").length -
+                                    1 && (
+                                  <>
+                                    <span
+                                      ref={(el) => {
+                                        if (!spanRefs.current[question.q_uuid])
+                                          spanRefs.current[question.q_uuid] =
+                                            [];
+                                        spanRefs.current[question.q_uuid][
+                                          partIndex
+                                        ] = el;
+                                      }}
+                                      className="invisible absolute whitespace-pre">
+                                      {inputValues[question.q_uuid]?.[
                                         partIndex
-                                      ]) ||
-                                    ""
-                                  }
-                                  onChange={(e) =>
-                                    onAnswerChange(
-                                      question.q_uuid,
-                                      e.target.value,
-                                      partIndex
-                                    )
-                                  }
-                                />
-                              )}
-                            </React.Fragment>
+                                      ] || " "}
+                                    </span>
+                                    <input
+                                      id={`choice-${question.q_uuid}-${index}`}
+                                      type="text"
+                                      className={`px-3 w-[100px] text-xl border rounded-md text-center ml-4 ${
+                                        showResult
+                                          ? inputValues[question.q_uuid]?.[
+                                              partIndex
+                                            ] ===
+                                            correct_answer[question.q_uuid]
+                                            ? "text-green-500 border-green-500"
+                                            : "text-red-500 border-red-500"
+                                          : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
+                                      }`}
+                                      data-q_uuid={question.q_uuid}
+                                      value={
+                                        inputValues[question.q_uuid]?.[
+                                          partIndex
+                                        ] || ""
+                                      }
+                                      onChange={(e) =>
+                                        onAnswerChange(
+                                          question.q_uuid,
+                                          e.target.value,
+                                          partIndex
+                                        )
+                                      }
+                                    />
+                                    {showResult &&
+                                      inputValues[question.q_uuid]?.[
+                                        partIndex
+                                      ] !== correct_answer[question.q_uuid] && (
+                                        <p className="text-green-500 mt-2 ml-2">
+                                          {`(${
+                                            correct_answer[question.q_uuid]
+                                          })`}
+                                        </p>
+                                      )}
+                                  </>
+                                )}
+                                </label>
+                              </React.Fragment>
                           ))}
                       </div>
                     )}
@@ -404,7 +512,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                     {question.choices.map((choice) => (
                       <div key={choice.choice_uuid}>
                         <input
-                          className="me-3"
+                          className="me-3 cursor-pointer"
                           type="radio"
                           id={`${choice.choice_uuid}`}
                           name={`choice-${question.q_uuid}`}
@@ -425,7 +533,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                         />
                         <label
                           htmlFor={`${choice.choice_uuid}`}
-                          className={`${
+                          className={`cursor-pointer ${
                             showResult &&
                             (choice.is_correct
                               ? "text-green-500"

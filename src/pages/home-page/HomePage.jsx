@@ -78,7 +78,7 @@ export default function HomePage() {
               ចាប់ផ្តើមការរៀនភាសាអង់គ្លេសជាមួយ
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8 items-center mb-16 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16 ">
               <div className="grid place-items-start">
                 <img
                   src="src/assets/img/Nerd-amico.png"
@@ -203,7 +203,7 @@ export default function HomePage() {
             <h2 className="text-center text-3xl md:text-4xl font-bold text-blues mb-24 px-4">
               រៀនឥលូវនេះជាមួយវគ្គសិក្សាអនឡាញដែលមានការគាំទ្រច្រើន
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 px-10 place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 px-5 md:px-10 place-items-center">
               <CardContentUpdate
                 img={skillListening}
                 title="ការស្ដាប់/Listening"

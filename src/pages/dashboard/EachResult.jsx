@@ -167,7 +167,7 @@ export default function EachResult() {
                       return (
                         <tr key={index} className="text-gray-700 border-b text-[12px] md:text-[16px]">
                           <td className="py-5  pl-8 text-left">{exercise?.ex_title}</td>
-                          <td className="py-5">{exercise?.scores}</td>
+                          <td className="py-5">{exercise?.scores.toFixed(2)}</td>
                           <td className="py-5">{formattedDate}</td>
                         </tr>
                       );

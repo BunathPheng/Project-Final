@@ -32,7 +32,11 @@ export default function Login() {
   };
   
   const validationSchema = Yup.object({
+<<<<<<< HEAD
     email: Yup.string().email("អ៊ីម៉ែលមិនត្រឹមត្រូវ").required("អ៊ីម៉ែលត្រូវបានទាមទារ"),
+=======
+    email: Yup.string().email("អ៊ីមែលមិនត្រឹមត្រូវ").required("អ៊ីមែលត្រូវបានទាមទារ"),
+>>>>>>> e6216a50e6d373835914a823037d9f03034c137c
     password: Yup.string().required("លេខសម្ងាត់ត្រូវបានទាមទារ"),
   });
 
@@ -41,7 +45,11 @@ export default function Login() {
     dispatch(fetchUserLogin(values))
       .unwrap()
       .then(()=>{
+<<<<<<< HEAD
         toast.success("អ៊ីម៉ែល ឬ លេខសម្ងាត់ ត្រឹមត្រូវ");
+=======
+        toast.success("អ៊ីមែល ឬ លេខសម្ងាត់ត្រឹមត្រូវ");
+>>>>>>> e6216a50e6d373835914a823037d9f03034c137c
         setTimeout(() => {
           setSubmitting(false);
           window.location.href = "/";
@@ -52,10 +60,17 @@ export default function Login() {
         console.log("Error message:", error.message);
         setTimeout(() => {
           if (error.message === "User is not verified 😏") {
+<<<<<<< HEAD
             toast.error("សូមផ្ទៀងផ្ទាត់អ៊ីម៉ែលរបស់អ្នក មុននឹងចូលប្រើប្រាស់ 🥳");
           }
           else {
             toast.error("អ៊ីម៉ែល ឬ លេខសម្ងាត់ មិនត្រឹមត្រូវ");
+=======
+            toast.error("សូមផ្ទៀងផ្ទាត់អ៊ីមែលរបស់អ្នក មុននឹងចូលប្រើប្រាស់ 🥳");
+          }
+          else {
+            toast.error("អ៊ីមែល ឬ លេខសម្ងាត់ មិនត្រឹមត្រូវ");
+>>>>>>> e6216a50e6d373835914a823037d9f03034c137c
           }
           setSubmitting(false);
         }, 500);
@@ -126,14 +141,22 @@ export default function Login() {
                     htmlFor="email"
                     className="block mb-2 text-xl font-medium text-blues"
                   >
+<<<<<<< HEAD
                     អ៊ីម៉ែល<span className="text-second">*</span>
+=======
+                    អ៊ីមែល<span className="text-second">*</span>
+>>>>>>> e6216a50e6d373835914a823037d9f03034c137c
                   </label>
                   <Field
                     type="email"
                     id="email"
                     name="email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+<<<<<<< HEAD
                     placeholder="បញ្ជូលអ៊ីម៉ែលរបស់អ្នក"
+=======
+                    placeholder="បញ្ជូលអ៊ីមែលរបស់អ្នក"
+>>>>>>> e6216a50e6d373835914a823037d9f03034c137c
                     required
                   />
                   <ErrorMessage

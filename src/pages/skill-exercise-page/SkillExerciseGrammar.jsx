@@ -38,10 +38,10 @@ export default function SkillExerciseGrammar() {
   }
   // console.log("grammarLevel", grammarLevel);
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="md:w-[90%] md:mx-auto">
       <section className="flex flex-col lg:flex-row mx-auto justify-evenly items-center mt-10 md:gap-10 gap-10">
-        <div className="md:w-[100%] lg:w-[600px] relative overflow-hidden">
-          {grammarLevel.map((v, index) => {
+        <div className="px-5 md:p-0 md:w-[100%] lg:w-[600px] relative overflow-hidden">
+          {grammarLevel.map((v) => {
             return (
               <div key={index}>
               <img className="object-cover" src={v.thumbnail} alt="Picture" />
@@ -54,12 +54,12 @@ export default function SkillExerciseGrammar() {
             return (
               <div key={index}>
                 <div>
-                  <h1 className="text-blue-950  md:text-[1.8rem] lg:text-[2rem] text-[24px] font-bold flex  text-center">
+                  <h1 className="text-blue-950 px-5 md:p-0  md:text-[1.8rem] lg:text-[2rem] text-[24px] font-bold flex text-center">
                     <div className="">{title}</div>
                     <div className="">{`${name}  `} វេយ្យាករណ៍</div>
                   </h1>
                 </div>
-                <div className="md:w-[100%] lg:w-[500px]  text-[18px] mt-5 leading-10 text-start">
+                <div className="md:w-[100%] lg:w-[500px] px-5 md:p-0 text-[18px] mt-5 leading-10 text-start">
                   <p className="text-grays">{parse(`${v.description}`)}</p>
                 </div>
               </div>
@@ -73,7 +73,7 @@ export default function SkillExerciseGrammar() {
           សូមធ្វើការជ្រើសរើសមេរៀន
         </h1>
       </div>
-      <div className="mx-auto my-10 justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 w-[320px] md:w-[90%] exclude">
+      <div className="mx-auto w-[100%] my-10 px-5  md:p-0  justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10  md:w-[90%] exclude">
         {grammarLevel.map((selectNameLevel) => {
           console.log("selectNameLevel:",selectNameLevel);
           // console.log("selectNameLevel", selectNameLevel);

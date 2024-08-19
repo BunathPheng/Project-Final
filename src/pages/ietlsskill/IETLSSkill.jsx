@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { FaRegHandPointRight } from "react-icons/fa";
 import "../skill-exercise-page/SKillEcercise.css";
 import LessonIETLSCard from "../../components/common/cards/LessonIETLSCard";
+import LoadingExerciseGrammar from "../../components/common/loading/LoadingExerciseGrammar";
 export default function IELTSSkill() {
   const param = useParams();
   const newname = param["ielts-name"];

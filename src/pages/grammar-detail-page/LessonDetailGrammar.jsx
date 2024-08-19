@@ -415,13 +415,13 @@ export default function LessonDetailGrammar() {
                     ការពន្យល់វេយ្យាករណ៍
                   </h2>
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                    <div className="px-8 border-2 bg-white rounded-xl">
+                    <div className="px-4 border-2 bg-white rounded-xl">
                       {/* ko */}
                       {lessonsById?.sections?.map((section, index) => {
                         console.log("section", section);
                         return (
                           <>
-                            <div className="mb-5">
+                            <div className="mb-5 md:px-8 md:leading-10">
                               {section?.title
                                 .toLowerCase()
                                 .includes("grammar explanation") ? (
@@ -429,12 +429,12 @@ export default function LessonDetailGrammar() {
                               ) : (
                                 <div className="flex items-center mt-8 gap-3 text-primary">
                                   <FaRegHandPointRight />
-                                  <h1 className="font-bold lg:text-2xl  md:text-2xl  text-xl flex-1">
+                                  <h1 className="font-bold lg:text-[24px]  md:text-[20px]  text-[16px] flex-1">
                                     {parse(`${section?.title}`)}
                                   </h1>
                                 </div>
                               )}
-                              <p className="mt-2 leading-10 text-[1rem]">
+                              <p className="mt-2 leading-8 lg:text-[20px]  md:text-[18px]  text-[14px]">
                                 {parse(`${section?.description}`)}
                               </p>
                               {section?.title
@@ -459,7 +459,7 @@ export default function LessonDetailGrammar() {
                                               <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
                                                 ឧទាហរណ៍:
                                               </h1>
-                                              <p className="mt-3 text-[1rem]">
+                                              <p className="mt-3 text-[16px]">
                                                 {parse(parts[1])}
                                               </p>
                                             </div>
@@ -470,11 +470,11 @@ export default function LessonDetailGrammar() {
                                       return (
                                         <div key={index}>
                                           {index === 0 && (
-                                            <h1 className="md:text-xl text-lg font-bold mt-1 text-second">
+                                            <h1 className="md:text-[20px] text-[18px] font-bold mt-1 text-second">
                                               ឧទាហរណ៍:
                                             </h1>
                                           )}
-                                          <p className="mt-3 text-[1rem]">
+                                          <p className="mt-3 lg:text-[20px] md:text-[18px] text-[14px]">
                                             {parse(example.example)}
                                           </p>
                                         </div>

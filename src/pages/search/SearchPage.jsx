@@ -15,7 +15,7 @@ export default function SearchPage() {
     <>
       <main className="mx-auto">
         <section className="w-full">
-          <h1 className="text-center text-[18px] md:text-[20px] lg:tetx-[25px] font-bold text-blues pt-4 px-1">
+          <h1 className="text-center text-[18px] md:text-[20px] lg:text-[30px] font-bold text-blues pt-4 px-1">
             លទ្ធផលមេរៀននិងលំហាត់ដែលអ្នកបានស្វែងរក
           </h1>
           <p className="text-[15px] md:text-[18px] text-justify px-4 md:w-[80%] mx-auto py-4 text-grays">
@@ -48,7 +48,7 @@ export default function SearchPage() {
                 (e.video && e.video !== "" && e.video !== "Video link")
               ) {
                 return (
-                  <div className="px-2.5 py-2" key={e.id || e.title}>
+                  <div className="px-2.5 py-6" key={e.id || e.title}>
                     <Link
                       to={`/excersice/${e.title
                         .toLowerCase()
@@ -56,7 +56,7 @@ export default function SearchPage() {
                       className="flex md:gap-3 items-center align-middle w-full h-[150px] md:w-[90%] md:h-[200px] bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 flex-1"
                     >
                       <img
-                        className="object-cover w-[140px] md:w-[320px] h-full rounded-tl-lg"
+                        className="object-cover w-[140px] md:w-[320px] lg:w-[350px] flex-shrink-0 h-full rounded-tl-lg"
                         src={
                           e.thumbnail ||
                           "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
@@ -65,11 +65,11 @@ export default function SearchPage() {
                       />
                       <div className="flex flex-col justify-between p-4 leading-normal">
                         <h5 className="mb-2 text-[16px] md:text-[24px] font-bold tracking-tight text-blues flex gap-3 items-center">
-                          <div className="lg:text-[24px]">
+                          <div className="text-[14px] md:text-[18px] lg:text-[24px]">
                             {e.title || "No title"}
                           </div>
                         </h5>
-                        <p className="mb-3 text-[8px] md:text-[20px] font-normal text-gray-700 md:line-clamp-3 line-clamp-2 lg:line-clamp-4">
+                        <p className="mb-3 text-[12px] md:text-[20px] lg:text-[24px] font-normal text-gray-700 md:line-clamp-3 line-clamp-2 lg:line-clamp-4">
                           {parse(`${e.description || "No description"}`)}
                         </p>
                       </div>
@@ -95,7 +95,7 @@ export default function SearchPage() {
 
           <div className="items-center align-middle justify-center">
             {filteredResults?.lessons?.map((e) => (
-              <div className="px-2.5 py-2" key={e.id || e.lesson_title}>
+              <div className="px-2.5 py-6" key={e.id || e.lesson_title}>
                 <Link
                   to={`/lesson/${e.lesson_title
                     .toLowerCase()
@@ -103,7 +103,7 @@ export default function SearchPage() {
                   className="flex md:gap-3 items-center align-middle w-full h-[150px] md:w-[90%] md:h-[200px] bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 flex-1"
                 >
                   <img
-                    className="object-cover w-[140px] md:w-[320px] h-full rounded-tl-lg"
+                    className="object-cover w-[140px] md:w-[320px] lg:w-[350px] flex-shrink-0 h-full rounded-tl-lg"
                     src={
                       e.thumbnail ||
                       "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"

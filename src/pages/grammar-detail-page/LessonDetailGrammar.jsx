@@ -474,6 +474,7 @@ export default function LessonDetailGrammar() {
                   </div>
                 </div>
               </div>
+
               {lessonsById?.exercises?.map((exercise) => {
                 console.log("Each exercise", exercise);
                 return (
@@ -485,6 +486,7 @@ export default function LessonDetailGrammar() {
                   </>
                 );
               })}
+              
             </>
           )}
         </main>

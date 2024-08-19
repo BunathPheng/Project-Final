@@ -290,14 +290,15 @@ const ExerciseComponent = ({ exercise, key }) => {
           លំហាត់អនុវត្តន៍
         </h2>
         <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-          <div className="p-8 border-2 bg-white rounded-xl">
-            <h1 className="text-primary text-2xl">
+          <div className="p-4 border-2 bg-white rounded-xl">
+            <h1 className="text-primary text-[15px] md:text-[24px]">
               {exercise.title || "Vocabulary Exercise"}
             </h1>
-            <div className="flex items-center mt-4 ml-4 gap-3 text-lg">
-              <BsSignpost className="text-gray-400" />
-              <p className="text-gray-400 text-xl">
-                {exercise.description || "ចូរធ្វើលំហាត់ខាងក្រោម"}
+            <div className="flex items-center py-2 gap-3 text-lg">
+              
+              <p className="text-gray-400 text-[12px] md:text-[20px]">
+                <BsSignpost className="text-gray-400 inline" />
+                <span className="ms-2">{exercise.description || "ចូរធ្វើលំហាត់ខាងក្រោម"}</span>
               </p>
             </div>
             {exercise.questions.map((question, index) => (
@@ -359,7 +360,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                           ))}
                       </div>
                     ) : (
-                      <div className="flex ml-4 mt-2 items-center gap-4 flex-row text-xl">
+                      <div className="md:w-[420px] flex py-2  gap-3 md:flex-row flex-col text-[14px] md:text-[20px]">
                         {/* {question.choices.length > 2 && 
                         <div></div>} */}
                         {`${index + 1}.`}
@@ -371,9 +372,10 @@ const ExerciseComponent = ({ exercise, key }) => {
                               {partIndex <
                                 question.question_text.split("#").length -
                                   1 && (
+
                                 <input
                                   type="text"
-                                  className="w-[110px] border rounded-md border-gray-200 focus:border-pink-200 focus:ring-pink-200"
+                                  className="w-full border rounded-md border-gray-200 focus:border-pink-200 focus:ring-pink-200"
                                   value={
                                     (inputValues[question.q_uuid] &&
                                       inputValues[question.q_uuid][
@@ -389,6 +391,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                     )
                                   }
                                 />
+
                               )}
                             </React.Fragment>
                           ))}

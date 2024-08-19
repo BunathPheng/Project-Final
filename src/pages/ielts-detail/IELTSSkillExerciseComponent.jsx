@@ -330,16 +330,16 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
         </h2>
         <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
           <div className="p-8 border-2 bg-white rounded-xl">
-            <h1 className="text-primary text-2xl">
+            <h1 className="text-primary text-[20px] md:text-[24px]">
               {parse(exercise?.title || "Vocabulary Exercise")}
             </h1>
             {groupedQuestions && Object.keys(groupedQuestions).map((type, index) => (
                   <>
                     {type === "FILL_IN_THE_BLANK" && (
                       <>
-                        <div className="flex items-center mt-4 ml-4 gap-3 text-lg text-second">
+                        <div className="flex items-center mt-4 ml-2 gap-3 text-lg text-second">
                           <BsSignpost />
-                          <p className="text-xl">{"ចូរបំពេញចន្លោះឱ្យបានត្រឹមត្រូវ"}</p>
+                          <p className="text-[18px] md:text-[20px]">{"ចូរបំពេញចន្លោះឱ្យបានត្រឹមត្រូវ"}</p>
                         </div>
                         {groupedQuestions[type].map((question, qIndex) => (
                           <div key={qIndex}>
@@ -349,7 +349,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                 {question.choices.map((choice, choiceIndex) => (
                                   <span
                                     key={choiceIndex}
-                                    className="px-4 py-2 m-1 text-xl bg-slate-50 border border-gray-300 rounded-md">
+                                    className="p-3 m-1 text-[18px] md:text-[20px] bg-slate-50 border border-gray-300 rounded-md">
                                     {parse(choice.text)}
                                   </span>
                                 ))}
@@ -375,11 +375,12 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                   </>
                                 ) : null}
                               </span>
-                              <div className={`cursor-pointer flex flex-wrap items-center gap-2 ${qIndex === 0 ? "m-[2px]" : ""}`}>
+
+                              <div className={`cursor-pointer flex flex-wrap gap-2 ${qIndex === 0 ? "m-[2px]" : ""}`}>
                                 {question.question_text.split("#").map((part, partIndex) => (
                                   <React.Fragment key={partIndex}>
                                     <label htmlFor={`choice-${question.q_uuid}-${qIndex}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
-                                    <span className="text-xl mt-2">{parse(part)}</span>
+                                    <span className="text-[20px] mt-2">{parse(part)}</span>
                                     {partIndex < question.question_text.split("#").length - 1 && (
                                       <>
                                         <span
@@ -391,6 +392,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                           className="invisible absolute whitespace-pre">
                                           {inputValues[question.q_uuid]?.[partIndex] || " "}
                                         </span>
+
                                         <input
                                           id={`choice-${question.q_uuid}-${qIndex}`}
                                           name={`choice-${question.q_uuid}`}
@@ -413,6 +415,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                             )
                                           }
                                         />
+
                                         {showResult ? (
                                           inputValues[question.q_uuid]?.[partIndex] ===
                                           correct_answer[question.q_uuid] ? (
@@ -431,6 +434,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                   </React.Fragment>
                                 ))}
                               </div>
+
                             </div>
                           </div>
                         ))}

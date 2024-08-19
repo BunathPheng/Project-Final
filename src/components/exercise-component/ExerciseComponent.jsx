@@ -320,7 +320,7 @@ const ExerciseComponent = ({ exercise, key }) => {
         <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
           លំហាត់អនុវត្តន៍
         </h2>
-        <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+        <div className="bg-[#faf5e6] md:p-[40px] lg:p-[50px]">
           <div className="p-4 border-2 bg-white rounded-xl">
             <h1 className="text-primary text-[15px] md:text-[24px]">
               {exercise.title || "Vocabulary Exercise"}
@@ -438,7 +438,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                     ) : (
                       <div className="grid w-full max-w-lg gap-4 py-2 text-sm md:text-base lg:text-lg">
                         <div className="grid grid-cols-[auto,1fr] gap-2 items-start">
-                          <span>{`${index + 1}.`}</span>
+                          <span className="text-[16px] md:text-[20px] lg:text-[24px] p-2">{`${index + 1}.`}</span>
                           <div className="grid gap-2">
                             {question.question_text
                               .split("#")
@@ -446,7 +446,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                 <React.Fragment key={partIndex}>
                                   <label
                                     htmlFor={`choice-${question.q_uuid}-${index}`}
-                                    className="cursor-pointer flex flex-wrap items-center gap-2"
+                                    className="cursor-pointer md:leading-10 flex flex-wrap items-center gap-2 text-[16px] md:text-[20px] lg:text-[24px]"
                                   >
                                     <span>{part}</span>
                                     {partIndex <
@@ -474,7 +474,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                         <input
                                           id={`choice-${question.q_uuid}-${index}`}
                                           type="text"
-                                          className={`w-full max-w-[150px] px-3 py-1 text-sm md:text-base border rounded-md text-center ${
+                                          className={`w-full max-w-[200px] md:h-[40px] lg:h-[50px] px-3 py-1 text-[16px] md:text-[18px] lg:text-[20px] border rounded-md text-center ${
                                             showResult
                                               ? inputValues[question.q_uuid]?.[
                                                   partIndex

@@ -1,9 +1,10 @@
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import React from "react";
-export default function Skillcard({ skill_name, des, photo }) {
+export default function Skillcard({ index, skill_name, des, photo }) {
   const skillName = skill_name.toLowerCase();
   return (
+    <div key={index}>
     <div className="max-w-[590px] relative overflow-hidden group">
       <Link to={`${skillName}`}>
         <img
@@ -19,6 +20,7 @@ export default function Skillcard({ skill_name, des, photo }) {
           <Button color="warning">រៀនបន្ត</Button>
         </div>
       </Link>
+    </div>
     </div>
   );
 }

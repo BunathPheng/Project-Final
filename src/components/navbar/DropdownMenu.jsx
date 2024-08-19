@@ -1,9 +1,8 @@
 import React from "react";
 
-export function DropdownMenu({ data, nav }) {
+export function DropdownMenu({ index, data, nav }) {
   return (
-    <>
-      <li>
+      <li key={index}>
         <a
           href={`${nav}`}
           className={`flex items-center w-full text-sm hover:bg-gray-100 p-2 transition duration-75 rounded-lg pl-11 ${
@@ -15,14 +14,12 @@ export function DropdownMenu({ data, nav }) {
           {data}
         </a>
       </li>
-    </>
   );
 }
 
-export function DropDownMenuHover({ data, nav }) {
+export function DropDownMenuHover({ index, data, nav }) {
   return (
-    <>
-      <li>
+      <li key={index}>
         <a
           href={`${nav}`}
           className={`block px-4 py-2 hover:bg-gray-100 ${
@@ -34,14 +31,12 @@ export function DropDownMenuHover({ data, nav }) {
           {data}
         </a>
       </li>
-    </>
   );
 }
 
-export function DropDownUserMenu({ data, nav, icon }) {
+export function DropDownUserMenu({ index, data, nav, icon }) {
   return (
-    <>
-      <li>
+      <li key={index}>
         <a
           href={`${nav}`}
           className={`block px-4 py-2 text-sm ${
@@ -57,6 +52,5 @@ export function DropDownUserMenu({ data, nav, icon }) {
         </span>
         </a>
       </li>
-    </>
   );
 }

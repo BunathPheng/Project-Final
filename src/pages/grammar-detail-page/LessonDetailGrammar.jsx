@@ -75,7 +75,9 @@ import LoadingLessonDetail from "../../components/common/loading/LoadingLessonDe
 export default function LessonDetailGrammar() {
   const param = useParams();
   console.log("param", param);
-  const newtitle = param.title.replace(/-/g, " ");
+  // const newtitle = param.title.replace(/-/g, " ");
+  const newtitle = decodeURIComponent(param.title).replace(/-/g, " ");
+  console.log("param.title:",param.title);
   const convert = newtitle.toUpperCase();
   console.log("convert", convert);
   // const lessons = useSelector(selectAllLessons);

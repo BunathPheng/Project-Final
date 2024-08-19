@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import {
   DropdownMenu,
@@ -26,12 +26,12 @@ export default function Navbar() {
   const [searchInput, setSearchInput] = useState("");
   const navigates = useNavigate();
   const dispatchs = useDispatch();
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      console.log("key", e.key);
-      navigates("/searchs"); // Navigate to /searchs page
-    }
-  };
+  // const handleKeyDown = (e) => {
+  //   if (e.key === "Enter") {
+  //     console.log("key", e.key);
+  //     navigates("/searchs"); // Navigate to /searchs page
+  //   }
+  // };
   // Assuming filteredResults is an object, not an array
   const filteredResults = useSelector(selectAllSearch);
 
@@ -49,6 +49,8 @@ export default function Navbar() {
   const [clickCount, setClickCount] = useState(0);
   const dispatch = useDispatch();
   const token = getAccessToken();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
   useEffect(() => {
     console.log("token before dispatching the fetchUserData:", token);
     if (token) {
@@ -63,6 +65,25 @@ export default function Navbar() {
 
   const handleClick = () => {
     setClickCount(clickCount + 1); // Increment click count on any click
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false); // Hide dropdown if click is outside
+    }
+  };
+
+  const handleResultClick = (title) => {
+    setSearchInput(title); // Update input value with selected result
+    setDropdownVisible(false); // Hide dropdown immediately
+    navigate(`/searchs?query=${encodeURIComponent(title)}`); // Navigate with query parameter
   };
 
   useEffect(() => {
@@ -134,23 +155,20 @@ export default function Navbar() {
               type="button"
               className="inline-flex items-center mt-1 p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" //style-navbar2 "
               aria-controls="navbar-search"
-              aria-expanded="false"
-            >
+              aria-expanded="false">
               <span className="sr-only">Open main menu</span>
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 17 14"
-              >
+                viewBox="0 0 17 14">
                 <path
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
+                  d="M1 1h15M1 7h15M1 13h15"/>
               </svg>
             </button>
             <Search />
@@ -249,8 +267,7 @@ export default function Navbar() {
           </div>
           <div
             className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1 style-navbar2"// style-navbar"
-            id="navbar-search"
-          >
+            id="navbar-search">
             <div className="relative mt-3 lg:hidden ">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
@@ -278,9 +295,19 @@ export default function Navbar() {
                 placeholder="ការស្វែងរក..."
                 onChange={handleInputChange}
                 value={searchInput}
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigate(`/searchs?query=${encodeURIComponent(searchInput)}`);
+                  }
+                }}
+                onFocus={() => setDropdownVisible(true)}
               />
-
+              
+              {dropdownVisible && (
+                <div
+                  ref={dropdownRef} // Attach ref to dropdown container
+                  className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10"
+                >
               {/* Check if filteredResults.exercises exists and has items */}
               {searchInput && filteredResults.exercises?.length > 0 && (
                 <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
@@ -290,7 +317,7 @@ export default function Navbar() {
                         // key={element.ex_uuid}
                         key={index}
                         className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
-                      >
+                        onClick={() => handleResultClick(element.title)}>
                         <Link to="/searchs">{element.title}</Link>
                       </li>
                     ))}
@@ -310,6 +337,8 @@ export default function Navbar() {
                     </ul>
                   </div>
                 )}
+            </div>
+            )}
             </div>
             <ul className="text-[16px] min-[1024px]:text-[15px] min-[1111px]:text-[16px] flex flex-col p-4 lg:p-0 mt-4 text-grays text-md border rounded-lg lg:space-x-4 xl:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
               <li>

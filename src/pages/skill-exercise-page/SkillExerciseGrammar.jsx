@@ -41,7 +41,7 @@ export default function SkillExerciseGrammar() {
     <div className="md:w-[90%] md:mx-auto">
       <section className="flex flex-col lg:flex-row mx-auto justify-evenly items-center mt-10 md:gap-10 gap-10">
         <div className="px-5 md:p-0 md:w-[100%] lg:w-[600px] relative overflow-hidden">
-          {grammarLevel.map((v) => {
+          {grammarLevel.map((v, index) => {
             return (
               <div key={index}>
               <img className="object-cover" src={v.thumbnail} alt="Picture" />

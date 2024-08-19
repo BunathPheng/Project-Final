@@ -1,35 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchSearch,
   selectAllSearch,
 } from "../../redux/features/search/SearchSlide";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import "../../components/navbar/Navbar.css";
+
 export default function Search() {
   const [searchInput, setSearchInput] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      console.log("key", e.key);
-      navigate("/searchs"); // Navigate to /searchs page
-    }
-  };
-  // Assuming filteredResults is an object, not an array
-  const filteredResults = useSelector(selectAllSearch);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     if (searchInput) {
       dispatch(fetchSearch(searchInput));
+      setDropdownVisible(true); // Show dropdown when there is search input
+    } else {
+      setDropdownVisible(false); // Hide dropdown when search input is empty
     }
   }, [searchInput, dispatch]);
 
   const handleInputChange = (event) => {
     setSearchInput(event.target.value);
   };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false); // Hide dropdown if click is outside
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleResultClick = (title) => {
+    setSearchInput(title); // Update input value with selected result
+    setDropdownVisible(false); // Hide dropdown immediately
+    navigate(`/searchs?query=${encodeURIComponent(title)}`); // Navigate with query parameter
+  };
+
+  const filteredResults = useSelector(selectAllSearch);
 
   return (
     <>
@@ -59,37 +76,41 @@ export default function Search() {
           placeholder="ការស្វែងរក..."
           onChange={handleInputChange}
           value={searchInput}
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              navigate(`/searchs?query=${encodeURIComponent(searchInput)}`);
+            }
+          }}
+          onFocus={() => setDropdownVisible(true)}
         />
-
-        {/* Check if filteredResults.exercises exists and has items */}
-        {searchInput && filteredResults.exercises?.length > 0 && (
-          <div id="result-search" className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
-            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50 ">
-              {filteredResults.exercises.map((element) => (
-                <li
-                  key={element.ex_uuid}
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
-                >
-                  <Link to="/searchs">{element.title}</Link>
-                </li>
-              ))}
-            </ul>
+        {dropdownVisible && (
+          <div
+            ref={dropdownRef} // Attach ref to dropdown container
+            className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10"
+          >
+            {/* Check if filteredResults.exercises exists and has items */}
+            {searchInput && filteredResults.exercises?.length > 0 ? (
+              <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50">
+                {filteredResults.exercises.map((element) => (
+                  <li
+                    key={element.ex_uuid}
+                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                    onClick={() => handleResultClick(element.title)}>
+                    {element.title}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              searchInput && (
+                <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
+                  <li className="p-2 text-gray-500 dark:text-gray-400">
+                    No results found
+                  </li>
+                </ul>
+              )
+            )}
           </div>
         )}
-
-        {/* Show "No results found" if searchInput is not empty and exercises array is empty */}
-        {searchInput &&
-          (!filteredResults.exercises ||
-            filteredResults.exercises.length === 0) && (
-            <div id="result-search"  className="absolute mt-2 min-[1024px]:mt-16 max-[1111px]:mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
-              <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
-                <li className="p-2 text-gray-500 dark:text-gray-400">
-                  No results found
-                </li>
-              </ul>
-            </div>
-          )}
       </div>
     </>
   );

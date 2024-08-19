@@ -74,23 +74,10 @@ export default function IELTSSkill() {
           {ieltsLevels?.map((selectNameLevel) => {
             const sortedExercises = selectNameLevel.exercises
               .slice()
-<<<<<<< HEAD
               .sort((a, b) => {
                 console.log(a);
                 // Sort by the numeric value that determines the order
                 return a.order - b.order; // Replace 'order' with the correct property
-=======
-              .reverse()
-              .map((exercise, index) => {
-                // console.log("exercise", exercise);
-                return (
-                  <LessonIETLSCard
-                    key={index}
-                    pic={exercise.thumbnail}
-                    title={exercise.title}
-                  />
-                );
->>>>>>> b165e0d2cafdbb2b7bd326ee58ee546e7d11d122
               });
 
             console.log("Sorted exercises:", sortedExercises);

@@ -77,11 +77,8 @@ export default function LessonDetailGrammar() {
   // console.log("param", param);
   // const newtitle = param.title.replace(/-/g, " ");
   const newtitle = decodeURIComponent(param.title).replace(/-/g, " ");
-<<<<<<< HEAD
   console.log("param.title:", param.title);
-=======
   // console.log("param.title:",param.title);
->>>>>>> b165e0d2cafdbb2b7bd326ee58ee546e7d11d122
   const convert = newtitle.toUpperCase();
   // console.log("convert", convert);
   // const lessons = useSelector(selectAllLessons);

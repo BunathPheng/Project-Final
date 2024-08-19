@@ -4,7 +4,7 @@ import { BsVolumeUp, BsSignpost } from "react-icons/bs";
 import loading from "../../assets/img/loading.gif";
 import { getAccessToken } from "../../lib/secureLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
-import parse from "html-react-parser"
+import parse from "html-react-parser";
 import {
   selectSubmit,
   submitAnswer,
@@ -17,11 +17,18 @@ import lose3 from "../../assets/img/lose3.gif";
 import lose4 from "../../assets/img/lose4.gif";
 import lose5 from "../../assets/img/lose5.gif";
 import lose6 from "../../assets/img/lose6.gif";
+import lose7 from "../../assets/img/LoseScore2.gif";
+import lose8 from "../../assets/img/LoseScore3.gif";
 import win1 from "../../assets/img/win1.gif";
 import win2 from "../../assets/img/win2.gif";
 import win3 from "../../assets/img/win3.gif";
 import win4 from "../../assets/img/win4.gif";
 import win5 from "../../assets/img/win5.gif";
+import win6 from "../../assets/img/WinScore1.gif";
+import win7 from "../../assets/img/WinScore2.gif";
+import win8 from "../../assets/img/WinScore3.gif";
+import win9 from "../../assets/img/WinScore4.gif";
+import win10 from "../../assets/img/WinScore5.gif";
 import voicelose1 from "../../assets/video/voicelose1.mp3";
 import voicelose2 from "../../assets/video/voicelose2.mp3";
 import voicelose3 from "../../assets/video/voicelose3.mp3";
@@ -80,7 +87,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
   ];
   const voiceLose = [voicelose1, voicelose2, voicelose3, voicelose4];
   const imgLose = [lose1, lose2, lose3, lose4, lose5, lose6];
-  const imgWin = [win1, win2, win3, win4, win5];
+  const imgWin = [win1, win2, win3, win4, win5, win6, win7, win8, win9, win10];
   const randomIndex = Math.floor(Math.random() * voiceWin.length);
   const randomIndex1 = Math.floor(Math.random() * voiceLose.length);
   const randomIndex2 = Math.floor(Math.random() * messageWin.length);
@@ -110,10 +117,10 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
   const [scoreArray, setScoreArray] = useState({});
   const [correct_answer, setCorrectAnswer] = useState([]);
   const checkCorrectAnswer = (question) => {
-    question.correct_answer.map((answer, aIndex) =>{
+    question.correct_answer.map((answer, aIndex) => {
       correct_answer[question.q_uuid] = answer.answer;
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (openModal && scoreSound) {
@@ -216,7 +223,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
       user_answer: userAnswers,
     };
     //console.log("token", getAccessToken());
-    
+
     if (lexerciseUuid) {
       try {
         const response = await dispatch(
@@ -293,11 +300,11 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
   const groupedQuestions = exercise?.questions?.reduce((groups, question) => {
     const { type } = question;
     if (!groups[type]) {
-        groups[type] = [];
+      groups[type] = [];
     }
     groups[type].push(question);
     return groups;
-}, {});
+  }, {});
 
   useEffect(() => {
     // Check if inputValues is empty, which means the "Try Again" button was clicked
@@ -311,7 +318,9 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
       // Update the width of each input based on its corresponding span
       Object.keys(inputValues).forEach((q_uuid) => {
         if (spanRefs.current[q_uuid]) {
-          const inputElements = document.querySelectorAll(`input[data-q_uuid="${q_uuid}"]`);
+          const inputElements = document.querySelectorAll(
+            `input[data-q_uuid="${q_uuid}"]`
+          );
           inputElements.forEach((input, index) => {
             const spanWidth = spanRefs.current[q_uuid][index].offsetWidth;
             input.style.width = `${Math.max(spanWidth + 50, 100)}px`; // 10px for padding, 50px is the minimum width
@@ -333,233 +342,292 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
             <h1 className="text-primary text-[20px] md:text-[24px]">
               {parse(exercise?.title || "Vocabulary Exercise")}
             </h1>
-            {groupedQuestions && Object.keys(groupedQuestions).map((type, index) => (
-                  <>
-                    {type === "FILL_IN_THE_BLANK" && (
-                      <>
-                        <div className="flex items-center mt-4 ml-2 gap-3 text-lg text-second">
-                          <BsSignpost />
-                          <p className="text-[18px] md:text-[20px]">{"ចូរបំពេញចន្លោះឱ្យបានត្រឹមត្រូវ"}</p>
-                        </div>
-                        {groupedQuestions[type].map((question, qIndex) => (
-                          <div key={qIndex}>
-                            {checkCorrectAnswer(question)}
-                            {qIndex === 0 && question?.choices.length > 1 && (
-                              <div className="inline-flex flex-wrap p-3 m-4 bg-slate-200 rounded-md">
-                                {question.choices.map((choice, choiceIndex) => (
-                                  <span
-                                    key={choiceIndex}
-                                    className="p-3 m-1 text-[18px] md:text-[20px] bg-slate-50 border border-gray-300 rounded-md">
-                                    {parse(choice.text)}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                            <div className="flex flex-row flex-wrap ml-4 mt-2 items-center gap-4 text-xl">
-                              <span className="flex items-center gap-3">
-                                {`${qIndex + 1}. `}
-                                {question.voice && isLoading && loadingIndex === qIndex ? (
-                                  <img src={loading} alt="Loading..." className="w-[36px]" />
-                                ) : question.voice ? (
-                                  <>
-                                    <audio
-                                      ref={(el) => (audioRefs.current[qIndex] = el)}
-                                      id={qIndex + 1}
-                                      src={question.voice}
-                                    ></audio>
-                                    <BsVolumeUp
-                                      className={`audio-button border-2 border-gray-200 p-1 text-4xl text-black rounded-md ${
-                                        qIndex === 0 ? "m-[2px]" : ""}`}
-                                      onClick={() => playAudio(qIndex)}
-                                    />
-                                  </>
-                                ) : null}
-                              </span>
+            {groupedQuestions &&
+              Object.keys(groupedQuestions).map((type, index) => (
+                <>
+                  {type === "FILL_IN_THE_BLANK" && (
+                    <>
+                      <div className="flex items-center mt-4 ml-2 gap-3 text-lg text-second">
+                        <BsSignpost />
+                        <p className="text-[18px] md:text-[20px]">
+                          {"ចូរបំពេញចន្លោះឱ្យបានត្រឹមត្រូវ"}
+                        </p>
+                      </div>
+                      {groupedQuestions[type].map((question, qIndex) => (
+                        <div key={qIndex}>
+                          {checkCorrectAnswer(question)}
+                          {qIndex === 0 && question?.choices.length > 1 && (
+                            <div className="inline-flex flex-wrap p-3 m-4 bg-slate-200 rounded-md">
+                              {question.choices.map((choice, choiceIndex) => (
+                                <span
+                                  key={choiceIndex}
+                                  className="p-3 m-1 text-[18px] md:text-[20px] bg-slate-50 border border-gray-300 rounded-md"
+                                >
+                                  {parse(choice.text)}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          <div className="flex flex-row flex-wrap ml-4 mt-2 items-center gap-4 text-xl">
+                            <span className="flex items-center gap-3">
+                              {`${qIndex + 1}. `}
+                              {question.voice &&
+                              isLoading &&
+                              loadingIndex === qIndex ? (
+                                <img
+                                  src={loading}
+                                  alt="Loading..."
+                                  className="w-[36px]"
+                                />
+                              ) : question.voice ? (
+                                <>
+                                  <audio
+                                    ref={(el) =>
+                                      (audioRefs.current[qIndex] = el)
+                                    }
+                                    id={qIndex + 1}
+                                    src={question.voice}
+                                  ></audio>
+                                  <BsVolumeUp
+                                    className={`audio-button border-2 border-gray-200 p-1 text-4xl text-black rounded-md ${
+                                      qIndex === 0 ? "m-[2px]" : ""
+                                    }`}
+                                    onClick={() => playAudio(qIndex)}
+                                  />
+                                </>
+                              ) : null}
+                            </span>
 
-                              <div className={`cursor-pointer flex flex-wrap gap-2 ${qIndex === 0 ? "m-[2px]" : ""}`}>
-                                {question.question_text.split("#").map((part, partIndex) => (
+                            <div
+                              className={`cursor-pointer flex flex-wrap gap-2 ${
+                                qIndex === 0 ? "m-[2px]" : ""
+                              }`}
+                            >
+                              {question.question_text
+                                .split("#")
+                                .map((part, partIndex) => (
                                   <React.Fragment key={partIndex}>
-                                    <label htmlFor={`choice-${question.q_uuid}-${qIndex}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
-                                    <span className="text-[20px] mt-2">{parse(part)}</span>
-                                    {partIndex < question.question_text.split("#").length - 1 && (
-                                      <>
-                                        <span
-                                          ref={(el) => {
-                                            if (!spanRefs.current[question.q_uuid])
-                                              spanRefs.current[question.q_uuid] = [];
-                                            spanRefs.current[question.q_uuid][partIndex] = el;
-                                          }}
-                                          className="invisible absolute whitespace-pre">
-                                          {inputValues[question.q_uuid]?.[partIndex] || " "}
-                                        </span>
-
-                                        <input
-                                          id={`choice-${question.q_uuid}-${qIndex}`}
-                                          name={`choice-${question.q_uuid}`}
-                                          type="text"
-                                          className={`cursor-pointer ml-1 w-[100px] text-xl border rounded-md border-gray-300 text-gray-300 focus:border-pink-200 focus:ring-pink-20 text-center ${
-                                            showResult
-                                              ? inputValues[question.q_uuid]?.[partIndex] ===
-                                                correct_answer[question.q_uuid]
-                                                ? "text-green-500 border-green-500"
-                                                : "text-red-500 border-red-500"
-                                              : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
-                                          }`}
-                                          data-q_uuid={question.q_uuid}
-                                          value={inputValues[question.q_uuid]?.[partIndex] || ""}
-                                          onChange={(e) =>
-                                            onAnswerChange(
-                                              question.q_uuid,
-                                              e.target.value,
+                                    <label
+                                      htmlFor={`choice-${question.q_uuid}-${qIndex}`}
+                                      className="cursor-pointer ml-2 flex flex-row gap-2 mt-1"
+                                    >
+                                      <span className="text-[20px] mt-2">
+                                        {parse(part)}
+                                      </span>
+                                      {partIndex <
+                                        question.question_text.split("#")
+                                          .length -
+                                          1 && (
+                                        <>
+                                          <span
+                                            ref={(el) => {
+                                              if (
+                                                !spanRefs.current[
+                                                  question.q_uuid
+                                                ]
+                                              )
+                                                spanRefs.current[
+                                                  question.q_uuid
+                                                ] = [];
+                                              spanRefs.current[question.q_uuid][
+                                                partIndex
+                                              ] = el;
+                                            }}
+                                            className="invisible absolute whitespace-pre"
+                                          >
+                                            {inputValues[question.q_uuid]?.[
                                               partIndex
-                                            )
-                                          }
-                                        />   
+                                            ] || " "}
+                                          </span>
 
-                                        {showResult ? (
-                                          inputValues[question.q_uuid]?.[partIndex] ===
-                                          correct_answer[question.q_uuid] ? (
-                                            <></>
+                                          <input
+                                            id={`choice-${question.q_uuid}-${qIndex}`}
+                                            name={`choice-${question.q_uuid}`}
+                                            type="text"
+                                            className={`cursor-pointer ml-1 w-[100px] text-xl border rounded-md border-gray-300 text-gray-300 focus:border-pink-200 focus:ring-pink-20 text-center ${
+                                              showResult
+                                                ? inputValues[
+                                                    question.q_uuid
+                                                  ]?.[partIndex] ===
+                                                  correct_answer[
+                                                    question.q_uuid
+                                                  ]
+                                                  ? "text-green-500 border-green-500"
+                                                  : "text-red-500 border-red-500"
+                                                : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
+                                            }`}
+                                            data-q_uuid={question.q_uuid}
+                                            value={
+                                              inputValues[question.q_uuid]?.[
+                                                partIndex
+                                              ] || ""
+                                            }
+                                            onChange={(e) =>
+                                              onAnswerChange(
+                                                question.q_uuid,
+                                                e.target.value,
+                                                partIndex
+                                              )
+                                            }
+                                          />
+
+                                          {showResult ? (
+                                            inputValues[question.q_uuid]?.[
+                                              partIndex
+                                            ] ===
+                                            correct_answer[question.q_uuid] ? (
+                                              <></>
+                                            ) : (
+                                              <p className="text-green-500 mt-2 ml-2">
+                                                {`(${
+                                                  correct_answer[
+                                                    question.q_uuid
+                                                  ]
+                                                })`}
+                                              </p>
+                                            )
                                           ) : (
-                                            <p className="text-green-500 mt-2 ml-2">
-                                              {`(${correct_answer[question.q_uuid]})`}
-                                            </p>
-                                          )
-                                        ) : (
-                                          <></>
-                                        )}
-                                      </>
-                                    )}
-                                     </label>
+                                            <></>
+                                          )}
+                                        </>
+                                      )}
+                                    </label>
                                   </React.Fragment>
                                 ))}
-                              </div>
-
                             </div>
                           </div>
-                        ))}
-                      </>
-                    )}
+                        </div>
+                      ))}
+                    </>
+                  )}
 
-                    {type === "TRUE_OR_FALSE" && (
-                      <>
+                  {type === "TRUE_OR_FALSE" && (
+                    <>
                       <div className="flex items-center mt-4 ml-4 gap-3 text-lg text-second">
                         <BsSignpost />
-                          <p className=" text-xl">
-                            {"តើប្រយោគនេះត្រូវ ឬខុស?"}
-                          </p>
+                        <p className=" text-xl">{"តើប្រយោគនេះត្រូវ ឬខុស?"}</p>
                       </div>
-                      
-                      {groupedQuestions[type].map((question, qIndex) => (
-                    <div className="flex gap-3 flex-col ml-4 mt-3 text-xl">
-                      <div className="flex gap-2">
-                        <span>{`${qIndex + 1}.`}</span>
-                        <p>{parse(question.question_text)}</p>
-                      </div>
-                      {question.choices.map((choice) => (
-                        <div key={choice.choice_uuid}>
-                          <input
-                            className="me-3 cursor-pointer"
-                            type="radio"
-                            id={`${choice.choice_uuid}`}
-                            name={`choice-${question.q_uuid}`}
-                            value={choice.text}
-                            onChange={(e) =>
-                              onAnswerChange(question.q_uuid, e.target.value)
-                            }
-                            checked={
-                              selectedAnswers[question.q_uuid] === choice.text
-                            }
-                            disabled={showResult}
-                            onClick={() =>
-                              unselectRadio(
-                                `choice-${question.q_uuid}`,
-                                `${question.q_uuid}`
-                              )
-                            }
-                          />
-                          <label
-                            htmlFor={`${choice.choice_uuid}`}
-                            className={`cursor-pointer ${
-                              showResult &&
-                              (choice.is_correct
-                                ? "text-green-500"
-                                : selectedAnswers[question.q_uuid] === choice.text
-                                ? "text-red-500"
-                                : "")
-                            }`}
-                          >
-                            {choice.text || "No choice"}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                      ))}
-                      </>
-                    )}
 
-                    {type === "MULTIPLE_CHOICES" && (
-                      <>
-                      <div className="flex items-center mt-4 ml-4 gap-3 text-lg text-second">
-                        <BsSignpost  />
-                          <p className=" text-xl">
-                            {"ចូរជ្រើសរើសចម្លើយឱ្យបានត្រឹមត្រូវ"}
-                          </p>
-                      </div>
-                      
                       {groupedQuestions[type].map((question, qIndex) => (
-                    <div className="flex gap-3 flex-col ml-4 mt-3 text-xl">
-                      <div className="flex gap-2">
-                        <span>{`${qIndex + 1}.`}</span>
-                        <p>{parse(question.question_text)}</p>
-                      </div>
-                      {question.choices.map((choice) => (
-                        <div key={choice.choice_uuid}>
-                          <input
-                            className="me-3 cursor-pointer"
-                            type="radio"
-                            id={`${choice.choice_uuid}`}
-                            name={`choice-${question.q_uuid}`}
-                            value={choice.text}
-                            onChange={(e) =>
-                              onAnswerChange(question.q_uuid, e.target.value)
-                            }
-                            checked={
-                              selectedAnswers[question.q_uuid] === choice.text
-                            }
-                            disabled={showResult}
-                            onClick={() =>
-                              unselectRadio(
-                                `choice-${question.q_uuid}`,
-                                `${question.q_uuid}`
-                              )
-                            }
-                          />
-                          <label
-                            htmlFor={`${choice.choice_uuid}`}
-                            className={`cursor-pointer ${
-                              showResult &&
-                              (choice.is_correct
-                                ? "text-green-500"
-                                : selectedAnswers[question.q_uuid] === choice.text
-                                ? "text-red-500"
-                                : "")
-                            }`}
-                          >
-                            {choice.text || "No choice"}
-                          </label>
+                        <div className="flex gap-3 flex-col ml-4 mt-3 text-xl">
+                          <div className="flex gap-2">
+                            <span>{`${qIndex + 1}.`}</span>
+                            <p>{parse(question.question_text)}</p>
+                          </div>
+                          {question.choices.map((choice) => (
+                            <div key={choice.choice_uuid}>
+                              <input
+                                className="me-3 cursor-pointer"
+                                type="radio"
+                                id={`${choice.choice_uuid}`}
+                                name={`choice-${question.q_uuid}`}
+                                value={choice.text}
+                                onChange={(e) =>
+                                  onAnswerChange(
+                                    question.q_uuid,
+                                    e.target.value
+                                  )
+                                }
+                                checked={
+                                  selectedAnswers[question.q_uuid] ===
+                                  choice.text
+                                }
+                                disabled={showResult}
+                                onClick={() =>
+                                  unselectRadio(
+                                    `choice-${question.q_uuid}`,
+                                    `${question.q_uuid}`
+                                  )
+                                }
+                              />
+                              <label
+                                htmlFor={`${choice.choice_uuid}`}
+                                className={`cursor-pointer ${
+                                  showResult &&
+                                  (choice.is_correct
+                                    ? "text-green-500"
+                                    : selectedAnswers[question.q_uuid] ===
+                                      choice.text
+                                    ? "text-red-500"
+                                    : "")
+                                }`}
+                              >
+                                {choice.text || "No choice"}
+                              </label>
+                            </div>
+                          ))}
                         </div>
                       ))}
-                    </div>
+                    </>
+                  )}
+
+                  {type === "MULTIPLE_CHOICES" && (
+                    <>
+                      <div className="flex items-center mt-4 ml-4 gap-3 text-lg text-second">
+                        <BsSignpost />
+                        <p className=" text-xl">
+                          {"ចូរជ្រើសរើសចម្លើយឱ្យបានត្រឹមត្រូវ"}
+                        </p>
+                      </div>
+
+                      {groupedQuestions[type].map((question, qIndex) => (
+                        <div className="flex gap-3 flex-col ml-4 mt-3 text-xl">
+                          <div className="flex gap-2">
+                            <span>{`${qIndex + 1}.`}</span>
+                            <p>{parse(question.question_text)}</p>
+                          </div>
+                          {question.choices.map((choice) => (
+                            <div key={choice.choice_uuid}>
+                              <input
+                                className="me-3 cursor-pointer"
+                                type="radio"
+                                id={`${choice.choice_uuid}`}
+                                name={`choice-${question.q_uuid}`}
+                                value={choice.text}
+                                onChange={(e) =>
+                                  onAnswerChange(
+                                    question.q_uuid,
+                                    e.target.value
+                                  )
+                                }
+                                checked={
+                                  selectedAnswers[question.q_uuid] ===
+                                  choice.text
+                                }
+                                disabled={showResult}
+                                onClick={() =>
+                                  unselectRadio(
+                                    `choice-${question.q_uuid}`,
+                                    `${question.q_uuid}`
+                                  )
+                                }
+                              />
+                              <label
+                                htmlFor={`${choice.choice_uuid}`}
+                                className={`cursor-pointer ${
+                                  showResult &&
+                                  (choice.is_correct
+                                    ? "text-green-500"
+                                    : selectedAnswers[question.q_uuid] ===
+                                      choice.text
+                                    ? "text-red-500"
+                                    : "")
+                                }`}
+                              >
+                                {choice.text || "No choice"}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
                       ))}
-                      </>
-                    )}
-                  </>
-        ))}
+                    </>
+                  )}
+                </>
+              ))}
             <div className="flex gap-4 mt-5 mb-2 md:flex-row flex-col">
               <Button
-                id={key}   
-                color="blue"            
+                id={key}
+                color="blue"
                 onClick={() => handleSubmit(exercise.ex_uuid, exercise)}
                 disabled={showResult}
                 className="w-fit"

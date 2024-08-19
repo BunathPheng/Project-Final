@@ -72,7 +72,7 @@ export default function Search() {
         <input
           type="text"
           id="search-navbar"
-          className="block w-full p-4 ps-10 text-sm min-[1024px]:text-[10px] min-[1111px]:text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+          className="block w-full p-4 ps-10 text-sm min-[1024px]:text-[10px] min-[1111px]:text-sm text-gray-900 border border-gray-300 rounded-xl dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           placeholder="ការស្វែងរក..."
           onChange={handleInputChange}
           value={searchInput}
@@ -95,7 +95,8 @@ export default function Search() {
                   <li
                     key={element.ex_uuid}
                     className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
-                    onClick={() => handleResultClick(element.title)}>
+                    onClick={() => handleResultClick(element.title)}
+                  >
                     {element.title}
                   </li>
                 ))}

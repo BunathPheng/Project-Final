@@ -17,11 +17,17 @@ import lose3 from "../../assets/img/lose3.gif";
 import lose4 from "../../assets/img/lose4.gif";
 import lose5 from "../../assets/img/lose5.gif";
 import lose6 from "../../assets/img/lose6.gif";
-import win1 from "../../assets/img/win1.gif";
+import lose7 from "../../assets/img/LoseScore2.gif";
+import lose8 from "../../assets/img/LoseScore3.gif";
 import win2 from "../../assets/img/win2.gif";
 import win3 from "../../assets/img/win3.gif";
 import win4 from "../../assets/img/win4.gif";
 import win5 from "../../assets/img/win5.gif";
+import win6 from "../../assets/img/WinScore1.gif";
+import win7 from "../../assets/img/WinScore2.gif";
+import win8 from "../../assets/img/WinScore3.gif";
+import win9 from "../../assets/img/WinScore4.gif";
+import win10 from "../../assets/img/WinScore5.gif";
 import voicelose1 from "../../assets/video/voicelose1.mp3";
 import voicelose2 from "../../assets/video/voicelose2.mp3";
 import voicelose3 from "../../assets/video/voicelose3.mp3";
@@ -78,8 +84,8 @@ const ExerciseComponent = ({ exercise, key }) => {
     voicewin10,
   ];
   const voiceLose = [voicelose1, voicelose2, voicelose3, voicelose4];
-  const imgLose = [lose1, lose2, lose3, lose4, lose5, lose6];
-  const imgWin = [win1, win2, win3, win4, win5];
+  const imgLose = [lose1, lose2, lose3, lose4, lose5, lose6, lose7, lose8];
+  const imgWin = [win2, win3, win4, win5, win6, win7, win8, win9, win10];
   const randomIndex = Math.floor(Math.random() * voiceWin.length);
   const randomIndex1 = Math.floor(Math.random() * voiceLose.length);
   const randomIndex2 = Math.floor(Math.random() * messageWin.length);
@@ -391,66 +397,74 @@ const ExerciseComponent = ({ exercise, key }) => {
                             .split("#")
                             .map((part, partIndex) => (
                               <React.Fragment key={partIndex}>
-                                <label htmlFor={`choice-${question.q_uuid}-${index}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
-                                <span className="text-xl me-4 mt-2">{part}</span>
-                                {partIndex <
-                                  question.question_text.split("#").length -
-                                    1 && (
-                                  <>
-                                    <span
-                                      ref={(el) => {
-                                        if (!spanRefs.current[question.q_uuid])
-                                          spanRefs.current[question.q_uuid] =
-                                            [];
-                                        spanRefs.current[question.q_uuid][
+                                <label
+                                  htmlFor={`choice-${question.q_uuid}-${index}`}
+                                  className="cursor-pointer ml-2 flex flex-row gap-2 mt-1"
+                                >
+                                  <span className="text-xl me-4 mt-2">
+                                    {part}
+                                  </span>
+                                  {partIndex <
+                                    question.question_text.split("#").length -
+                                      1 && (
+                                    <>
+                                      <span
+                                        ref={(el) => {
+                                          if (
+                                            !spanRefs.current[question.q_uuid]
+                                          )
+                                            spanRefs.current[question.q_uuid] =
+                                              [];
+                                          spanRefs.current[question.q_uuid][
+                                            partIndex
+                                          ] = el;
+                                        }}
+                                        className="invisible absolute whitespace-pre"
+                                      >
+                                        {inputValues[question.q_uuid]?.[
                                           partIndex
-                                        ] = el;
-                                      }}
-                                      className="invisible absolute whitespace-pre"
-                                    >
-                                      {inputValues[question.q_uuid]?.[
-                                        partIndex
-                                      ] || " "}
-                                    </span>
-                                    <input
-                                      id={`choice-${question.q_uuid}-${index}`}
-                                      type="text"
-                                      className={`px-3 w-[100px] lg:text-[20px] border rounded-md text-center ml-4 ${
-                                        showResult
-                                          ? inputValues[question.q_uuid]?.[
-                                              partIndex
-                                            ] ===
-                                            correct_answer[question.q_uuid]
-                                            ? "text-green-500 border-green-500"
-                                            : "text-red-500 border-red-500"
-                                          : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
-                                      }`}
-                                      data-q_uuid={question.q_uuid}
-                                      value={
+                                        ] || " "}
+                                      </span>
+                                      <input
+                                        id={`choice-${question.q_uuid}-${index}`}
+                                        type="text"
+                                        className={`px-3 w-[100px] lg:text-[20px] border rounded-md text-center ml-4 ${
+                                          showResult
+                                            ? inputValues[question.q_uuid]?.[
+                                                partIndex
+                                              ] ===
+                                              correct_answer[question.q_uuid]
+                                              ? "text-green-500 border-green-500"
+                                              : "text-red-500 border-red-500"
+                                            : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
+                                        }`}
+                                        data-q_uuid={question.q_uuid}
+                                        value={
+                                          inputValues[question.q_uuid]?.[
+                                            partIndex
+                                          ] || ""
+                                        }
+                                        onChange={(e) =>
+                                          onAnswerChange(
+                                            question.q_uuid,
+                                            e.target.value,
+                                            partIndex
+                                          )
+                                        }
+                                      />
+                                      {showResult &&
                                         inputValues[question.q_uuid]?.[
                                           partIndex
-                                        ] || ""
-                                      }
-                                      onChange={(e) =>
-                                        onAnswerChange(
-                                          question.q_uuid,
-                                          e.target.value,
-                                          partIndex
-                                        )
-                                      }
-                                    />
-                                    {showResult &&
-                                      inputValues[question.q_uuid]?.[
-                                        partIndex
-                                      ] !== correct_answer[question.q_uuid] && (
-                                        <p className="text-green-500 mt-2 ml-2">
-                                          {`(${
-                                            correct_answer[question.q_uuid]
-                                          })`}
-                                        </p>
-                                      )}
-                                  </>
-                                )}
+                                        ] !==
+                                          correct_answer[question.q_uuid] && (
+                                          <p className="text-green-500 mt-2 ml-2">
+                                            {`(${
+                                              correct_answer[question.q_uuid]
+                                            })`}
+                                          </p>
+                                        )}
+                                    </>
+                                  )}
                                 </label>
                               </React.Fragment>
                             ))}
@@ -467,68 +481,74 @@ const ExerciseComponent = ({ exercise, key }) => {
                             .split("#")
                             .map((part, partIndex) => (
                               <React.Fragment key={partIndex}>
-                                <label htmlFor={`choice-${question.q_uuid}-${index}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
-                                <span className="md:text-[18px] lg:text-xl mt-2">
-                                  {part}
-                                </span>
-                                {partIndex <
-                                  question.question_text.split("#").length -
-                                    1 && (
-                                  <>
-                                    <span
-                                      ref={(el) => {
-                                        if (!spanRefs.current[question.q_uuid])
-                                          spanRefs.current[question.q_uuid] =
-                                            [];
-                                        spanRefs.current[question.q_uuid][
+                                <label
+                                  htmlFor={`choice-${question.q_uuid}-${index}`}
+                                  className="cursor-pointer ml-2 flex flex-row gap-2 mt-1"
+                                >
+                                  <span className="md:text-[18px] lg:text-xl mt-2">
+                                    {part}
+                                  </span>
+                                  {partIndex <
+                                    question.question_text.split("#").length -
+                                      1 && (
+                                    <>
+                                      <span
+                                        ref={(el) => {
+                                          if (
+                                            !spanRefs.current[question.q_uuid]
+                                          )
+                                            spanRefs.current[question.q_uuid] =
+                                              [];
+                                          spanRefs.current[question.q_uuid][
+                                            partIndex
+                                          ] = el;
+                                        }}
+                                        className="invisible absolute whitespace-pre"
+                                      >
+                                        {inputValues[question.q_uuid]?.[
                                           partIndex
-                                        ] = el;
-                                      }}
-                                      className="invisible absolute whitespace-pre"
-                                    >
-                                      {inputValues[question.q_uuid]?.[
-                                        partIndex
-                                      ] || " "}
-                                    </span>
-                                    <input
-                                      id={`choice-${question.q_uuid}-${index}`}
-                                      type="text"
-                                      className={`px-3 w-[50px] lg:w-[100px] text-xl border rounded-md text-center ml-4 ${
-                                        showResult
-                                          ? inputValues[question.q_uuid]?.[
-                                              partIndex
-                                            ] ===
-                                            correct_answer[question.q_uuid]
-                                            ? "text-green-500 border-green-500"
-                                            : "text-red-500 border-red-500"
-                                          : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
-                                      }`}
-                                      data-q_uuid={question.q_uuid}
-                                      value={
+                                        ] || " "}
+                                      </span>
+                                      <input
+                                        id={`choice-${question.q_uuid}-${index}`}
+                                        type="text"
+                                        className={`px-3 w-[50px] lg:w-[100px] text-xl border rounded-md text-center ml-4 ${
+                                          showResult
+                                            ? inputValues[question.q_uuid]?.[
+                                                partIndex
+                                              ] ===
+                                              correct_answer[question.q_uuid]
+                                              ? "text-green-500 border-green-500"
+                                              : "text-red-500 border-red-500"
+                                            : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
+                                        }`}
+                                        data-q_uuid={question.q_uuid}
+                                        value={
+                                          inputValues[question.q_uuid]?.[
+                                            partIndex
+                                          ] || ""
+                                        }
+                                        onChange={(e) =>
+                                          onAnswerChange(
+                                            question.q_uuid,
+                                            e.target.value,
+                                            partIndex
+                                          )
+                                        }
+                                      />
+                                      {showResult &&
                                         inputValues[question.q_uuid]?.[
                                           partIndex
-                                        ] || ""
-                                      }
-                                      onChange={(e) =>
-                                        onAnswerChange(
-                                          question.q_uuid,
-                                          e.target.value,
-                                          partIndex
-                                        )
-                                      }
-                                    />
-                                    {showResult &&
-                                      inputValues[question.q_uuid]?.[
-                                        partIndex
-                                      ] !== correct_answer[question.q_uuid] && (
-                                        <p className="text-green-500 mt-2 ml-2">
-                                          {`(${
-                                            correct_answer[question.q_uuid]
-                                          })`}
-                                        </p>
-                                      )}
-                                  </>
-                                )}
+                                        ] !==
+                                          correct_answer[question.q_uuid] && (
+                                          <p className="text-green-500 mt-2 ml-2">
+                                            {`(${
+                                              correct_answer[question.q_uuid]
+                                            })`}
+                                          </p>
+                                        )}
+                                    </>
+                                  )}
                                 </label>
                               </React.Fragment>
                             ))}

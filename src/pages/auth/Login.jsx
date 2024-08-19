@@ -141,22 +141,14 @@ export default function Login() {
                     htmlFor="email"
                     className="block mb-2 text-xl font-medium text-blues"
                   >
-<<<<<<< HEAD
                     អ៊ីម៉ែល<span className="text-second">*</span>
-=======
-                    អ៊ីមែល<span className="text-second">*</span>
->>>>>>> e6216a50e6d373835914a823037d9f03034c137c
                   </label>
                   <Field
                     type="email"
                     id="email"
                     name="email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-<<<<<<< HEAD
                     placeholder="បញ្ជូលអ៊ីម៉ែលរបស់អ្នក"
-=======
-                    placeholder="បញ្ជូលអ៊ីមែលរបស់អ្នក"
->>>>>>> e6216a50e6d373835914a823037d9f03034c137c
                     required
                   />
                   <ErrorMessage

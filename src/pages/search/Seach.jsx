@@ -33,7 +33,7 @@ export default function Search() {
 
   return (
     <>
-      <div className="relative hidden style-navbar lg:block lg:w-[210px] xl:w-[300px] ml-5">
+      <div className="relative hidden style-navbar2 lg:block lg:w-[210px] xl:w-[300px]">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
             className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -55,7 +55,7 @@ export default function Search() {
         <input
           type="text"
           id="search-navbar"
-          className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+          className="block w-full p-4 ps-10 text-sm min-[1024px]:text-[10px] min-[1111px]:text-sm text-gray-900 border border-gray-300 rounded-xl bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
           placeholder="ការស្វែងរក..."
           onChange={handleInputChange}
           value={searchInput}
@@ -64,8 +64,8 @@ export default function Search() {
 
         {/* Check if filteredResults.exercises exists and has items */}
         {searchInput && filteredResults.exercises?.length > 0 && (
-          <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
-            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50">
+          <div id="result-search" className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
+            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50 ">
               {filteredResults.exercises.map((element) => (
                 <li
                   key={element.ex_uuid}
@@ -82,7 +82,7 @@ export default function Search() {
         {searchInput &&
           (!filteredResults.exercises ||
             filteredResults.exercises.length === 0) && (
-            <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
+            <div id="result-search"  className="absolute mt-2 min-[1024px]:mt-16 max-[1111px]:mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
               <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
                 <li className="p-2 text-gray-500 dark:text-gray-400">
                   No results found

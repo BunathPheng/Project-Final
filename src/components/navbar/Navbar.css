@@ -4,8 +4,13 @@
     }
     .style-navbar2 {
         display: flex !important;
+        width: 130px;
     }
     .style-navbar3 {
         display: block !important;
+        width: 10px;
+    }
+    #result-search {
+        margin-top: 60px;
     }
 }

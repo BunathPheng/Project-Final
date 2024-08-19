@@ -249,7 +249,7 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"// style-navbar"
+            className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1 style-navbar2"// style-navbar"
             id="navbar-search"
           >
             <div className="relative mt-3 lg:hidden ">
@@ -311,7 +311,7 @@ export default function Navbar() {
                   </div>
                 )}
             </div>
-            <ul className="flex flex-col p-4 lg:p-0 mt-4 text-grays text-md border rounded-lg lg:space-x-4 xl:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
+            <ul className="text-[16px] min-[1024px]:text-[15px] min-[1111px]:text-[16px] flex flex-col p-4 lg:p-0 mt-4 text-grays text-md border rounded-lg lg:space-x-4 xl:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
               <li>
                 <Link
                   to="/"

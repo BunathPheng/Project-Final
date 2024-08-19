@@ -4,10 +4,10 @@ import React from "react";
 export default function Skillcard({ skill_name, des, photo }) {
   const skillName = skill_name.toLowerCase();
   return (
-    <div className="max-w-[590px] relative overflow-hidden">
+    <div className="max-w-[590px] relative overflow-hidden group">
       <Link to={`${skillName}`}>
         <img
-          className="h-[400px] object-cover transform transition-transform duration-300 hover:scale-105 hover:brightness-75 brightness-50"
+          className="h-[400px] object-cover transform transition-transform duration-300 group-hover:scale-105 group-hover:brightness-75 brightness-50"
           src={photo}
           alt="Card"
         />

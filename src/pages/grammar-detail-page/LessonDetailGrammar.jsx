@@ -401,7 +401,7 @@ export default function LessonDetailGrammar() {
                         <div className="flex gap-4 mt-4 text-grays">
                           <BsPatchCheck className="text-[40px] md:text-[30px] text-second" />
                           <p className="md:text-lg md:line-clamp-none line-clamp-2">
-                            {lessonsById?.description}
+                            {parse(String(lessonsById?.description || "No description"))}
                           </p>
                         </div>
                       </div>

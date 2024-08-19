@@ -391,7 +391,8 @@ const ExerciseComponent = ({ exercise, key }) => {
                             .split("#")
                             .map((part, partIndex) => (
                               <React.Fragment key={partIndex}>
-                                <span className="text-xl me-4">{part}</span>
+                                <label htmlFor={`choice-${question.q_uuid}-${index}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
+                                <span className="text-xl me-4 mt-2">{part}</span>
                                 {partIndex <
                                   question.question_text.split("#").length -
                                     1 && (
@@ -414,7 +415,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                     <input
                                       id={`choice-${question.q_uuid}-${index}`}
                                       type="text"
-                                      className={`px-3 w-[100px] lg:text-[20px] border rounded-md text-center ${
+                                      className={`px-3 w-[100px] lg:text-[20px] border rounded-md text-center ml-4 ${
                                         showResult
                                           ? inputValues[question.q_uuid]?.[
                                               partIndex
@@ -424,6 +425,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                             : "text-red-500 border-red-500"
                                           : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
                                       }`}
+                                      data-q_uuid={question.q_uuid}
                                       value={
                                         inputValues[question.q_uuid]?.[
                                           partIndex
@@ -449,6 +451,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                       )}
                                   </>
                                 )}
+                                </label>
                               </React.Fragment>
                             ))}
                         </div>
@@ -464,7 +467,8 @@ const ExerciseComponent = ({ exercise, key }) => {
                             .split("#")
                             .map((part, partIndex) => (
                               <React.Fragment key={partIndex}>
-                                <span className="md:text-[18px] lg:text-xl">
+                                <label htmlFor={`choice-${question.q_uuid}-${index}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
+                                <span className="md:text-[18px] lg:text-xl mt-2">
                                   {part}
                                 </span>
                                 {partIndex <
@@ -489,7 +493,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                     <input
                                       id={`choice-${question.q_uuid}-${index}`}
                                       type="text"
-                                      className={`px-3 w-[50px] lg:w-[100px] text-xl border rounded-md text-center ${
+                                      className={`px-3 w-[50px] lg:w-[100px] text-xl border rounded-md text-center ml-4 ${
                                         showResult
                                           ? inputValues[question.q_uuid]?.[
                                               partIndex
@@ -499,6 +503,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                             : "text-red-500 border-red-500"
                                           : "border-gray-300 text-gray-700 focus:border-pink-200 focus:ring-pink-200"
                                       }`}
+                                      data-q_uuid={question.q_uuid}
                                       value={
                                         inputValues[question.q_uuid]?.[
                                           partIndex
@@ -524,6 +529,7 @@ const ExerciseComponent = ({ exercise, key }) => {
                                       )}
                                   </>
                                 )}
+                                </label>
                               </React.Fragment>
                             ))}
                         </div>

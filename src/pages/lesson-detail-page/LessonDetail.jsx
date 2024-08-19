@@ -414,7 +414,7 @@ export default function LessonDetail() {
                       <div className="flex gap-4 mt-4 text-grays items-center">
                         <BsPatchCheck className=" text-[60px] lg:text-2xl md:text-xl text-second" />
                         <p className="lg:text-xl text-[18px] md:line-clamp-none line-clamp-1">
-                          {excersiceById?.description}
+                          {parse(String(excersiceById?.description  || "No description"))}
                         </p>
                       </div>
                     </div>
@@ -457,7 +457,7 @@ export default function LessonDetail() {
                     <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
                       <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                         <p className="text-[20px] leading-[3rem]">
-                          {parse(`${excersiceById?.transcript}`)}
+                          {parse(String(`${excersiceById?.transcript}`))}
                         </p>
                       </div>
                     </div>
@@ -471,7 +471,7 @@ export default function LessonDetail() {
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
                     <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                       <p className="text-[20px] leading-[3rem]">
-                        {parse(excersiceById?.reading_text)}
+                        {parse(String(excersiceById?.reading_text))}
                       </p>
                     </div>
                   </div>
@@ -485,7 +485,7 @@ export default function LessonDetail() {
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
                     <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                       <p className="text-[20px] leading-[3rem]">
-                        {parse(excersiceById?.tip)}
+                        {parse(String(excersiceById?.tip))}
                       </p>
                     </div>
                   </div>

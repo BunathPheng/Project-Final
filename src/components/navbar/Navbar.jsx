@@ -646,7 +646,7 @@ export default function Navbar() {
                 <Link
                   to="/ielts"
                   className={`block py-2 px-3 font-bold text-grays lg:p-0 ${
-                    location.pathname === "/ielts"
+                    location.pathname.includes("/ielts")
                       ? "text-primary bg-gray-100 rounded lg:bg-transparent"
                       : "hover:text-primary"
                   }`}

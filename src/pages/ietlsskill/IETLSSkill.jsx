@@ -16,6 +16,7 @@ export default function IELTSSkill() {
   const newname = param["ielts-name"];
   const titles = newname.replace("ietls", "b1");
   const ietls = useSelector(selectNameLevel);
+  const stauss = useSelector((state) => state.skillNameLevel.status);
   const [ieltsLevels, setietlsLevels] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,6 +29,10 @@ export default function IELTSSkill() {
     setietlsLevels(filteredSkills);
   }, [ietls]);
   console.log("ieltsLevels", ieltsLevels);
+  console.log("Loading", stauss);
+  if (stauss === "Loading") {
+    return <LoadingExerciseGrammar />;
+  }
   return (
     <>
       <div className="w-[90%] mx-auto">

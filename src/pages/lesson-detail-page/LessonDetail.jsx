@@ -414,7 +414,11 @@ export default function LessonDetail() {
                       <div className="flex gap-4 mt-4 text-grays items-center">
                         <BsPatchCheck className=" text-[60px] lg:text-2xl md:text-xl text-second" />
                         <p className="lg:text-xl text-[18px] md:line-clamp-none line-clamp-1">
-                          {parse(String(excersiceById?.description  || "No description"))}
+                          {parse(
+                            String(
+                              excersiceById?.description || "No description"
+                            )
+                          )}
                         </p>
                       </div>
                     </div>

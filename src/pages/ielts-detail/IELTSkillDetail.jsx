@@ -360,7 +360,7 @@ export default function LessonDetail() {
             </ul>
           </div>
         </aside>
-        <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
+        <main className="w-full flex-shrink-0 self-end">
           {statuss === "Loading" ? (
             <div className="flex justify-center h-[200px]">
               <img src={loading2} alt="Loading..." />

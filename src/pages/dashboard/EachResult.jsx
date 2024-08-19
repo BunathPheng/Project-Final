@@ -167,7 +167,8 @@ export default function EachResult() {
                       return (
                         <tr key={index} className="text-gray-700 border-b text-[12px] md:text-[16px]">
                           <td className="py-5  pl-8 text-left">{exercise?.ex_title}</td>
-                          <td className="py-5">{exercise?.scores}</td>
+                          {console.log("exercise?.score", typeof(exercise?.scores))}
+                          <td className="py-5">{parseFloat(exercise?.scores) % 1 === 0 ? parseFloat(exercise?.scores).toFixed(0) : parseFloat(exercise?.scores).toFixed(2)}</td>
                           <td className="py-5">{formattedDate}</td>
                         </tr>
                       );

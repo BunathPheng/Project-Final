@@ -89,6 +89,7 @@ export default function SkillExerciseVocabluary() {
                   pic={excersice.thumbnail}
                   title={excersice.lesson_title}
                   des={excersice.description}
+                  uuid = {excersice.ex_uuid}
                 />
               </>
             );

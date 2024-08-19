@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import "../cards/Lessoncard.css";
 
 export default function Lessoncard({ onClick, title, des, pic, uuid }) {
-  const newtitle = title.replace(/ /g, "-");
-  const convert = newtitle.toLowerCase();
-  const handleClick = () => {
-    onClick(uuid);
-  };
+  const [newtitle, setNewTitle] = useState("");
+  useEffect(() => {
+    // Sanitize the title once on mount or when the title prop changes
+    let sanitizedTitle = title
+      .replace(/ /g, "-")       
+      .toLowerCase();           
+
+    setNewTitle(encodeURIComponent(sanitizedTitle)); // URL encode
+  }, [title]);
+  //const newtitle = encodeURIComponent(title.replace(/ /g, "-"));
+  // const convert = newtitle.toLowerCase();
+  // console.log("convert:",convert);
 
   return (
-    <div onClick={handleClick}>
-      <Link to={`${convert}`}>
+    // <div onClick={handleClick}>
+      <Link to={`${newtitle}`}>
         <div className="max-w-[430px] max-h-[261px] rounded-tr-3xl rounded-bl-3xl relative group">
           <img
             className="rounded-tr-3xl rounded-bl-3xl brightness-50 w-[400px] h-[250px] object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-75"
@@ -28,6 +36,6 @@ export default function Lessoncard({ onClick, title, des, pic, uuid }) {
           </div>
         </div>
       </Link>
-    </div>
+    // </div>
   );
 }

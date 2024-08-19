@@ -14,8 +14,8 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   email: Yup.string()
-  .email("អុីមែលមិនត្រឹមត្រូវ")
-  .required("អុីមែលត្រូវបានទាមទារ")
+  .email("អ៊ីម៉ែលមិនត្រឹមត្រូវ")
+  .required("អ៊ីម៉ែលត្រូវបានទាមទារ")
 });
 
 export default function ForgotPassword() {
@@ -94,7 +94,7 @@ export default function ForgotPassword() {
                   </h2>
 
                   <h2 className="text-lg font-suwannaphum font-bold text-center text-blues mb-5">
-                    បញ្ជូលអុីមែលដើម្បីកំណត់លេខសម្ងាត់ឡើងវិញ។
+                    បញ្ជូលអ៊ីម៉ែលដើម្បីកំណត់លេខសម្ងាត់ឡើងវិញ។
                   </h2>
 
                   <div>
@@ -102,14 +102,14 @@ export default function ForgotPassword() {
                       htmlFor="email"
                       className="block mb-2 text-xl font-medium text-blues"
                     >
-                      អុីមែល<span className="text-second">*</span>
+                      អ៊ីម៉ែល<span className="text-second">*</span>
                     </label>
                     <Field
                       type="email"
                       id="email"
                       name="email"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="បញ្ជូលអុីមែលរបស់អ្នក"
+                      placeholder="បញ្ជូលអ៊ីម៉ែលរបស់អ្នក"
                       onChange={(e) => handleGetEmail(e, setFieldValue)}
                       required
                     />
@@ -125,7 +125,7 @@ export default function ForgotPassword() {
                       type="submit"
                       className="w-full px-5 py-3 -mt-1 text-lg font-medium text-white bg-blue-900 rounded-lg hover:bg-primary hover:text-blues focus:ring-4 focus:outline-none focus:ring-blue-100"
                     >
-                      { isSubmitting ? handleLoading() : "បញ្ជូនអុីមែល" }
+                      { isSubmitting ? handleLoading() : "បញ្ជូនអ៊ីម៉ែល" }
                     </button>
                   </div>
 

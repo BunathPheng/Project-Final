@@ -77,7 +77,7 @@ export default function LessonDetailGrammar() {
   console.log("param", param);
   // const newtitle = param.title.replace(/-/g, " ");
   const newtitle = decodeURIComponent(param.title).replace(/-/g, " ");
-  console.log("param.title:",param.title);
+  console.log("param.title:", param.title);
   const convert = newtitle.toUpperCase();
   console.log("convert", convert);
   // const lessons = useSelector(selectAllLessons);
@@ -360,6 +360,7 @@ export default function LessonDetailGrammar() {
                 grammarlevel.lessons.map((excersice) => {
                   const name = excersice.lesson_title.toLowerCase();
                   const formattedTitle = name.replace(/\s+/g, "-");
+                  console.log("formattedTitle", formattedTitle);
                   return (
                     <li key={excersice.lesson_uuid}>
                       <NavLink
@@ -403,7 +404,11 @@ export default function LessonDetailGrammar() {
                         <div className="flex gap-4 mt-4 text-grays">
                           <BsPatchCheck className="text-[40px] md:text-[30px] text-second" />
                           <p className="md:text-lg md:line-clamp-none line-clamp-2">
-                            {parse(String(lessonsById?.description || "No description"))}
+                            {parse(
+                              String(
+                                lessonsById?.description || "No description"
+                              )
+                            )}
                           </p>
                         </div>
                       </div>
@@ -503,7 +508,6 @@ export default function LessonDetailGrammar() {
                   </>
                 );
               })}
-              
             </>
           )}
         </main>

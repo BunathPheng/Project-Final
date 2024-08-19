@@ -34,7 +34,7 @@ export default function NewPassword() {
   const dispatch = useDispatch();
   const location = useLocation();
   const email = location?.state?.email;
-  console.log("email in NewPassword", email);
+  // console.log("email in NewPassword", email);
 
   const [showPassword, setShowPassword] = useState(false);
   const [cShowPassword, setCShowPassword] = useState(false);

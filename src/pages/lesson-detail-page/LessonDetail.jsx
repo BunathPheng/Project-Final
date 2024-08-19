@@ -61,14 +61,14 @@ import SkillExerciseComponent from "../../components/skill-exercise-component/Sk
 import LoadingLessonDetail from "../../components/common/loading/LoadingLessonDetail";
 export default function LessonDetail() {
   const param = useParams();
-  console.log("param", param);
+  // console.log("param", param);
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
-  console.log("convert", convert);
+  // console.log("convert", convert);
   const excercises = useSelector(selectExcersice);
   const excersiceById = useSelector(selectExcersiceById);
   const statuss = useSelector(selectLoadingStatus);
-  console.log("excersiceById in LessonDetail:", excersiceById);
+  // console.log("excersiceById in LessonDetail:", excersiceById);
   const skillNameLevels = useSelector(selectNameLevel);
   const submits = useSelector(selectSubmit);
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ export default function LessonDetail() {
   const randomImgWin = imgWin[randomIndex4];
   const randomImgLose = imgLose[randomIndex5];
   const [skillLevels, setskillLevels] = useState([]);
-  console.log("skillLevelname:", skillNameLevels);
+  // console.log("skillLevelname:", skillNameLevels);
   const [audioUrl, setAudioUrl] = useState("");
   const [scoreSound, setScoreSound] = useState(null);
   useEffect(() => {
@@ -163,7 +163,7 @@ export default function LessonDetail() {
     }
   }, [openModal, scoreSound]);
 
-  console.log("final uuid", finaluuid);
+  // console.log("final uuid", finaluuid);
   useEffect(() => {
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
@@ -228,7 +228,7 @@ export default function LessonDetail() {
       user_uuid: "", // Replace, this with dynamic user UUID if available
       user_answer: userAnswers,
     };
-    console.log("token", getAccessToken());
+    // console.log("token", getAccessToken());
     if (finaluuid) {
       try {
         const response = await dispatch(
@@ -247,7 +247,7 @@ export default function LessonDetail() {
         setScoreSound(new Audio(soundToPlay));
         // Open modal after submission
       } catch (error) {
-        console.error("Submit Error:", error);
+        // console.error("Submit Error:", error);
       }
     }
   };
@@ -270,14 +270,14 @@ export default function LessonDetail() {
     setScore(0);
     setShowScore(false); // Reset showScore
     setIsSubmitted(false); // Reset isSubmitted
-    console.log("finaluuid", finaluuid);
+    // console.log("finaluuid", finaluuid);
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
-      console.log("finaluuid", finaluuid);
+      // console.log("finaluuid", finaluuid);
     }
   };
-  console.log("excersiceById", excersiceById);
-  console.log("excercises", excercises);
+  // console.log("excersiceById", excersiceById);
+  // console.log("excercises", excercises);
   const handleShowAnswers = () => {
     if (excersiceById?.questions) {
       const answers = excersiceById.questions.reduce((acc, question) => {
@@ -320,9 +320,9 @@ export default function LessonDetail() {
   const handleNavigation = (path) => {
     window.location.href = path;
   };
-  console.log("excersice", excersiceById.voice);
+  // console.log("excersice", excersiceById.voice);
   // const sanitizedHTML = DOMPurify.sanitize(excersiceById?.transcript);
-  console.log("submits", submits);
+  // console.log("submits", submits);
   return (
     <>
       <button
@@ -425,7 +425,7 @@ export default function LessonDetail() {
                   </div>
                 </div>
               )}
-              {console.log("exercise:", excersiceById)}
+              {/* {console.log("exercise:", excersiceById)} */}
               {excersiceById?.video && (
                 <div className="bg-gray-300 mt-7">
                   <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">

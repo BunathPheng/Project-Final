@@ -11,7 +11,7 @@ const initialState = {
 export const fetchResubmitExercise = createAsyncThunk(
     "resubmit/fetchResubmitExercise",
     async({ user_uuid, exercises_uuids }, { rejectWithValue }) => {
-        console.log("Parameters received:", { user_uuid, exercises_uuids }); // Debug log
+        //console.log("Parameters received:", { user_uuid, exercises_uuids }); // Debug log
 
         const body = JSON.stringify({
             user_uuid,
@@ -33,10 +33,10 @@ export const fetchResubmitExercise = createAsyncThunk(
             }
 
             const res = await response.json();
-            console.log("Response in fetchResubmit:", res);
+            //console.log("Response in fetchResubmit:", res);
             return res;
         } catch (error) {
-            console.error('Resubmit error:', error);
+            //console.error('Resubmit error:', error);
             return rejectWithValue(error);
         }
     }
@@ -54,12 +54,12 @@ export const resubmitSlice = createSlice({
             .addCase(fetchResubmitExercise.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.resubmit = action.payload;
-                console.log("Action in succeeded:", action);
+                //console.log("Action in succeeded:", action);
             })
             .addCase(fetchResubmitExercise.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
-                console.log("Action in failed:", action);
+                //console.log("Action in failed:", action);
             });
     },
 });

@@ -91,7 +91,7 @@ export default function IETLSGrammarDetail() {
     dispatch(fetchExcersices());
   }, [dispatch]);
   //
-  console.log("excercises", excercises);
+  // console.log("excercises", excercises);
   useEffect(() => {
     if (lessons.length > 0) {
       const matchedExcersice = lessons.find(
@@ -157,7 +157,7 @@ export default function IETLSGrammarDetail() {
                   .slice()
                   .reverse()
                   .map((exercise, index) => {
-                    console.log("exercise", exercise);
+                    // console.log("exercise", exercise);
                     return (
                       <li key={exercise.id}>
                         <a href="#">{exercise.title}</a>
@@ -206,7 +206,7 @@ export default function IETLSGrammarDetail() {
               </div>
             </div>
             {lessonsById?.questions?.map((question, index) => {
-              console.log("question", question.type);
+              // console.log("question", question.type);
               return (
                 <>
                   <ExerciseComponetIETlS question={question} />

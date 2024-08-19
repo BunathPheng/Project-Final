@@ -40,7 +40,7 @@ import loading2 from "../../assets/img/loding1.gif";
 
 export default function VocabularyDetail() {
   const param = useParams();
-  console.log("param: " + param);
+  //console.log("param: " + param);
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
   const excercises = useSelector(selectExcersice);
@@ -59,7 +59,7 @@ export default function VocabularyDetail() {
   const [loadingSection, setLoadingSection] = useState(null);
   const audioRefs = useRef({});
   const levels = param["level-vocabulary"];
-  console.log("param", param);
+  // console.log("param", param);
   const [isLoading, setIsLoading] = useState(true);
   const newlevels = levels.split("-");
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function VocabularyDetail() {
   useEffect(() => {
     dispatch(fetchLessons());
   }, []);
-  console.log("lessons", lessons);
+  // console.log("lessons", lessons);
   useEffect(() => {
     if (lessons.length > 0) {
       const matchedLesson = lessons.find(
@@ -100,7 +100,7 @@ export default function VocabularyDetail() {
       dispatch(fetchLessonsById(lessonsuuid));
     }
   }, [lessonsuuid, dispatch]);
-  console.log("lessonsById", lessonsById);
+  //console.log("lessonsById", lessonsById);
 
   const skill_level = param["skill_level-skill_name"];
   useEffect(() => {
@@ -125,8 +125,8 @@ export default function VocabularyDetail() {
   //   return <LoadingVocabularyDetail/>;
   // }
 
-  console.log("excersiceById in VocabularyDetail", excersiceById);
-  console.log("excercises in VocabularyDetail", excercises);
+  // console.log("excersiceById in VocabularyDetail", excersiceById);
+  // console.log("excercises in VocabularyDetail", excercises);
 
   const playAudio = (url, sectionId) => {
     const audio = audioRefs.current[sectionId];
@@ -159,7 +159,7 @@ export default function VocabularyDetail() {
     setSidebarOpen(false);
   };
 
-  console.log("submits", submits);
+  // console.log("submits", submits);
   return (
     <>
       <button
@@ -241,7 +241,7 @@ export default function VocabularyDetail() {
                     <div className="">
                       <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-2">
                         {lessonsById?.lesson_title || "No title"}
-                        {console.log("lessonById:", lessonsById)}
+                        {/* {console.log("lessonById:", lessonsById)} */}
                       </h2>
                       <div className="flex gap-4 mt-4 text-grays">
                         <BsPatchCheck className=" text-[40px] md:text-[30px] text-second md:block  hidden" />

@@ -17,8 +17,8 @@ export default function SkillExercise() {
   const param = useParams();
   const [skillLevels, setskillLevels] = useState([]);
   let title = "";
-  console.log(param);
-  console.log("param", param.skill_name);
+  // console.log(param);
+  // console.log("param", param.skill_name);
   if (param.skill_name === "reading") {
     title = "ការអានកម្រិត​";
   } else if (param.skill_name === "listening") {

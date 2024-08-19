@@ -67,6 +67,7 @@ export default function Slide() {
                   img={lesson?.thumbnail}
                   title={lesson?.lesson_title}
                   des={parse(lesson?.description)}
+                  value={`/`}
                 />
               </SwiperSlide>
             );

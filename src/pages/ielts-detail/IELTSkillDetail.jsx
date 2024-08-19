@@ -13,6 +13,7 @@ import {
   fetchExcersices,
   selectExcersice,
   selectExcersiceById,
+  selectLoadingStatus,
 } from "../../redux/features/lessondetail/lessondetailSlice";
 import {
   fetchSkillNameLevel,
@@ -24,6 +25,7 @@ import { selectSubmit } from "../../redux/features/submit/submitSlice";
 import { Button, ListGroup, Modal } from "flowbite-react";
 import { fetchUserData } from "../../redux/verify/verifyUserSlice";
 import { getAccessToken } from "../../lib/secureLocalStorage";
+import loading2 from "../../assets/img/loding1.gif";
 import "../lesson-detail-page/lesson.css";
 import { BsPatchCheck } from "react-icons/bs";
 import lose1 from "../../assets/img/lose1.gif";
@@ -60,6 +62,7 @@ export default function LessonDetail() {
   // console.log("convert", convert);
   const excercises = useSelector(selectExcersice);
   const excersiceById = useSelector(selectExcersiceById);
+  const statuss = useSelector(selectLoadingStatus);
   // console.log("excersiceById in LessonDetail:", excersiceById);
   const skillNameLevels = useSelector(selectNameLevel);
   const submits = useSelector(selectSubmit);
@@ -288,35 +291,50 @@ export default function LessonDetail() {
       alert("Please submit your answers first.");
     }
   };
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   return (
     <>
       <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
+        onClick={toggleSidebar}
         type="button"
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       >
-        <span class="sr-only">Open sidebar</span>
+        <span className="sr-only">Open sidebar</span>
         <svg
-          class="w-6 h-6"
+          className="w-6 h-6"
           aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            clip-rule="evenodd"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+            clipRule="evenodd"
           ></path>
         </svg>
       </button>
       <div className="flex">
+        {isSidebarOpen && (
+          <div
+            onClick={closeSidebar}
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          ></div>
+        )}
         <aside
           id="default-sidebar"
-          className="max-sm:fixed new excludeNew pt-2  md:px-6 px-5 h-screen lg:sticky left-0 z-40 w-48 lg:w-64 lg:pt-4 transition-transform -translate-x-full sm:translate-x-0 bg-white md:border-r border-gray-200"
+          className={`max-sm:fixed new excludeNew pt-2 md:px-6 px-5 h-screen lg:sticky left-0 z-40 w-48 lg:w-64 lg:pt-4 transition-transform ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } sm:translate-x-0 bg-white md:border-r border-gray-200`}
           aria-label="Sidebar"
         >
           <div className="h-full px-3 w-[160px] overflow-y-auto bg-white pb-8 ">
@@ -344,87 +362,96 @@ export default function LessonDetail() {
           </div>
         </aside>
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
-          <div>
-            <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
-              <div className="flex gap-4 flex-col  lg:flex-row">
-                <img
-                  src={
-                    excersiceById?.thumbnail ||
-                    "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-                  }
-                  alt=""
-                  className="w-[350px] object-cover rounded-lg"
-                />
-                <div className="">
-                  <h2 className="w-fit  bg-[#ffc30e] md:px-20 px-10 py-2 text-white font-bold text-lg">
-                    {excersiceById?.title || "No title"}
-                  </h2>
-                  <div className="flex gap-4 mt-4 text-grays items-center">
-                    <BsPatchCheck className=" text-[60px] lg:text-2xl md:text-xl text-second" />
-                    <p className="lg:text-xl text-[18px] md:line-clamp-none line-clamp-1">
-                      {excersiceById?.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {statuss === "Loading" ? (
+            <div className="flex justify-center h-[200px]">
+              <img src={loading2} alt="Loading..." />
             </div>
-            {/* {console.log("exercise:", excersiceById)} */}
-            {excersiceById.voice && (
-              <div className="mt-7">
-                <audio
-                  controls
-                  className="w-full"
-                  src={excersiceById?.voice}
-                ></audio>
-              </div>
-            )}
-            {excersiceById?.transcript && (
-              <div className="bg-gray-300 mt-7">
-                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                  ការសន្ទនា
-                </h2>
-                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                  <div className="px-8 py-6 border-2 bg-white rounded-xl">
-                    <p className="text-[20px] leading-[3rem]">
-                      {parse(`${excersiceById?.transcript}`)}
-                    </p>
+          ) : (
+            <>
+              <div>
+                <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
+                  <div className="flex gap-4 flex-col  lg:flex-row">
+                    <img
+                      src={
+                        excersiceById?.thumbnail ||
+                        "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                      }
+                      alt=""
+                      className="w-[350px] object-cover rounded-lg"
+                    />
+                    <div className="">
+                      <h2 className="w-fit  bg-[#ffc30e] md:px-20 px-10 py-2 text-white font-bold text-lg">
+                        {excersiceById?.title || "No title"}
+                      </h2>
+                      <div className="flex gap-4 mt-4 text-grays items-center">
+                        <BsPatchCheck className=" text-[60px] lg:text-2xl md:text-xl text-second" />
+                        <p className="lg:text-xl text-[18px] md:line-clamp-none line-clamp-1">
+                          {parse(String(excersiceById?.description)) ||
+                            "No description"}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-            {excersiceById.reading_text && (
-              <div className="bg-gray-300 mt-7">
-                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                  អត្ថបទអំណាន
-                </h2>
-                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                  <div className="px-8 py-6 border-2 bg-white rounded-xl">
-                    <p className="text-[20px] leading-[3rem]">
-                      {parse(excersiceById?.reading_text)}
-                    </p>
+                {/* {console.log("exercise:", excersiceById)} */}
+                {excersiceById.voice && (
+                  <div className="mt-7">
+                    <audio
+                      controls
+                      className="w-full"
+                      src={excersiceById?.voice}
+                    ></audio>
                   </div>
-                </div>
-              </div>
-            )}
-            {excersiceById.tip && (
-              <div className="bg-gray-300 mt-7">
-                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
-                  គន្លឹះ
-                </h2>
-                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                  <div className="px-8 py-6 border-2 bg-white rounded-xl">
-                    <p className="text-[20px] leading-[3rem]">
-                      {parse(excersiceById?.tip)}
-                    </p>
+                )}
+                {excersiceById?.transcript && (
+                  <div className="bg-gray-300 mt-7">
+                    <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
+                      ការសន្ទនា
+                    </h2>
+                    <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                      <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                        <p className="text-[20px] leading-[3rem]">
+                          {parse(String(`${excersiceById?.transcript}`))}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
+                {excersiceById.reading_text && (
+                  <div className="bg-gray-300 mt-7">
+                    <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
+                      អត្ថបទអំណាន
+                    </h2>
+                    <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                      <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                        <p className="text-[20px] leading-[3rem]">
+                          {parse(String(excersiceById?.reading_text))}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {excersiceById.tip && (
+                  <div className="bg-gray-300 mt-7">
+                    <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
+                      គន្លឹះ
+                    </h2>
+                    <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                      <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                        <p className="text-[20px] leading-[3rem]">
+                          {parse(String(excersiceById?.tip))}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <IELTSSkillExerciseComponent
+                  key={excersiceById.ex_uuid}
+                  exercise={excersiceById}
+                />
               </div>
-            )}
-            <IELTSSkillExerciseComponent
-              key={excersiceById.ex_uuid}
-              exercise={excersiceById}
-            />
-          </div>
+            </>
+          )}
         </main>
       </div>
     </>

@@ -30,6 +30,7 @@ export default function SkillExercise() {
   }
   const skill_level = param["skill_level-skill_name"];
   const skillNameLevels = useSelector(selectNameLevel);
+  const satuss = useSelector((state) => state.skillNameLevel.status);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -47,8 +48,8 @@ export default function SkillExercise() {
     );
     setskillLevels(filteredSkills);
   }, [skillNameLevels]);
-  if(isLoading){
-    return <LoadingExerciseGrammar/>;
+  if (satuss === "Loading") {
+    return <LoadingExerciseGrammar />;
   }
   return (
     <div className="w-[90%] mx-auto">

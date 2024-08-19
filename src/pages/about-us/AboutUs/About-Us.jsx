@@ -5,16 +5,16 @@ import { BsFillBalloonHeartFill } from "react-icons/bs";
 import Marquee from "react-fast-marquee";
 import { FaRegHandPointRight } from "react-icons/fa";
 import { FaGithub, FaTelegram, FaFacebook } from "react-icons/fa";
-import 'aos/dist/aos.css';
-import Aos from 'aos';
+import "aos/dist/aos.css";
+import Aos from "aos";
 import { useEffect, useState } from "react";
 import LoadingAboutUs from "../../../components/common/loading/LoadingAboutUs";
 export default function AboutUs() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    Aos.init({delay: 200, duration: 1200});
-    
+    Aos.init({ delay: 200, duration: 1200 });
+
     const fetchData = async () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setIsLoading(false);
@@ -23,8 +23,8 @@ export default function AboutUs() {
     fetchData();
   }, []);
 
-  if(isLoading){
-    return <LoadingAboutUs/>
+  if (isLoading) {
+    return <LoadingAboutUs />;
   }
 
   return (
@@ -109,7 +109,7 @@ export default function AboutUs() {
           <FaRegHandPointRight className="animate-hand-point" />
           <span className="ml-8">បេសកកម្មចម្បង</span>
         </h1>
-          
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 md:mt-10 lg:mt-12 space-y-2 md:space-y-3">
           <div className="w-full h-[200px] md:h-[350px] lg:h-[400px]">
             <img
@@ -119,9 +119,7 @@ export default function AboutUs() {
             />
           </div>
 
-          <div
-            className="flex justify-center items-center text-[20px] md:text-[22px] leading-10 md:leading-10 text-gray-600"
-          >
+          <div className="flex justify-center items-center text-[20px] md:text-[22px] leading-10 md:leading-10 text-gray-600">
             <p className="mt-0 text-[20px]">
               <span className="text-second">បេសកកម្មរបស់យើង</span>
               <span className="ml-2">
@@ -148,9 +146,7 @@ export default function AboutUs() {
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-8 md:mt-10 lg:mt-12 space-y-2 md:space-y-3">
-          <div
-            className="w-full h-[200px] md:h-[350px] lg:h-[400px] order-first lg:order-last"
-          >
+          <div className="w-full h-[200px] md:h-[350px] lg:h-[400px] order-first lg:order-last">
             <img
               className="w-full h-full object-cover"
               src="src/assets/img/mission2.png"
@@ -158,9 +154,7 @@ export default function AboutUs() {
             />
           </div>
 
-          <div
-            className="flex justify-center items-center text-[20px] md:text-[22px] leading-10 md:leading-10 text-gray-600"
-          >
+          <div className="flex justify-center items-center text-[20px] md:text-[22px] leading-10 md:leading-10 text-gray-600">
             <p className="mt-0">
               <span className="text-second">ចក្ខុវិស័យ៖</span>
               <span className="ml-2">
@@ -261,9 +255,7 @@ export default function AboutUs() {
             <span className="ml-8">ក្រុមរបស់ពួកយើង</span>
           </h1>
 
-          <div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-y-5 gap-x-12 mt-12"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-5 gap-x-12 mt-12">
             <div class="w-full md:w-[384px] md:h-full px-6 py-10 text-center bg-slate-200 rounded-xl lg:mt-0 xl:px-10">
               <div class="space-y-5">
                 <img
@@ -395,9 +387,7 @@ export default function AboutUs() {
         </section>
 
         <section className="w-[90%] mx-auto mb-12 -mt-5">
-          <div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-y-5 gap-x-12 mt-12"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-5 gap-x-12 mt-12">
             <div class="w-full md:w-[384px] md:h-full px-6 py-10 text-center bg-slate-200 rounded-xl lg:mt-0 xl:px-10">
               <div class="space-y-5">
                 <img
@@ -523,9 +513,7 @@ export default function AboutUs() {
         </section>
 
         <section className="w-[90%] mx-auto mb-12 -mt-5">
-          <div
-            className="grid grid-cols-1 lg:grid-cols-3 gap-y-5 gap-x-12 mt-12"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-5 gap-x-12 mt-12">
             <div class="w-full md:w-[384px] md:h-full px-6 py-10 text-center bg-slate-200 rounded-xl lg:mt-0 xl:px-10">
               <div class="space-y-5">
                 <img
@@ -664,16 +652,14 @@ export default function AboutUs() {
       </section>
 
       <section className="w-[90%] mx-auto mb-12 pt-5">
-        <div
-        className="mb-2 md:mb-4">
+        <div className="mb-2 md:mb-4">
           <img
             className="w-full object-cover rounded-md"
             src="src/assets/img/GroupTeamschool.png"
             alt=""
           />
         </div>
-        <div
-        className="grid grid-cols-3 gap-2 md:gap-4">
+        <div className="grid grid-cols-3 gap-2 md:gap-4">
           <img
             className="rounded-md object-cover"
             src="src/assets/img/action.jpg"
@@ -699,9 +685,7 @@ export default function AboutUs() {
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <div
-            className="w-full h-full flex justify-end items-end order-first lg:order-last"
-          >
+          <div className="w-full h-full flex justify-end items-end order-first lg:order-last">
             <img
               className="w-[100%] md:w-[83%] h-full object-cover rounded-lg"
               src="src/assets/img/FAQs-bro.png"
@@ -731,9 +715,7 @@ export default function AboutUs() {
       </section>
 
       <section className="w-[90%] mx-auto grid lg:grid-cols-2 grid-cols-1 gap-4 items-center pb-8 md:-mt-16">
-        <div
-          className="flex justify-center items-cejustify-center"
-        >
+        <div className="flex justify-center items-cejustify-center">
           <img
             src="src/assets/img/Chat bot-bro.png"
             alt="Chatbot Illustration"

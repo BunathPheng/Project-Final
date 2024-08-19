@@ -6,7 +6,12 @@ export default function CardIELTS({ img, title, des }) {
     <>
       <div class="max-w-sm  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 transition duration-500 transform hover:scale-105 hover:shadow-lg">
         <a href={`ielts/${newtitle}`}>
-          <img class="rounded-t-lg" src={img} alt="" />
+          <img
+            class="rounded-t-lg"
+            src={img}
+            alt=""
+            className="w-full h-[300px] object-cover"
+          />
         </a>
         <div class="p-5">
           <a href={`${newtitle}`}>

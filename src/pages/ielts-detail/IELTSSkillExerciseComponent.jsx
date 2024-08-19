@@ -379,7 +379,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                 {question.question_text.split("#").map((part, partIndex) => (
                                   <React.Fragment key={partIndex}>
                                     <label htmlFor={`choice-${question.q_uuid}-${qIndex}`} className="cursor-pointer ml-2 flex flex-row gap-2 mt-1">
-                                    <span className="text-xl">{parse(part)}</span>
+                                    <span className="text-xl mt-2">{parse(part)}</span>
                                     {partIndex < question.question_text.split("#").length - 1 && (
                                       <>
                                         <span
@@ -395,7 +395,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                           id={`choice-${question.q_uuid}-${qIndex}`}
                                           name={`choice-${question.q_uuid}`}
                                           type="text"
-                                          className={`cursor-pointer px-3 w-[100px] text-xl border rounded-md border-gray-300 text-gray-300 focus:border-pink-200 focus:ring-pink-20 text-center  ${
+                                          className={`cursor-pointer px-3 w-[100px] text-xl border rounded-md border-gray-300 text-gray-300 focus:border-pink-200 focus:ring-pink-20 text-center ml-1  ${
                                             showResult
                                               ? inputValues[question.q_uuid]?.[partIndex] ===
                                                 correct_answer[question.q_uuid]

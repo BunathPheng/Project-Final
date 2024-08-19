@@ -25,6 +25,7 @@ export default function SkillExerciseVocabluary() {
   const levels = param["level-vocabulary"];
   const newlevels = levels.split("-");
   const VocabularyLevel = useSelector(selectAllVocabluaryByLevel);
+  const satuss = useSelector((state) => state.vocabluary.status);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -36,8 +37,8 @@ export default function SkillExerciseVocabluary() {
 
     fetchData();
   }, []);
-  if (isLoading) {
-    return <LoadingExerciseGrammar/>;
+  if (satuss === "Loading") {
+    return <LoadingExerciseGrammar />;
   }
   return (
     <div className="w-[90%] mx-auto">

@@ -62,6 +62,7 @@ export default function SkillLevel() {
   console.log("param", param.skill_name);
   console.log("param", param);
   const skill = useSelector(selectSkillByName);
+  const status = useSelector((state) => state.skill.status);
   const [skillLevels, setskillLevels] = useState([]);
   useEffect(() => {
     const filteredSkills = skill.filter(
@@ -81,8 +82,8 @@ export default function SkillLevel() {
 
     fetchData();
   }, []);
-  if (isLoading) {
-    return <LoadingAllSkill/>;
+  if (status === "Loading") {
+    return <LoadingAllSkill />;
   }
   console.log("skills", skill);
   return (

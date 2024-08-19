@@ -34,7 +34,7 @@ import {
   selectAllVocabluaryByLevel,
 } from "../../redux/features/vocabulary/vocabularySlice";
 import "../skill-level/SkillLevel.css";
-
+import loading2 from "../../assets/img/loding1.gif";
 export default function VocabularyDetailSearch() {
   const param = useParams();
   console.log("param: " + param);
@@ -45,6 +45,8 @@ export default function VocabularyDetailSearch() {
   const skillNameLevels = useSelector(selectNameLevel);
   const vocabularylevel = useSelector(selectAllVocabluaryByLevel);
   const lessons = useSelector(selectAllLessons);
+  const states = useSelector((state) => state.lesson.status);
+  console.log("states: ", states);
   const lessonsById = useSelector(selectAllLessonsById);
   const submits = useSelector(selectSubmit);
   const dispatch = useDispatch();
@@ -68,6 +70,7 @@ export default function VocabularyDetailSearch() {
   useEffect(() => {
     dispatch(fetchLessons());
   }, []);
+  console.log("state", statss);
   console.log("lessons", lessons);
   useEffect(() => {
     if (lessons.length > 0) {
@@ -189,97 +192,109 @@ export default function VocabularyDetailSearch() {
             </ul>
           </div>
         </aside>
+        {console.log("statss", statss)}
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
-          <div>
-            <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
-              <div className="flex gap-4 flex-col  lg:flex-row">
-                <img
-                  src={
-                    lessonsById?.thumbnail ||
-                    "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-                  }
-                  alt=""
-                  className="w-[300px] object-cover rounded-lg"
-                />
-                <div className="">
-                  <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-2">
-                    {lessonsById?.lesson_title || "No title"}
-                    {console.log("lessonById:", lessonsById)}
-                  </h2>
-                  <div className="flex gap-4 mt-4 text-grays">
-                    <BsPatchCheck className=" text-[40px] md:text-[30px] text-second md:block  hidden" />
-                    <p className="md:text-lg md:line-clamp-none line-clamp-2">
-                      {lessonsById?.description}
-                    </p>
+          {states === "loading" ? (
+            <div className="flex justify-center h-[200px]">
+              <img src={loading2} alt="Loading..." />
+            </div>
+          ) : (
+            <>
+              <div>
+                <div className="md:p-[40px] lg:p-[40px] p-[20px] bg-[#f5f5f5]">
+                  <div className="flex gap-4 flex-col  lg:flex-row">
+                    <img
+                      src={
+                        lessonsById?.thumbnail ||
+                        "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                      }
+                      alt=""
+                      className="w-[300px] object-cover rounded-lg"
+                    />
+                    <div className="">
+                      <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-2">
+                        {lessonsById?.lesson_title || "No title"}
+                        {console.log("lessonById:", lessonsById)}
+                      </h2>
+                      <div className="flex gap-4 mt-4 text-grays">
+                        <BsPatchCheck className=" text-[40px] md:text-[30px] text-second md:block  hidden" />
+                        <p className="md:text-lg md:line-clamp-none line-clamp-2">
+                          {lessonsById?.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
+                  ពាក្យគន្លឹះ
+                </h2>
+                <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
+                  <div className="p-8 border-2 bg-white rounded-xl">
+                    <h1 className="text-xl  ms-2 text-gray-500 mb-6 ">
+                      រៀននឹងស្តាប់ពាក្យខាងក្រោម៖
+                    </h1>
+                    <div className="grid gap-10 md:gap-5 lg:gap-10 md:grid-cols-2 lg:grid-cols-4 grid-cols-1 exclude-1024-vocabulary w-fit mx-auto">
+                      {lessonsById?.sections?.map((section) => (
+                        <div
+                          key={section.section_uuid}
+                          className="border-2 md:mx-auto border-gray-200 lg:w-[250px] p-1 rounded-xl"
+                        >
+                          <div>
+                            <div className="">
+                              <img
+                                src={section?.thumbnail_url}
+                                alt={section?.title}
+                                className="object-cover w-[250px] h-[150px] relative 
+                                rounded-t-lg"
+                              />
+                              <div>
+                                {loadingSection === section.section_uuid ? (
+                                  <img
+                                    src={loading}
+                                    alt="Loading"
+                                    className="border-2 border-gray-100 w-[30px] object-cover p-1 mt-2 rounded-md ml-2"
+                                  />
+                                ) : (
+                                  <BsVolumeUp
+                                    className="audio-button border-2 border-gray-200 text-3xl p-1 text-black mt-2 rounded-md ml-2"
+                                    onClick={() =>
+                                      playAudio(
+                                        section.voice[0].voice_url,
+                                        section.section_uuid
+                                      )
+                                    } // Assuming there's at least one voice URL
+                                  />
+                                )}
+                              </div>
+                              <p className="text-lg border-2 border-gray-200 text-center p-1 rounded-3xl m-2">
+                                {section?.title}
+                              </p>
+                              <audio
+                                ref={(el) =>
+                                  (audioRefs.current[section.section_uuid] = el)
+                                }
+                              ></audio>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold mt-7">
-              ពាក្យគន្លឹះ
-            </h2>
-            <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-              <div className="p-8 border-2 bg-white rounded-xl">
-                <h1 className="text-xl  ms-2 text-gray-500 mb-6 ">
-                  រៀននឹងស្តាប់ពាក្យខាងក្រោម៖
-                </h1>
-                <div className="grid gap-10 md:gap-5 lg:gap-10 md:grid-cols-2 lg:grid-cols-4 grid-cols-1 exclude-1024-vocabulary w-fit mx-auto">
-                  {lessonsById?.sections?.map((section) => (
-                    <div
-                      key={section.section_uuid}
-                      className="border-2 md:mx-auto border-gray-200 lg:w-[250px] p-1 rounded-xl"
-                    >
-                      <div>
-                        <div className="">
-                          <img
-                            src={section?.thumbnail_url}
-                            alt={section?.title}
-                            className="object-cover w-[250px] h-[150px] relative 
-                                rounded-t-lg"
-                          />
-                          <div>
-                            {loadingSection === section.section_uuid ? (
-                              <img
-                                src={loading}
-                                alt="Loading"
-                                className="border-2 border-gray-100 w-[30px] object-cover p-1 mt-2 rounded-md ml-2"
-                              />
-                            ) : (
-                              <BsVolumeUp
-                                className="audio-button border-2 border-gray-200 text-3xl p-1 text-black mt-2 rounded-md ml-2"
-                                onClick={() =>
-                                  playAudio(
-                                    section.voice[0].voice_url,
-                                    section.section_uuid
-                                  )
-                                } // Assuming there's at least one voice URL
-                              />
-                            )}
-                          </div>
-                          <p className="text-lg border-2 border-gray-200 text-center p-1 rounded-3xl m-2">
-                            {section?.title}
-                          </p>
-                          <audio
-                            ref={(el) =>
-                              (audioRefs.current[section.section_uuid] = el)
-                            }
-                          ></audio>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          {lessonsById?.exercises?.map((exercise) => {
-            console.log("Each exercise", exercise);
-            return (
-              <>
-                <ExerciseComponent key={exercise.ex_uuid} exercise={exercise} />
-              </>
-            );
-          })}
+              {lessonsById?.exercises?.map((exercise) => {
+                console.log("Each exercise", exercise);
+                return (
+                  <>
+                    <ExerciseComponent
+                      key={exercise.ex_uuid}
+                      exercise={exercise}
+                    />
+                  </>
+                );
+              })}
+            </>
+          )}
         </main>
       </div>
     </>

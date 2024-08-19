@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BsVolumeUp } from "react-icons/bs";
 import { useRef } from "react";
 import { FaRegHandPointRight } from "react-icons/fa";
+import parse from "html-react-parser"
 
 import {
   fetchExcersices,
@@ -148,35 +149,51 @@ export default function VocabularyDetail() {
     }
   };
 
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   console.log("submits", submits);
   return (
     <>
       <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
+        onClick={toggleSidebar}
         type="button"
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       >
-        <span class="sr-only">Open sidebar</span>
+        <span className="sr-only">Open sidebar</span>
         <svg
-          class="w-6 h-6"
+          className="w-6 h-6"
           aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            clip-rule="evenodd"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+            clipRule="evenodd"
           ></path>
         </svg>
       </button>
       <div className="flex">
+        {isSidebarOpen && (
+          <div
+            onClick={closeSidebar}
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          ></div>
+        )}
         <aside
           id="default-sidebar"
-          className="max-sm:fixed new excludeNew pt-2  md:px-6 px-5 h-screen lg:sticky left-0 z-40 w-48 lg:w-64 lg:pt-4 transition-transform -translate-x-full sm:translate-x-0 bg-white md:border-r border-gray-200"
+          className={`max-sm:fixed new excludeNew pt-2 md:px-6 px-5 h-screen lg:sticky left-0 z-40 w-48 lg:w-64 lg:pt-4 transition-transform ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } sm:translate-x-0 bg-white md:border-r border-gray-200`}
           aria-label="Sidebar"
         >
           <div className="h-full px-4 w-[160px] overflow-y-auto bg-white pb-8">
@@ -202,6 +219,7 @@ export default function VocabularyDetail() {
             </ul>
           </div>
         </aside>
+
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
           {statss === "loading" ? (
             <div className="flex justify-center h-[200px]">
@@ -228,7 +246,7 @@ export default function VocabularyDetail() {
                       <div className="flex gap-4 mt-4 text-grays">
                         <BsPatchCheck className=" text-[40px] md:text-[30px] text-second md:block  hidden" />
                         <p className="md:text-lg md:line-clamp-none line-clamp-2">
-                          {lessonsById?.description}
+                        {parse(String(lessonsById?.description || "No description"))}
                         </p>
                       </div>
                     </div>
@@ -292,7 +310,6 @@ export default function VocabularyDetail() {
                 </div>
               </div>
               {lessonsById?.exercises?.map((exercise) => {
-                console.log("Each exercise", exercise);
                 return (
                   <>
                     <ExerciseComponent

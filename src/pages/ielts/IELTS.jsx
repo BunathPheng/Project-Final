@@ -21,6 +21,7 @@ import { selectAllVocabluary } from "../../redux/features/vocabulary/vocabularyS
 import LoadingIL from "../../components/common/loading/LoadingIL";
 export default function IELTS() {
   const skills = useSelector(selectAllSkills);
+  const loadings = useSelector((state) => state.skill.status);
   const grammars = useSelector(selectAllGrammars);
   const vocabularys = useSelector(selectAllVocabluary);
   const dispatch = useDispatch();
@@ -60,11 +61,13 @@ export default function IELTS() {
 
     fetchData();
   });
-  if(isLoading){
+
+  console.log(loadings);
+  if (loadings === "Loading") {
     return <LoadingIL />;
   }
   return (
-    <section className="w-full  px-10 main">
+    <section className="w-full px-[20px] md:px-[40px] main">
       <div className="new-main px-0 pb-20 lg:px-20  lg:py-20 rounded-t-xl ">
         <h1 className="lg:text-[36px] md:text-[24px] text-[20px] h-[50px] text-blues font-bold text-center main">
           <ReactTyped

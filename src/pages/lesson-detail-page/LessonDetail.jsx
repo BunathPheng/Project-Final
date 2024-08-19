@@ -252,6 +252,16 @@ export default function LessonDetail() {
     }
   };
 
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   const handleTryAgain = () => {
     setSelectedAnswers({});
     setAnswersToShow({});
@@ -316,59 +326,63 @@ export default function LessonDetail() {
   return (
     <>
       <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
+        onClick={toggleSidebar}
         type="button"
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       >
-        <span class="sr-only">Open sidebar</span>
+        <span className="sr-only">Open sidebar</span>
         <svg
-          class="w-6 h-6"
+          className="w-6 h-6"
           aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            clip-rule="evenodd"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+            clipRule="evenodd"
           ></path>
         </svg>
       </button>
+
       <div className="flex">
+        {isSidebarOpen && (
+          <div
+            onClick={closeSidebar}
+            className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          ></div>
+        )}
+
         <aside
           id="default-sidebar"
-          className="max-sm:fixed new excludeNew pt-2  md:px-6 px-5 h-screen lg:sticky left-0 z-40 w-48 lg:w-64 lg:pt-4 transition-transform -translate-x-full sm:translate-x-0 bg-white md:border-r border-gray-200"
+          className={`max-sm:fixed new excludeNew pt-2 md:px-6 px-5 h-screen lg:sticky left-0 z-40 w-48 lg:w-64 lg:pt-4 transition-transform ${
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } sm:translate-x-0 bg-white md:border-r border-gray-200`}
           aria-label="Sidebar"
         >
-          <div className="h-full px-4 w-[160px] overflow-y-auto bg-white pb-8 ">
+          <div className="h-full px-4 w-[160px] overflow-y-auto bg-white pb-8">
             <ul className="space-y-4 font-bold">
               {skillLevels.map((selectNameLevel) =>
                 selectNameLevel.exercises.map((excersice) => {
-                  console.log("exercise:", excersice);
-                  console.log("excersice.title", excersice.title);
                   const name = excersice.title.toLowerCase();
                   const formattedTitle = name.replace(/\s+/g, "-");
                   return (
-                    <>
-                      <li key={excersice.id} className="">
-                        <NavLink
-                          onClick={() =>
-                            handleNavigation(
-                              `/skills/${param.skill_name}/${param["skill_level-skill_name"]}/${formattedTitle}`
-                            )
-                          }
-                          to={`/skills/${param.skill_name}/${param["skill_level-skill_name"]}/${formattedTitle}`}
-                          className={({ isActive }) =>
-                            isActive ? "text-primary" : "text-grays"
-                          }
-                        >
-                          {excersice.title}
-                        </NavLink>
-                      </li>
-                    </>
+                    <li key={excersice.id} className="">
+                      <NavLink
+                        onClick={() =>
+                          handleNavigation(
+                            `/skills/${param.skill_name}/${param["skill_level-skill_name"]}/${formattedTitle}`
+                          )
+                        }
+                        to={`/skills/${param.skill_name}/${param["skill_level-skill_name"]}/${formattedTitle}`}
+                        className={({ isActive }) =>
+                          isActive ? "text-primary" : "text-grays"
+                        }
+                      >
+                        {excersice.title}
+                      </NavLink>
+                    </li>
                   );
                 })
               )}
@@ -387,11 +401,11 @@ export default function LessonDetail() {
                   <div className="flex gap-4 flex-col  lg:flex-row">
                     <img
                       src={
-                        excersiceById?.thumbnail ||
+                        excersiceById.thumbnail ||
                         "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
                       }
                       alt=""
-                      className="w-[350px] object-cover rounded-lg"
+                      className="w-[300px] object-cover rounded-lg"
                     />
                     <div className="">
                       <h2 className="w-fit  bg-[#ffc30e] md:px-20 px-10 py-2 text-white font-bold text-lg">
@@ -414,7 +428,7 @@ export default function LessonDetail() {
                     វីដេអូ
                   </h2>
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                    <div className="px-4 md:px-8 py-6 border-2 bg-white rounded-xl">
+                    <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                       <div>
                         <video width="100%" controls>
                           <source src={excersiceById.video} type="video/mp4" />
@@ -441,7 +455,7 @@ export default function LessonDetail() {
                       ការសន្ទនា
                     </h2>
                     <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                      <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                      <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                         <p className="text-[20px] leading-[3rem]">
                           {parse(`${excersiceById?.transcript}`)}
                         </p>
@@ -455,7 +469,7 @@ export default function LessonDetail() {
                     អត្ថបទអំណាន
                   </h2>
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                    <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                    <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                       <p className="text-[20px] leading-[3rem]">
                         {parse(excersiceById?.reading_text)}
                       </p>
@@ -469,7 +483,7 @@ export default function LessonDetail() {
                     គន្លឹះ
                   </h2>
                   <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-                    <div className="px-8 py-6 border-2 bg-white rounded-xl">
+                    <div className="px-4 lg:px-8 py-6 border-2 bg-white rounded-xl">
                       <p className="text-[20px] leading-[3rem]">
                         {parse(excersiceById?.tip)}
                       </p>

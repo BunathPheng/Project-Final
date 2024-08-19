@@ -42,7 +42,7 @@ export default function SkillPage() {
     fetchData();
   }, [dispatch]);
 
-  if (isLoading) {
+  if (status === "Loading") {
     return <LoadingSkill />;
   }
 

@@ -67,7 +67,7 @@ export default function SkillExercise() {
               <>
                 <div className="">
                   <div>
-                    <h1 className=" text-blue-950 px-5 md:p-0  md:text-[1.8rem] lg:text-[2rem] text-[24px] font-bold flex text-center">
+                    <h1 className=" text-blue-950 px-5 md:p-0  md:text-[1.8rem] lg:text-[2rem] text-[24px] font-bold flex  text-center">
                       <div className="">{parse(`${title}`)}</div>
                       <div className="">{parse(`${v.skill_level}`)}</div>
                     </h1>

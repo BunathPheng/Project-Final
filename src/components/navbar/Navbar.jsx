@@ -85,7 +85,15 @@ export default function Navbar() {
     setDropdownVisible(false); // Hide dropdown immediately
     navigate(`/searchs?query=${encodeURIComponent(title)}`); // Navigate with query parameter
   };
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setClickCount(0); // Reset click count after timeout
@@ -151,24 +159,27 @@ export default function Navbar() {
           </a>
           <div className="flex lg:order-2 items-center">
             <button
-              data-collapse-toggle="navbar-search"
+              onClick={toggleSidebar}
               type="button"
               className="inline-flex items-center mt-1 p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" //style-navbar2 "
               aria-controls="navbar-search"
-              aria-expanded="false">
+              aria-expanded="false"
+            >
               <span className="sr-only">Open main menu</span>
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 17 14">
+                viewBox="0 0 17 14"
+              >
                 <path
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"/>
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
               </svg>
             </button>
             <Search />
@@ -220,7 +231,8 @@ export default function Navbar() {
                 className={`z-50 hidden my-4 text-base list-none bg-white ${
                   getAccessToken() ? "divide-y divide-gray-100" : ""
                 } rounded shadow`}
-                id="dropdown-user">
+                id="dropdown-user"
+              >
                 <ul className="py-1" role="none">
                   {userContentList.map((content, index) => {
                     return (
@@ -266,9 +278,11 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1 style-navbar2"// style-navbar"
-            id="navbar-search">
-            <div className="relative mt-3 lg:hidden ">
+            className={`${
+              isSidebarOpen ? "block" : "hidden"
+            } items-center justify-between  w-full lg:flex lg:w-auto lg:order-1 style-navbar2`}
+          >
+            <div className="relative mt-3 lg:hidden">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -297,48 +311,51 @@ export default function Navbar() {
                 value={searchInput}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
-                    navigate(`/searchs?query=${encodeURIComponent(searchInput)}`);
+                    navigate(
+                      `/searchs?query=${encodeURIComponent(searchInput)}`
+                    );
                   }
                 }}
                 onFocus={() => setDropdownVisible(true)}
               />
-              
+
               {dropdownVisible && (
                 <div
                   ref={dropdownRef} // Attach ref to dropdown container
                   className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10"
                 >
-              {/* Check if filteredResults.exercises exists and has items */}
-              {searchInput && filteredResults.exercises?.length > 0 && (
-                <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
-                  <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50">
-                    {filteredResults.exercises.map((element, index) => (
-                      <li
-                        // key={element.ex_uuid}
-                        key={index}
-                        className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
-                        onClick={() => handleResultClick(element.title)}>
-                        <Link to="/searchs">{element.title}</Link>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Check if filteredResults.exercises exists and has items */}
+                  {searchInput && filteredResults.exercises?.length > 0 && (
+                    <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
+                      <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50">
+                        {filteredResults.exercises.map((element, index) => (
+                          <li
+                            // key={element.ex_uuid}
+                            key={index}
+                            className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                            onClick={() => handleResultClick(element.title)}
+                          >
+                            <Link to="/searchs">{element.title}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Show "No results found" if searchInput is not empty and exercises array is empty */}
+                  {searchInput &&
+                    (!filteredResults.exercises ||
+                      filteredResults.exercises.length === 0) && (
+                      <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
+                        <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
+                          <li className="p-2 text-gray-500 dark:text-gray-400">
+                            No results found
+                          </li>
+                        </ul>
+                      </div>
+                    )}
                 </div>
               )}
-
-              {/* Show "No results found" if searchInput is not empty and exercises array is empty */}
-              {searchInput &&
-                (!filteredResults.exercises ||
-                  filteredResults.exercises.length === 0) && (
-                  <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
-                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200">
-                      <li className="p-2 text-gray-500 dark:text-gray-400">
-                        No results found
-                      </li>
-                    </ul>
-                  </div>
-                )}
-            </div>
-            )}
             </div>
             <ul className="text-[16px] min-[1024px]:text-[15px] min-[1111px]:text-[16px] flex flex-col p-4 lg:p-0 mt-4 text-grays text-md border rounded-lg lg:space-x-4 xl:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
               <li>

@@ -237,7 +237,6 @@ export default function LessonDetail() {
       }
     }
   };
-
   const handleTryAgain = () => {
     setSelectedAnswers({});
     setAnswersToShow({});

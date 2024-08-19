@@ -11,9 +11,9 @@ export default function LessonIETLSCard({ onClick, title, des, pic, uuid }) {
     <div onClick={handleClick}>
       <Link to={`${convert}`}>
         <div>
-          <div className="max-w-[430px] max-h-[261px] rounded-tr-3xl rounded-bl-3xl relative">
+          <div className="max-w-[430px] max-h-[261px] rounded-tr-3xl rounded-bl-3xl relative group">
             <img
-              className="rounded-tr-3xl rounded-bl-3xl brightness-50 w-[400px] h-[250px] object-cover hover:brightness-75 transition-transform duration-300 hover:scale-105"
+              className="rounded-tr-3xl rounded-bl-3xl brightness-50 w-[400px] h-[250px] object-cover group-hover:brightness-75 transition-transform duration-300 group-hover:scale-105"
               src={pic}
               alt="champion"
             />

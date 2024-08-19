@@ -4,6 +4,7 @@ import "./Lessoncard.css";
 export default function CardContentUpdate({ img, title, des, value }) {
   return (
     <>
+    {console.log("value:",value)}
       <a href={value}>
         <div className="bg-slate-100  rounded-tl-[10%] rounded-br-[10%] border-gray-100 border-1 pb-8">
           <img

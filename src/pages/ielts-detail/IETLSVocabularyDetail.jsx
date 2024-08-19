@@ -91,7 +91,7 @@ export default function IELTSkillDetail() {
     dispatch(fetchExcersices());
   }, [dispatch]);
   //
-  console.log("excercises", excercises);
+  // console.log("excercises", excercises);
   useEffect(() => {
     if (lessons.length > 0) {
       const matchedExcersice = lessons.find(
@@ -108,7 +108,7 @@ export default function IELTSkillDetail() {
       dispatch(fetchLessonsById(finaluuid));
     }
   }, [finaluuid, dispatch]);
-  console.log("excersiceByIdNew", excersiceById);
+  // console.log("excersiceByIdNew", excersiceById);
   //
   useEffect(() => {
     dispatch(fetchSkillNameLevel(newstr));
@@ -158,7 +158,7 @@ export default function IELTSkillDetail() {
                   .slice()
                   .reverse()
                   .map((exercise, index) => {
-                    console.log("exercise", exercise);
+                    // console.log("exercise", exercise);
                     return (
                       <li key={exercise.id}>
                         <a href="#">{exercise.title}</a>
@@ -207,7 +207,7 @@ export default function IELTSkillDetail() {
               </div>
             </div>
             {lessonsById?.questions?.map((question, index) => {
-              console.log("question", question.type);
+              // console.log("question", question.type);
               return (
                 <>
                   <ExerciseComponetIETlS question={question} />

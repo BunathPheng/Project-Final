@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
 export default function Register() {
   const userResponse = useSelector(selectUser);
   const location = useLocation();
-  console.log("location: ", location);
+  // console.log("location: ", location);
   const email = location?.state?.email;
   // console.log("useResponse", userResponse);
   const dispatch = useDispatch();

@@ -118,7 +118,7 @@ export default function Dashboard() {
     }
   };
 
-  console.log("user:", user?.user_uuid);
+  // console.log("user:", user?.user_uuid);
   const userId = user?.user_uuid || "";
 
   useEffect(() => {
@@ -144,7 +144,7 @@ export default function Dashboard() {
               ...prevExercises,
               [level]: result,
             }));
-            console.log(`${level} exercise:`, result);
+            // console.log(`${level} exercise:`, result);
           })
           .catch((error) => {
             console.error(`Error fetching ${level} exercise:`, error);
@@ -161,7 +161,7 @@ export default function Dashboard() {
   const exerciseB2Data = exercises.B2.payload?.length;
   const exerciseC1Data = exercises.C1.payload?.length;
   const exerciseC2Data = exercises.C2.payload?.length;
-  console.log("exerciseA1Data:", exerciseA1Data);
+  // console.log("exerciseA1Data:", exerciseA1Data);
 
   useEffect(() => {
     dispatch(fetchExcersices());
@@ -186,22 +186,22 @@ export default function Dashboard() {
   const numAllSubmitExercises = submitExercises?.payload?.length;
   const total = (numAllSubmitExercises / numAllExercises) * 100;
   const totalA1 = parseFloat(
-    ((exerciseA1Data / groupedExercises["A1"]?.length) * 100).toFixed()
+    ((exerciseA1Data / groupedExercises["A1"]?.length) * 100).toFixed(2)
   );
   const totalA2 = parseFloat(
-    ((exerciseA2Data / groupedExercises["A2"]?.length) * 100).toFixed()
+    ((exerciseA2Data / groupedExercises["A2"]?.length) * 100).toFixed(2)
   );
   const totalB1 = parseFloat(
-    ((exerciseB1Data / groupedExercises["B1"]?.length) * 100).toFixed()
+    ((exerciseB1Data / groupedExercises["B1"]?.length) * 100).toFixed(2)
   );
   const totalB2 = parseFloat(
-    ((exerciseB2Data / groupedExercises["B2"]?.length) * 100).toFixed()
+    ((exerciseB2Data / groupedExercises["B2"]?.length) * 100).toFixed(2)
   );
   const totalC1 = parseFloat(
-    ((exerciseC1Data / groupedExercises["C1"]?.length) * 100).toFixed()
+    ((exerciseC1Data / groupedExercises["C1"]?.length) * 100).toFixed(2)
   );
   const totalC2 = parseFloat(
-    ((exerciseC2Data / groupedExercises["C2"]?.length) * 100).toFixed()
+    ((exerciseC2Data / groupedExercises["C2"]?.length) * 100).toFixed(2)
   );
 
   console.log("groupedExercises['A1']: ", groupedExercises["A1"]);

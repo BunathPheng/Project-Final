@@ -74,7 +74,7 @@ export default function ForgotPassword() {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={async (values, { resetForm }) => {
-              console.log(values);
+              // console.log(values);
               await dispatch(fetchVerifyEmail(values));
               resetForm();
             }}

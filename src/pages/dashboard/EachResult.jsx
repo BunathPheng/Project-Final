@@ -24,17 +24,17 @@ export default function EachResult() {
   const user = useSelector(selectUsers);
   const userId = user?.user_uuid || "";
   const {level} = useParams();
-  console.log("level:",level);
+  // console.log("level:",level);
   
   useEffect(()=>{
     if(userId && token){
       const data = dispatch(fetchSubmitExercisesByLevel({ user_uuid: userId, token, level }));
-      console.log("data:",data)
+      // console.log("data:",data)
     }
   }, [dispatch, userId, token])
 
   const submittedExerciseByLevel = useSelector(selectSubmitExercisesByLevel);
-  console.log("submittedExerciseByLevel:",submittedExerciseByLevel);
+  // console.log("submittedExerciseByLevel:",submittedExerciseByLevel);
 
   return (
     <section>
@@ -167,7 +167,8 @@ export default function EachResult() {
                       return (
                         <tr key={index} className="text-gray-700 border-b text-[12px] md:text-[16px]">
                           <td className="py-5  pl-8 text-left">{exercise?.ex_title}</td>
-                          <td className="py-5">{exercise?.scores.toFixed(2)}</td>
+                          {/* {console.log("exercise?.score", typeof(exercise?.scores))} */}
+                          <td className="py-5">{parseFloat(exercise?.scores) % 1 === 0 ? parseFloat(exercise?.scores).toFixed(0) : parseFloat(exercise?.scores).toFixed(2)}</td>
                           <td className="py-5">{formattedDate}</td>
                         </tr>
                       );

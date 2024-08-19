@@ -62,7 +62,7 @@ export default function IELTS() {
     fetchData();
   });
 
-  console.log(loadings);
+  // console.log(loadings);
   if (loadings === "Loading") {
     return <LoadingIL />;
   }
@@ -92,7 +92,7 @@ export default function IELTS() {
         </p>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-x-10 gap-y-10 w-fit mx-auto mt-10">
           {ieltsSkills?.map((element, index) => {
-            console.log("element: ", element);
+            // console.log("element: ", element);
             return (
               <>
                 <CardIELTS

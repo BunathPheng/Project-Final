@@ -2,29 +2,29 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_URL } from "../../api";
 //state
 const initialState = {
-   excercises:[],
-   excercise:{},
+    excercises: [],
+    excercise: {},
     // idle -> |pending|fulfilled|rejected|
     status: "idle",
-    error: null 
+    error: null
 }
 export const fetchExcersices = createAsyncThunk(
-    "excercise/fetchExcersices",    
+    "excercise/fetchExcersices",
     async() => {
         const response = await fetch(`${BASE_URL}/exercises`);
         const data = await response.json()
-        console.log("Res", data.payload)
-        return data.payload; 
+            //console.log("Res", data.payload)
+        return data.payload;
     }
 );
 
 export const fetchExcersiceById = createAsyncThunk(
-    "excercise/fetchExcersiceById",    
+    "excercise/fetchExcersiceById",
     async(uuid) => {
         const response = await fetch(`${BASE_URL}/exercises/${uuid}`);
-        const data1= await response.json()
-        console.log("data1", data1.payload)
-        return data1.payload; 
+        const data1 = await response.json()
+            // console.log("data1", data1.payload)
+        return data1.payload;
     }
 );
 
@@ -63,5 +63,5 @@ export const lessondetailSlice = createSlice({
 export default lessondetailSlice.reducer;
 //state.reducer.product(in initialState)
 export const selectExcersice = ((state) => state.excersice.excercises);
-export const  selectExcersiceById = ((state) => state.excersice.excercise);
+export const selectExcersiceById = ((state) => state.excersice.excercise);
 export const selectLoadingStatus = ((state) => state.excersice.status);

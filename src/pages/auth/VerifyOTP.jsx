@@ -49,7 +49,7 @@ export default function VerifyOTP() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  console.log("location: ", location);
+  // console.log("location: ", location);
   const email = location?.state;
   const otpBoxReference = useRef([]);
 
@@ -98,8 +98,8 @@ export default function VerifyOTP() {
 
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
     const otp = values.otp.join("");
-    console.log("Submitting OTP: ", otp);
-    console.log("Email: ", email);
+    // console.log("Submitting OTP: ", otp);
+    // console.log("Email: ", email);
     
     setSubmitting(true);
 

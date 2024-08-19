@@ -72,14 +72,14 @@ import Search from "./Seach";
 import loading2 from "../../assets/img/loding1.gif";
 export default function SearchDetailLessons() {
   const param = useParams();
-  console.log("param", param);
+  // console.log("param", param);
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
-  console.log("convertnew", convert);
+  // console.log("convertnew", convert);
   // const lessons = useSelector(selectAllLessons);
   const excercises = useSelector(selectExcersice);
   const statusNew = useSelector((state) => state.lesson.status);
-  console.log("statusNew", statusNew);
+  // console.log("statusNew", statusNew);
   const excersiceById = useSelector(selectExcersiceById);
   const grammarLevel = useSelector((state) => state.grammar.grammarLevels);
   const submits = useSelector(selectSubmit);
@@ -163,27 +163,27 @@ export default function SearchDetailLessons() {
   useEffect(() => {
     dispatch(fetchLessons());
   }, []);
-  console.log("lessonsnew", lessons);
+  // console.log("lessonsnew", lessons);
   useEffect(() => {
     if (lessons.length > 0) {
       const matchedlessons = lessons.find(
         (e) => e.lesson_title.toUpperCase() === convert
       );
-      console.log("matchedlessons", matchedlessons);
+      // console.log("matchedlessons", matchedlessons);
       if (matchedlessons) {
         setLessonsuuid(matchedlessons.lesson_uuid);
       }
     }
   }, [lessons, convert]);
-  console.log("finaluuid", lessonuuid);
+  // console.log("finaluuid", lessonuuid);
   useEffect(() => {
     if (lessonuuid) {
       dispatch(fetchLessonsById(lessonuuid));
     }
   }, [lessonuuid, dispatch]);
-  console.log("lesson_uuid", lessonuuid);
-  console.log("excersiceById", excersiceById);
-  console.log("excercises", excercises);
+  // console.log("lesson_uuid", lessonuuid);
+  // console.log("excersiceById", excersiceById);
+  // console.log("excercises", excercises);
 
   const playAudio = (url, sectionId) => {
     const audio = audioRefs.current[sectionId];
@@ -223,7 +223,7 @@ export default function SearchDetailLessons() {
       [questionId]: answer,
     }));
   };
-  console.log("lessonsByIdnew", lessonsById);
+  // console.log("lessonsByIdnew", lessonsById);
   useEffect(() => {
     if (lessonsById?.sections) {
       lessonsById.sections.forEach((section) => {
@@ -235,7 +235,7 @@ export default function SearchDetailLessons() {
       });
     }
   }, [lessonsById]);
-  console.log("voice section", voiceSection);
+  // console.log("voice section", voiceSection);
   const handleSubmit = async () => {
     const unansweredQuestions = excersiceById?.questions?.filter(
       (question) => !selectedAnswers[question.q_uuid]
@@ -257,7 +257,7 @@ export default function SearchDetailLessons() {
       user_uuid: "", // Replace, this with dynamic user UUID if available
       user_answer: userAnswers,
     };
-    console.log("token", getAccessToken());
+    // console.log("token", getAccessToken());
     if (finaluuid) {
       try {
         const response = await dispatch(
@@ -278,7 +278,7 @@ export default function SearchDetailLessons() {
 
         // Open modal after submission
       } catch (error) {
-        console.error("Submit Error:", error);
+        // console.error("Submit Error:", error);
       }
     }
   };
@@ -293,7 +293,7 @@ export default function SearchDetailLessons() {
     setIsSubmitted(false); // Reset isSubmitted
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
-      console.log("finaluuid", finaluuid);
+      // console.log("finaluuid", finaluuid);
     }
   };
 
@@ -311,7 +311,7 @@ export default function SearchDetailLessons() {
       setAnswersToShow(answers);
     }
   };
-  console.log("lessonId", lessonsById);
+  // console.log("lessonId", lessonsById);
   const handleShowScore = () => {
     if (isSubmitted) {
       setShowScore(true);
@@ -320,10 +320,10 @@ export default function SearchDetailLessons() {
       alert("Please submit your answers first.");
     }
   };
-  console.log("excersice", excersiceById.voice);
+  // console.log("excersice", excersiceById.voice);
   const sanitizedHTML = DOMPurify.sanitize(excersiceById?.transcript);
-  console.log("submits", submits);
-  console.log("selectNameLevel", selectNameLevel);
+  // console.log("submits", submits);
+  // console.log("selectNameLevel", selectNameLevel);
   const [voiceState, setVoiceState] = useState("");
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -543,7 +543,7 @@ export default function SearchDetailLessons() {
                 </div>
               )}
               {lessonsById?.exercises?.map((exercise) => {
-                console.log("Each exercise", exercise);
+                // console.log("Each exercise", exercise);
                 return (
                   <>
                     <ExerciseComponet

@@ -80,7 +80,7 @@ export default function SkillExerciseVocabluary() {
       </div>
       <div className="mx-auto my-10 justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 w-[320px] md:w-[90%] exclude">
         {VocabularyLevel.map((selectNameLevel) => {
-          console.log("selectNameLevel", selectNameLevel);
+          //console.log("selectNameLevel", selectNameLevel);
           return selectNameLevel.lessons.map((excersice) => {
             // console.log("excersice", excersice);
             return (

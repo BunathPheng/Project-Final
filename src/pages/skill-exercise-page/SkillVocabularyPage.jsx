@@ -29,8 +29,8 @@ export default function SkillVocabularyPage() {
   let title = "";
   let title1 = "";
   let icon = null;
-  console.log("param", param.skill_name);
-  console.log("param", param);
+  // console.log("param", param.skill_name);
+  // console.log("param", param);
   const vocabularys = useSelector(selectAllVocabluary);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -47,7 +47,7 @@ export default function SkillVocabularyPage() {
   if (isLoading) {
     return <LoadingSkillVocabulary />;
   }
-  console.log("vocabularys", vocabularys);
+  //console.log("vocabularys", vocabularys);
   return (
     <>
       <div className="relative w-[100%] mx-auto">
@@ -75,7 +75,7 @@ export default function SkillVocabularyPage() {
       <section className="">
         <div className="mt-10 lg:w-[80%] w-[90%] mx-auto grid  gap-10 md:grid-cols-2 lg:grid-cols-2 grid-cols-1 mb-10 exclude-1024">
           {vocabularys.map((vocabulary, index) => {
-            console.log("vocabulary", vocabulary);
+            //console.log("vocabulary", vocabulary);
             return (
               <>
                 <LevelcardVocabulary

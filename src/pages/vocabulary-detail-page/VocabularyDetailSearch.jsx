@@ -37,7 +37,7 @@ import "../skill-level/SkillLevel.css";
 import loading2 from "../../assets/img/loding1.gif";
 export default function VocabularyDetailSearch() {
   const param = useParams();
-  console.log("param: " + param);
+  // console.log("param: " + param);
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
   const excercises = useSelector(selectExcersice);
@@ -46,7 +46,7 @@ export default function VocabularyDetailSearch() {
   const vocabularylevel = useSelector(selectAllVocabluaryByLevel);
   const lessons = useSelector(selectAllLessons);
   const states = useSelector((state) => state.lesson.status);
-  console.log("states: ", states);
+  // console.log("states: ", states);
   const lessonsById = useSelector(selectAllLessonsById);
   const submits = useSelector(selectSubmit);
   const dispatch = useDispatch();
@@ -70,8 +70,8 @@ export default function VocabularyDetailSearch() {
   useEffect(() => {
     dispatch(fetchLessons());
   }, []);
-  console.log("state", statss);
-  console.log("lessons", lessons);
+  // console.log("state", statss);
+  // console.log("lessons", lessons);
   useEffect(() => {
     if (lessons.length > 0) {
       const matchedLesson = lessons.find(
@@ -98,7 +98,7 @@ export default function VocabularyDetailSearch() {
       dispatch(fetchLessonsById(lessonsuuid));
     }
   }, [lessonsuuid, dispatch]);
-  console.log("lessonsById", lessonsById);
+  // console.log("lessonsById", lessonsById);
 
   const skill_level = param["skill_level-skill_name"];
   useEffect(() => {
@@ -114,8 +114,8 @@ export default function VocabularyDetailSearch() {
     }
   }, [submits]);
 
-  console.log("excersiceById in VocabularyDetail", excersiceById);
-  console.log("excercises in VocabularyDetail", excercises);
+  // console.log("excersiceById in VocabularyDetail", excersiceById);
+  // console.log("excercises in VocabularyDetail", excercises);
 
   const playAudio = (url, sectionId) => {
     const audio = audioRefs.current[sectionId];
@@ -138,7 +138,7 @@ export default function VocabularyDetailSearch() {
     }
   };
 
-  console.log("submits", submits);
+  // console.log("submits", submits);
   return (
     <>
       <button
@@ -192,7 +192,7 @@ export default function VocabularyDetailSearch() {
             </ul>
           </div>
         </aside>
-        {console.log("statss", statss)}
+        {/* {console.log("statss", statss)} */}
         <main className="flex-1 md:px-[28px] md:pb-[28px] pb-[28px] px-[20px]">
           {states === "loading" ? (
             <div className="flex justify-center h-[200px]">
@@ -214,7 +214,7 @@ export default function VocabularyDetailSearch() {
                     <div className="">
                       <h2 className="w-fit bg-[#ffc30e] md:px-20 px-10 py-2 text-white md:text-lg text-md font-bold md:line-clamp-2">
                         {lessonsById?.lesson_title || "No title"}
-                        {console.log("lessonById:", lessonsById)}
+                        {/* {console.log("lessonById:", lessonsById)} */}
                       </h2>
                       <div className="flex gap-4 mt-4 text-grays">
                         <BsPatchCheck className=" text-[40px] md:text-[30px] text-second md:block  hidden" />
@@ -283,7 +283,7 @@ export default function VocabularyDetailSearch() {
                 </div>
               </div>
               {lessonsById?.exercises?.map((exercise) => {
-                console.log("Each exercise", exercise);
+                // console.log("Each exercise", exercise);
                 return (
                   <>
                     <ExerciseComponent

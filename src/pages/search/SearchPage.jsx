@@ -10,7 +10,7 @@ import parse from "html-react-parser";
 export default function SearchPage() {
   const [searchInput, setSearchInput] = useState("");
   const filteredResults = useSelector(selectAllSearch);
-  console.log("filteredResults", filteredResults);
+  //console.log("filteredResults", filteredResults);
   return (
     <>
       <main className="mx-auto">

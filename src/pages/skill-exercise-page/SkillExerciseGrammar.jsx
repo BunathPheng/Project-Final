@@ -20,6 +20,7 @@ export default function SkillExerciseGrammar() {
   const newlevels = levels.split("-");
   const name = levels.slice(0, 5).toLocaleUpperCase();
   const grammarLevel = useSelector((state) => state.grammar.grammarLevels);
+  const satuss = useSelector((state) => state.grammar.status);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -31,8 +32,9 @@ export default function SkillExerciseGrammar() {
 
     fetchData();
   }, []);
-  if (isLoading) {
-    return <LoadingExerciseGrammar/>;
+  console.log("satuss", satuss);
+  if (satuss === "Loading") {
+    return <LoadingExerciseGrammar />;
   }
   // console.log("grammarLevel", grammarLevel);
   return (

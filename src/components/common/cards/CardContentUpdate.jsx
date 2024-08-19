@@ -11,7 +11,7 @@ export default function CardContentUpdate({ img, title, des, value }) {
             src={img}
             alt={title}
           />
-          <h1 className=" font-new text-[24px] font-bold text-second text-center mt-5">
+          <h1 className=" font-new text-[24px] font-bold text-second text-center mt-5 line-clamp-1">
             {title}
           </h1>
           <p className="font-suwannaphum  text-[16px] text-center pt-1 pb-6 px-4 line-clamp-3">

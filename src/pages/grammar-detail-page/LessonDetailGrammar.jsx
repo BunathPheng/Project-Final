@@ -74,12 +74,16 @@ import LoadingLessonDetail from "../../components/common/loading/LoadingLessonDe
 
 export default function LessonDetailGrammar() {
   const param = useParams();
-  console.log("param", param);
+  // console.log("param", param);
   // const newtitle = param.title.replace(/-/g, " ");
   const newtitle = decodeURIComponent(param.title).replace(/-/g, " ");
+<<<<<<< HEAD
   console.log("param.title:", param.title);
+=======
+  // console.log("param.title:",param.title);
+>>>>>>> b165e0d2cafdbb2b7bd326ee58ee546e7d11d122
   const convert = newtitle.toUpperCase();
-  console.log("convert", convert);
+  // console.log("convert", convert);
   // const lessons = useSelector(selectAllLessons);
   const excercises = useSelector(selectExcersice);
   const excersiceById = useSelector(selectExcersiceById);
@@ -173,13 +177,13 @@ export default function LessonDetailGrammar() {
       const matchedlessons = lessons.find(
         (e) => e.lesson_title.toUpperCase() === convert
       );
-      console.log("matchedlessons", matchedlessons);
+      // console.log("matchedlessons", matchedlessons);
       if (matchedlessons) {
         setLessonsuuid(matchedlessons.lesson_uuid);
       }
     }
   }, [lessons, convert]);
-  console.log("lesson_uuid", lessonuuid);
+  // console.log("lesson_uuid", lessonuuid);
   useEffect(() => {
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
@@ -191,8 +195,8 @@ export default function LessonDetailGrammar() {
     }
   }, [lessonuuid, dispatch]);
 
-  console.log("excersiceById", excersiceById);
-  console.log("excercises", excercises);
+  // console.log("excersiceById", excersiceById);
+  // console.log("excercises", excercises);
   const skill_level = param["skill_level-skill_name"];
   // useEffect(() => {
   //   dispatch(fetchSkillNameLevel(skill_level));
@@ -242,7 +246,7 @@ export default function LessonDetailGrammar() {
       user_uuid: "", // Replace, this with dynamic user UUID if available
       user_answer: userAnswers,
     };
-    console.log("token", getAccessToken());
+    // console.log("token", getAccessToken());
     if (finaluuid) {
       try {
         const response = await dispatch(
@@ -287,7 +291,7 @@ export default function LessonDetailGrammar() {
     setIsSubmitted(false); // Reset isSubmitted
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
-      console.log("finaluuid", finaluuid);
+      // console.log("finaluuid", finaluuid);
     }
   };
 
@@ -305,7 +309,7 @@ export default function LessonDetailGrammar() {
       setAnswersToShow(answers);
     }
   };
-  console.log("lessonId", lessonsById);
+  // console.log("lessonId", lessonsById);
   const handleShowScore = () => {
     if (isSubmitted) {
       setShowScore(true);
@@ -314,10 +318,10 @@ export default function LessonDetailGrammar() {
       alert("Please submit your answers first.");
     }
   };
-  console.log("excersice", excersiceById.voice);
+  // console.log("excersice", excersiceById.voice);
   const sanitizedHTML = DOMPurify.sanitize(excersiceById?.transcript);
-  console.log("submits", submits);
-  console.log("selectNameLevel", selectNameLevel);
+  // console.log("submits", submits);
+  // console.log("selectNameLevel", selectNameLevel);
   return (
     <>
       <button
@@ -423,7 +427,7 @@ export default function LessonDetailGrammar() {
                     <div className="px-4 border-2 bg-white rounded-xl">
                       {/* ko */}
                       {lessonsById?.sections?.map((section, index) => {
-                        console.log("section", section);
+                        // console.log("section", section);
                         return (
                           <>
                             <div className="mb-5 md:px-8 md:leading-10">
@@ -498,7 +502,7 @@ export default function LessonDetailGrammar() {
               </div>
 
               {lessonsById?.exercises?.map((exercise) => {
-                console.log("Each exercise", exercise);
+                // console.log("Each exercise", exercise);
                 return (
                   <>
                     <ExerciseComponent

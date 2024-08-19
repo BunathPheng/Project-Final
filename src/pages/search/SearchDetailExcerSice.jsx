@@ -60,14 +60,14 @@ import loading2 from "../../assets/img/loding1.gif";
 import SkillExerciseComponent from "../../components/skill-exercise-component/SkillExerciseComponent";
 export default function SearchDetailExcerSice() {
   const param = useParams();
-  console.log("param", param);
+  // console.log("param", param);
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
-  console.log("convert", convert);
+  // console.log("convert", convert);
   const excercises = useSelector(selectExcersice);
   const excersiceById = useSelector(selectExcersiceById);
   const statuss = useSelector(selectLoadingStatus);
-  console.log("excersiceById in LessonDetail:", excersiceById);
+  // console.log("excersiceById in LessonDetail:", excersiceById);
   const skillNameLevels = useSelector(selectNameLevel);
   const submits = useSelector(selectSubmit);
   const dispatch = useDispatch();
@@ -131,7 +131,7 @@ export default function SearchDetailExcerSice() {
   const randomImgWin = imgWin[randomIndex4];
   const randomImgLose = imgLose[randomIndex5];
   const [skillLevels, setskillLevels] = useState([]);
-  console.log("skillLevelname:", skillNameLevels);
+  //console.log("skillLevelname:", skillNameLevels);
   const [audioUrl, setAudioUrl] = useState("");
   const [scoreSound, setScoreSound] = useState(null);
   useEffect(() => {
@@ -141,7 +141,7 @@ export default function SearchDetailExcerSice() {
   useEffect(() => {
     dispatch(fetchExcersices());
   }, [dispatch]);
-  console.log("excercises", excercises);
+  // console.log("excercises", excercises);
   useEffect(() => {
     if (excercises.length > 0) {
       const matchedExcersice = excercises.find(
@@ -163,7 +163,7 @@ export default function SearchDetailExcerSice() {
     }
   }, [openModal, scoreSound]);
 
-  console.log("final uuid", finaluuid);
+  // console.log("final uuid", finaluuid);
   useEffect(() => {
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
@@ -225,7 +225,7 @@ export default function SearchDetailExcerSice() {
       user_uuid: "", // Replace, this with dynamic user UUID if available
       user_answer: userAnswers,
     };
-    console.log("token", getAccessToken());
+    // console.log("token", getAccessToken());
     if (finaluuid) {
       try {
         const response = await dispatch(
@@ -244,7 +244,7 @@ export default function SearchDetailExcerSice() {
         setScoreSound(new Audio(soundToPlay));
         // Open modal after submission
       } catch (error) {
-        console.error("Submit Error:", error);
+        // console.error("Submit Error:", error);
       }
     }
   };
@@ -257,14 +257,14 @@ export default function SearchDetailExcerSice() {
     setScore(0);
     setShowScore(false); // Reset showScore
     setIsSubmitted(false); // Reset isSubmitted
-    console.log("finaluuid", finaluuid);
+    // console.log("finaluuid", finaluuid);
     if (finaluuid) {
       dispatch(fetchExcersiceById(finaluuid));
-      console.log("finaluuid", finaluuid);
+      // console.log("finaluuid", finaluuid);
     }
   };
-  console.log("excersiceById", excersiceById);
-  console.log("excercises", excercises);
+  // console.log("excersiceById", excersiceById);
+  // console.log("excercises", excercises);
   const handleShowAnswers = () => {
     if (excersiceById?.questions) {
       const answers = excersiceById.questions.reduce((acc, question) => {
@@ -306,9 +306,9 @@ export default function SearchDetailExcerSice() {
       alert("Please submit your answers first.");
     }
   };
-  console.log("excersice", excersiceById.voice);
+  // console.log("excersice", excersiceById.voice);
   // const sanitizedHTML = DOMPurify.sanitize(excersiceById?.transcript);
-  console.log("submits", submits);
+  // console.log("submits", submits);
   return (
     <>
       <button
@@ -382,7 +382,7 @@ export default function SearchDetailExcerSice() {
                     </div>
                   </div>
                 </div>
-                {console.log("exercise:", excersiceById)}
+                {/* {console.log("exercise:", excersiceById)} */}
                 {excersiceById.voice && (
                   <div className="mt-7">
                     <audio

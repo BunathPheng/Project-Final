@@ -70,14 +70,14 @@ export const verifyUserSlice = createSlice({
             })
             .addCase(fetchUserData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                console.log("payload in succeed", action.payload);
+                //console.log("payload in succeed", action.payload);
                 state.users = action.payload.payload;
                 state.profile = action.payload.payload.profile;
-                console.log("profile in succeed", state.profile);
+                //console.log("profile in succeed", state.profile);
             })
             .addCase(fetchUserData.rejected, (state, action) => {
                 state.status = 'failed';
-                console.log("payload in failed", action.payload);
+                //console.log("payload in failed", action.payload);
                 state.error = action.payload;
             });
     }

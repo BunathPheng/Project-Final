@@ -48,8 +48,8 @@ export default function Login() {
         }, 1500);
       })
       .catch((error) => {
-        console.log("Login error:", error);
-        console.log("Error message:", error.message);
+        // console.log("Login error:", error);
+        // console.log("Error message:", error.message);
         setTimeout(() => {
           if (error.message === "User is not verified 😏") {
             toast.error("សូមផ្ទៀងផ្ទាត់អ៊ីម៉ែលរបស់អ្នក មុននឹងចូលប្រើប្រាស់ 🥳");

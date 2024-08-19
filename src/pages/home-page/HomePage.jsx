@@ -26,7 +26,7 @@ export default function HomePage() {
     return <Loading />;
   }
 
-  console.log("access token in home page", getAccessToken());
+  // console.log("access token in home page", getAccessToken());
   return (
     <section className="bg-gray-50">
       <div className="relative flex w-full h-[700px] items-center justify-center overflow-hidden">

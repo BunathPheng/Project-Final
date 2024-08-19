@@ -59,8 +59,8 @@ export default function SkillLevel() {
     icon = <RiSpeakLine />;
     title1 = "ការនិយាយកម្រិត";
   }
-  console.log("param", param.skill_name);
-  console.log("param", param);
+  // console.log("param", param.skill_name);
+  // console.log("param", param);
   const skill = useSelector(selectSkillByName);
   const status = useSelector((state) => state.skill.status);
   const [skillLevels, setskillLevels] = useState([]);
@@ -85,7 +85,7 @@ export default function SkillLevel() {
   if (status === "Loading") {
     return <LoadingAllSkill />;
   }
-  console.log("skills", skill);
+  // console.log("skills", skill);
   return (
     <>
       <div className="relative w-[100%] mx-auto">

@@ -28,8 +28,8 @@ export default function SkillGrammarPage() {
   let title = "";
   let title1 = "";
   let icon = null;
-  console.log("param", param.skill_name);
-  console.log("param", param);
+  // console.log("param", param.skill_name);
+  // console.log("param", param);
   const grammars = useSelector((state) => state.grammar.grammars);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -80,7 +80,7 @@ export default function SkillGrammarPage() {
       <section className="">
         <div className="mt-10 lg:w-[80%] w-[90%] mx-auto grid  gap-10 md:grid-cols-2 lg:grid-cols-2 grid-cols-1 mb-10 exclude-1024">
           {skillGrammar.map((grammar, index) => {
-            console.log("grammar in Grammar page:", grammar);
+            //console.log("grammar in Grammar page:", grammar);
             return (
               <>
                 <LevelcardGrammar

@@ -23,15 +23,15 @@ export const fetchSubmitExercises = createAsyncThunk(
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.log("Error response data:", errorData);
+                //console.log("Error response data:", errorData);
                 return rejectWithValue(errorData.detail || "An error occurred.");
             }
 
             const data = await response.json();
-            console.log("data in fetchSubmitExercises:", data);
+            //console.log("data in fetchSubmitExercises:", data);
             return data;
         } catch (error) {
-            console.error("fetchSubmitExercises error:", error);
+            //console.error("fetchSubmitExercises error:", error);
             return rejectWithValue(error.message);
         }
     }
@@ -52,15 +52,15 @@ export const fetchSubmitExercisesByLevel = createAsyncThunk(
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.log("Error response data:", errorData);
+                //console.log("Error response data:", errorData);
                 return rejectWithValue(errorData.detail || "An error occurred.");
             }
 
             const data = await response.json();
-            console.log("data in fetchSubmitExercisesByLevel:", data);
+            //console.log("data in fetchSubmitExercisesByLevel:", data);
             return data.payload;
         } catch (error) {
-            console.error("fetchSubmitExercisesByLevel error:", error);
+            //console.error("fetchSubmitExercisesByLevel error:", error);
             return rejectWithValue(error.message);
         }
     }
@@ -88,12 +88,12 @@ export const exerciseSlice = createSlice({
             .addCase(fetchSubmitExercises.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.exercise = action.payload;
-                console.log("fulfilled in fetchSubmitExercises:", action);
+                // console.log("fulfilled in fetchSubmitExercises:", action);
             })
             .addCase(fetchSubmitExercises.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
-                console.log("rejected in fetchSubmitExercises:", action);
+                // console.log("rejected in fetchSubmitExercises:", action);
             })
             .addCase(fetchSubmitExercisesByLevel.pending, (state) => {
                 state.status = "loading";
@@ -101,12 +101,12 @@ export const exerciseSlice = createSlice({
             .addCase(fetchSubmitExercisesByLevel.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.answer = action.payload;
-                console.log("fulfilled in fetchSubmitExercisesByLevel:", action);
+                // console.log("fulfilled in fetchSubmitExercisesByLevel:", action);
             })
             .addCase(fetchSubmitExercisesByLevel.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message;
-                console.log("rejected in fetchSubmitExercisesByLevel:", action);
+                // console.log("rejected in fetchSubmitExercisesByLevel:", action);
             });
     }
 });

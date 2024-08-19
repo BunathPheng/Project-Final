@@ -125,7 +125,7 @@ export default function Dashboard() {
     }
   };
 
-  console.log("user:", user?.user_uuid);
+  // console.log("user:", user?.user_uuid);
   const userId = user?.user_uuid || "";
 
   useEffect(() => {
@@ -151,7 +151,7 @@ export default function Dashboard() {
               ...prevExercises,
               [level]: result,
             }));
-            console.log(`${level} exercise:`, result);
+            // console.log(`${level} exercise:`, result);
           })
           .catch((error) => {
             console.error(`Error fetching ${level} exercise:`, error);
@@ -168,7 +168,7 @@ export default function Dashboard() {
   const exerciseB2Data = exercises.B2.payload?.length;
   const exerciseC1Data = exercises.C1.payload?.length;
   const exerciseC2Data = exercises.C2.payload?.length;
-  console.log("exerciseA1Data:", exerciseA1Data);
+  // console.log("exerciseA1Data:", exerciseA1Data);
 
   useEffect(() => {
     dispatch(fetchExcersices());

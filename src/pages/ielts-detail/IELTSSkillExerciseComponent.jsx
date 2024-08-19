@@ -185,7 +185,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
   };
   const token = getAccessToken();
   useEffect(() => {
-    console.log("token before dispatching the fetchUserData:", token);
+    // console.log("token before dispatching the fetchUserData:", token);
     if (token) {
       dispatch(fetchUserData(token));
     }
@@ -193,7 +193,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
 
   const user = useSelector(selectUsers);
   const uid = user?.user_uuid;
-  console.log("user in Exercise:", user);
+  // console.log("user in Exercise:", user);
   const handleSubmit = async (lexerciseUuid, excersice) => {
     const unansweredQuestions = excersice?.questions?.filter(
       (question) => !selectedAnswers[question.q_uuid]
@@ -215,7 +215,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
       user_uuid: uid || "", // Replace, this with dynamic user UUID if available
       user_answer: userAnswers,
     };
-    console.log("token", getAccessToken());
+    //console.log("token", getAccessToken());
     
     if (lexerciseUuid) {
       try {
@@ -227,17 +227,17 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
         handleShowAnswers(lexerciseUuid);
         setShowScore(true); // Ensure score is shown after submission
         setOpenModal(true);
-        console.log("response in exercise:", response);
+        //console.log("response in exercise:", response);
         const points = response.payload.payload.exercises.scores;
         scoreArray[lexerciseUuid] = parseFloat(points);
-        console.log("scoreArray:", scoreArray[lexerciseUuid]);
+        //console.log("scoreArray:", scoreArray[lexerciseUuid]);
         // Determine which sound to play based on the score
         const soundToPlay = points >= 5 ? randomVoiceWin : randomVoiceLose;
         //const scoreSound = new Audio(soundToPlay);
         setScoreSound(new Audio(soundToPlay));
         // Open modal after submission
       } catch (error) {
-        console.error("Submit Error:", error);
+        // console.error("Submit Error:", error);
       }
     }
   };
@@ -251,7 +251,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
     setScore(0);
     setShowScore(false); // Reset showScore
     setIsSubmitted(false); // Reset isSubmitted
-    console.log("Exercise UUID:", lexerciseUuid);
+    //console.log("Exercise UUID:", lexerciseUuid);
     const exercise_uuids = [lexerciseUuid];
     dispatch(
       fetchResubmitExercise({ user_uuid, exercises_uuids: exercise_uuids })
@@ -275,15 +275,15 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
 
   const handleShowScore = (lexerciseUuid) => {
     if (isSubmitted) {
-      console.log("exercise in handleScore:", lexerciseUuid);
+      //console.log("exercise in handleScore:", lexerciseUuid);
       const newScore = scoreArray[lexerciseUuid];
-      console.log("new score: ", newScore);
+      //console.log("new score: ", newScore);
       if (newScore !== undefined) {
         setScore(newScore);
         setShowScore(true);
         setOpenModal(true);
       } else {
-        console.error("Score not found for exercise:", lexerciseUuid);
+        //console.error("Score not found for exercise:", lexerciseUuid);
       }
     } else {
       alert("Please submit your answers first.");
@@ -328,8 +328,8 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
         <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
           លំហាត់អនុវត្តន៍
         </h2>
-        <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-          <div className="p-4 border-2 bg-white rounded-xl">
+        <div className="bg-[#faf5e6] p-[20px] md:p-[40px] lg:p-[40px]">
+          <div className="px-8 py-6 border-2 bg-white rounded-xl">
             <h1 className="text-primary text-[20px] md:text-[24px]">
               {parse(exercise?.title || "Vocabulary Exercise")}
             </h1>
@@ -556,7 +556,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                     )}
                   </>
         ))}
-            <div className="flex gap-4 mt-5 md:flex-row flex-col">
+            <div className="flex gap-4 mt-5 mb-2 md:flex-row flex-col">
               <Button
                 id={key}   
                 color="blue"            
@@ -586,7 +586,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
           </div>
         </div>
       </div>
-      {console.log("score: ", score)}
+      {/* {console.log("score: ", score)} */}
       <div
         id="popup-modal"
         tabIndex="-1"

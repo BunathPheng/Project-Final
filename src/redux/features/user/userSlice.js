@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 
 const userToken = getAccessToken();
-console.log("");
+// console.log("");
 
 const initialState = userToken ? {
     isLoggedIn: true,
@@ -70,7 +70,7 @@ export const fetchVerifyEmail = createAsyncThunk(
             }
         );
         const apiResponse = await response.json();
-        console.log("apiResponse:", apiResponse);
+        //console.log("apiResponse:", apiResponse);
         return apiResponse;
     }
 );
@@ -88,7 +88,7 @@ export const fetchEmailOtp = createAsyncThunk(
                 },
             }
         );
-        console.log("response in userSlice", response);
+        // console.log("response in userSlice", response);
         return response.data;
     }
 );
@@ -109,7 +109,7 @@ export const fetchNewPassword = createAsyncThunk(
             body,
         });
         const newResponse = await response.json();
-        console.log("new Response in userSlice:", newResponse);
+        // console.log("new Response in userSlice:", newResponse);
         return newResponse;
     }
 );
@@ -131,7 +131,7 @@ export const fetchUserLogin = createAsyncThunk(
 
         const data = await response.json();
         if (data.access_token) {
-            console.log("accessToken in fetchUserLogin", data);
+            //console.log("accessToken in fetchUserLogin", data);
             storeAccessToken(data);
         } else {
             throw new Error(data.detail || "Login failed");
@@ -158,14 +158,14 @@ export const fetchUpdateUserInfo = createAsyncThunk(
             body,
         });
 
-        console.log("data response: ", response);
+        //console.log("data response: ", response);
 
         if (!response.ok) {
             throw new Error("Failed to update user information");
         }
 
         const data = await response.json();
-        console.log("data in fetchUpdateUserInfo:", data);
+        //console.log("data in fetchUpdateUserInfo:", data);
         return data;
     }
 );
@@ -182,11 +182,11 @@ export const fetchUploadFile = createAsyncThunk(
             });
 
             const result = await response.json();
-            console.log("data response in fetchUploadFile:", result);
+            //console.log("data response in fetchUploadFile:", result);
             // return result.fileUrl; // Assuming the server returns the URL of the uploaded file
             return result;
         } catch (error) {
-            console.error('Error uploading file:', error);
+            //console.error('Error uploading file:', error);
             return null;
         }
     }
@@ -221,9 +221,9 @@ export const userSlice = createSlice({
             })
             .addCase(fetchEmailOtp.fulfilled, (state, action) => {
                 state.status = "success";
-                console.log("reset password in userSlice:", action.payload);
+                //console.log("reset password in userSlice:", action.payload);
                 state.resetPassword = action.payload;
-                console.log("done otp:", state.resetPassword);
+                //console.log("done otp:", state.resetPassword);
             })
             .addCase(fetchEmailOtp.rejected, (state) => {
                 state.status = "failed";
@@ -249,8 +249,8 @@ export const userSlice = createSlice({
                 // storeAccessToken(action.payload);
                 state.userToken = payload.access_token;
                 state.status = "success";
-                console.log("done login", state.userToken);
-                console.log("user info", payload);
+                // console.log("done login", state.userToken);
+                // console.log("user info", payload);
                 state.isLoggedIn = true;
             })
             .addCase(fetchUserLogin.rejected, (state) => {
@@ -262,7 +262,7 @@ export const userSlice = createSlice({
             })
             .addCase(fetchNewPassword.fulfilled, (state, action) => {
                 state.status = "success";
-                console.log("newPassowrd in userSlice", action.payload);
+                //console.log("newPassowrd in userSlice", action.payload);
                 state.newPassword = action.payload;
             })
             .addCase(fetchNewPassword.rejected, (state) => {
@@ -274,11 +274,11 @@ export const userSlice = createSlice({
             })
             .addCase(fetchUpdateUserInfo.fulfilled, (state, action) => {
                 state.status = "success";
-                console.log("data in userSlice", action.payload);
+                //console.log("data in userSlice", action.payload);
             })
             .addCase(fetchUpdateUserInfo.rejected, (state, action) => {
                 state.status = "failed";
-                console.log("failed data in userSlice", action);
+                //console.log("failed data in userSlice", action);
             })
 
         .addCase(fetchUploadFile.pending, (state) => {
@@ -286,13 +286,13 @@ export const userSlice = createSlice({
             })
             .addCase(fetchUploadFile.fulfilled, (state, action) => {
                 state.status = "success";
-                console.log("fetch data uplaod in userSlice", action.payload);
+                //console.log("fetch data uplaod in userSlice", action.payload);
                 state.fileURL = action.payload.payload.file_urls[0].file_path;
-                console.log("fileURL:", state.fileURL)
+                //console.log("fileURL:", state.fileURL)
             })
             .addCase(fetchUploadFile.rejected, (state, action) => {
                 state.status = "failed";
-                console.log("failed uploaded data in userSlice", action);
+                //console.log("failed uploaded data in userSlice", action);
             });
     },
 });

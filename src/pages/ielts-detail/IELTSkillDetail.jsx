@@ -233,7 +233,7 @@ export default function LessonDetail() {
         setScoreSound(new Audio(soundToPlay));
         // Open modal after submission
       } catch (error) {
-        console.error("Submit Error:", error);
+        //console.error("Submit Error:", error);
       }
     }
   };
@@ -340,7 +340,7 @@ export default function LessonDetail() {
             <ul className="space-y-4 font-bold text-grays">
               {skillLevels.map((selectNameLevel) =>
                 selectNameLevel.exercises.map((exercise) => {
-                  console.log("exercise", exercise.title);
+                  // console.log("exercise", exercise.title);
                   const name = exercise.title.toLowerCase();
                   const formattedTitle = name.replace(/\s+/g, "-");
                   return (

@@ -5,7 +5,7 @@ import { BASE_URL } from "../../api";
 //state
 const initialState = {
     skills: [],
-    skill:[],
+    skill: [],
     // idle -> |pending|fulfilled|rejected|
     status: "idle",
     error: null
@@ -24,7 +24,7 @@ export const fetchSkillByName = createAsyncThunk(
     async(name) => {
         const res = await fetch(`${BASE_URL}/skills/${name}`);
         const data = await res.json()
-        console.log("data1", data)
+            //console.log("data1", data)
         return data.payload;
     }
 );
@@ -50,7 +50,7 @@ export const skillSlide = createSlice({
                 state.status = "Loading";
             })
             .addCase(fetchSkillByName.fulfilled, (state, action) => {
-               
+
                 state.status = "success";
                 state.skill = action.payload;
             })
@@ -66,4 +66,4 @@ export const skillSlide = createSlice({
 export default skillSlide.reducer;
 //state.reducer.product(in initialState)
 export const selectAllSkills = ((state) => state.skill.skills);
-export const selectSkillByName= ((state) => state.skill.skill);
+export const selectSkillByName = ((state) => state.skill.skill);

@@ -28,7 +28,7 @@ export default function IETLSGrammarDetail() {
     );
     setieltsGrammar(filteredGrammarslevel);
   }, [grammarslevel]);
-  console.log("ieltsLevels", ieltsLevels);
+  // console.log("ieltsLevels", ieltsLevels);
   return (
     <>
       <div className="w-[90%] mx-auto">
@@ -71,7 +71,7 @@ export default function IETLSGrammarDetail() {
               .slice()
               .reverse()
               .map((exercise, index) => {
-                console.log("exercise", exercise);
+                // console.log("exercise", exercise);
                 return (
                   <LessonIETLSCard
                     key={index}

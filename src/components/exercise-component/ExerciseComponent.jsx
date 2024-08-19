@@ -320,8 +320,8 @@ const ExerciseComponent = ({ exercise, key }) => {
         <h2 className="w-full bg-[#ffc30e] px-10 py-2 text-[#F5F5F5] text-xl font-bold">
           លំហាត់អនុវត្តន៍
         </h2>
-        <div className="bg-[#faf5e6] md:p-[40px] lg:p-[50px]">
-          <div className="p-4 border-2 bg-white rounded-xl">
+        <div className="bg-[#faf5e6] p-[20px] md:p-[40px] lg:p-[40px]">
+          <div className="p-[16px] lg:px-[48px] lg:py-[34px] border-2 bg-white rounded-xl">
             <h1 className="text-primary text-[15px] md:text-[24px]">
               {exercise.title || "Vocabulary Exercise"}
             </h1>

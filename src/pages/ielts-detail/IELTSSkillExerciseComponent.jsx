@@ -329,7 +329,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
           លំហាត់អនុវត្តន៍
         </h2>
         <div className="bg-[#faf5e6] md:p-[40px] lg:p-[40px] p-[20px]">
-          <div className="p-8 border-2 bg-white rounded-xl">
+          <div className="p-4 border-2 bg-white rounded-xl">
             <h1 className="text-primary text-[20px] md:text-[24px]">
               {parse(exercise?.title || "Vocabulary Exercise")}
             </h1>
@@ -397,7 +397,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                           id={`choice-${question.q_uuid}-${qIndex}`}
                                           name={`choice-${question.q_uuid}`}
                                           type="text"
-                                          className={`cursor-pointer px-3 w-[100px] text-xl border rounded-md border-gray-300 text-gray-300 focus:border-pink-200 focus:ring-pink-20 text-center ml-1  ${
+                                          className={`cursor-pointer ml-1 w-[100px] text-xl border rounded-md border-gray-300 text-gray-300 focus:border-pink-200 focus:ring-pink-20 text-center ${
                                             showResult
                                               ? inputValues[question.q_uuid]?.[partIndex] ===
                                                 correct_answer[question.q_uuid]
@@ -414,7 +414,7 @@ const IELTSSkillExerciseComponent = ({ exercise, key }) => {
                                               partIndex
                                             )
                                           }
-                                        />
+                                        />   
 
                                         {showResult ? (
                                           inputValues[question.q_uuid]?.[partIndex] ===

@@ -42,7 +42,7 @@ export default function AboutUs() {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper md:h-[550px] mb-10 md:mb-[56px]"
+          className="mySwiper w-[100%] md:h-[550px] mb-10 md:mb-[56px]"
         >
           <SwiperSlide>
             <img

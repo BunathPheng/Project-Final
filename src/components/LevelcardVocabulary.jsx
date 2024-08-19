@@ -19,7 +19,6 @@ export default function LevelcardVocabulary({
     level = "";
   }
   const newtitle = skillname.replace(/ /g, "-");
-  console.log("newtitle: ", newtitle);
   const maintitle = title.slice(0, 5);
   return (
     <>

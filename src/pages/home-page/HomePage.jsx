@@ -63,7 +63,7 @@ export default function HomePage() {
         >
           <img
             className="mb-4 w-[90px] object-cover"
-            src="http://136.228.158.126:50005/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
+            src="https://english-api.cstad.shop/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
           />
           <p className="text-blues text-[18px]  leading-8 text-justify">
             រៀនភាសាអង់គ្លេសតាមអ៊ីនធឺណិតនិងបង្កើនជំនាញរបស់អ្នកតាមរយៈវគ្គសិក្សានិងធនធានដែលមានគុណភាពខ្ពស់របស់យើង។

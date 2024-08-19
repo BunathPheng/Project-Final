@@ -233,7 +233,7 @@ export default function LessonDetail() {
         setScoreSound(new Audio(soundToPlay));
         // Open modal after submission
       } catch (error) {
-        //console.error("Submit Error:", error);
+        console.error("Submit Error:", error);
       }
     }
   };
@@ -339,27 +339,27 @@ export default function LessonDetail() {
           <div className="h-full px-3 w-[160px] overflow-y-auto bg-white pb-8 ">
             <ul className="space-y-4 font-bold text-grays">
             {skillLevels.map((selectNameLevel) => {
-  // Sort exercises based on the number in the title
-  const sortedExercises = selectNameLevel.exercises
-    .slice()
-    .sort((a, b) => {
-      // Regular expression to match the number in the title
-      const getNumberFromTitle = (title) => {
-        const match = title.match(/\d+/);
-        return match ? parseInt(match[0], 10) : 0; // Return the number or 0 if no number is found
-      };
+            // Sort exercises based on the number in the title
+            const sortedExercises = selectNameLevel.exercises
+              .slice()
+              .sort((a, b) => {
+                // Regular expression to match the number in the title
+                const getNumberFromTitle = (title) => {
+                  const match = title.match(/\d+/);
+                  return match ? parseInt(match[0], 10) : 0; // Return the number or 0 if no number is found
+                };
 
-      // Extract numbers from titles
-      const numberA = getNumberFromTitle(a.title);
-      const numberB = getNumberFromTitle(b.title);
+                // Extract numbers from titles
+                const numberA = getNumberFromTitle(a.title);
+                const numberB = getNumberFromTitle(b.title);
 
-      // Sort in ascending order based on the number
-      return numberA - numberB;
-    });
+                // Sort in ascending order based on the number
+                return numberA - numberB;
+              });
 
-  return sortedExercises.map((exercise) => {
-    const name = exercise.title.toLowerCase();
-    const formattedTitle = name.replace(/\s+/g, "-");
+            return sortedExercises.map((exercise) => {
+              const name = exercise.title.toLowerCase();
+              const formattedTitle = name.replace(/\s+/g, "-");
 
     return (
       <li key={exercise.id}>

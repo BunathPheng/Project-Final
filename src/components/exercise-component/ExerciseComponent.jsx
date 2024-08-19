@@ -16,11 +16,18 @@ import lose3 from "../../assets/img/lose3.gif";
 import lose4 from "../../assets/img/lose4.gif";
 import lose5 from "../../assets/img/lose5.gif";
 import lose6 from "../../assets/img/lose6.gif";
+import lose7 from "../../assets/img/LoseScore2.gif";
+import lose8 from "../../assets/img/LoseScore3.gif";
 import win1 from "../../assets/img/win1.gif";
 import win2 from "../../assets/img/win2.gif";
 import win3 from "../../assets/img/win3.gif";
 import win4 from "../../assets/img/win4.gif";
 import win5 from "../../assets/img/win5.gif";
+import win6 from "../../assets/img/WinScore1.gif";
+import win7 from "../../assets/img/WinScore2.gif";
+import win8 from "../../assets/img/WinScore3.gif";
+import win9 from "../../assets/img/WinScore4.gif";
+import win10 from "../../assets/img/WinScore5.gif";
 import voicelose1 from "../../assets/video/voicelose1.mp3";
 import voicelose2 from "../../assets/video/voicelose2.mp3";
 import voicelose3 from "../../assets/video/voicelose3.mp3";
@@ -78,8 +85,8 @@ const ExerciseComponent = ({ exercise, key }) => {
     voicewin10,
   ];
   const voiceLose = [voicelose1, voicelose2, voicelose3, voicelose4];
-  const imgLose = [lose1, lose2, lose3, lose4, lose5, lose6];
-  const imgWin = [win1, win2, win3, win4, win5];
+  const imgLose = [lose1, lose2, lose3, lose4, lose5, lose6, lose7, lose8];
+  const imgWin = [win1, win2, win3, win4, win5, win6, win7, win8, win9, win10];
   const randomIndex = Math.floor(Math.random() * voiceWin.length);
   const randomIndex1 = Math.floor(Math.random() * voiceLose.length);
   const randomIndex2 = Math.floor(Math.random() * messageWin.length);
@@ -430,7 +437,9 @@ const ExerciseComponent = ({ exercise, key }) => {
                     ) : (
                       <div className="grid w-full max-w-lg gap-4 py-2 text-sm md:text-base lg:text-lg">
                         <div className="grid grid-cols-[auto,1fr] gap-2 items-start">
-                          <span className="text-[16px] md:text-[20px] lg:text-[24px] p-2">{`${index + 1}.`}</span>
+                          <span className="text-[16px] md:text-[20px] lg:text-[24px] p-2">{`${
+                            index + 1
+                          }.`}</span>
                           <div className="grid gap-2">
                             {question.question_text
                               .split("#")

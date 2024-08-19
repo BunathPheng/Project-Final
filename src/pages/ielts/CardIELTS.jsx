@@ -14,11 +14,9 @@ export default function CardIELTS({ img, title, des }) {
           />
         </a>
         <div class="p-5">
-          <a href={`${newtitle}`}>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-primary">
-              {title}
-            </h5>
-          </a>
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-primary">
+            {title}
+          </h5>
           <p class="mb-3 font-normal text-lg text-gray-700 dark:text-gray-400">
             {des}
           </p>

@@ -14,7 +14,7 @@ export default function Footer() {
         min-[320px]:py-3 min-[320px]:px-7 min-[320px]:flex-col border-gray-600 border-b-2"
       >
         <div className="flex flex-col lg:items-start mb-4 lg:mb-0">
-          <a href="">
+          <a href="/">
             <img
               src={image.img1}
               alt=""
@@ -27,13 +27,13 @@ export default function Footer() {
           <div className="flex gap-10 mt-5 ">
             <div className="">
               <a
-                href="#"
+                href="https://web.facebook.com/istad.co"
                 className="hover:text-gray-300 flex items-center font-Inter text-xl"
               >
                 <FaFacebook className="mr-1" /> Facebook
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/"
                 className="hover:text-gray-300 flex items-center font-Inter text-xl mt-2"
               >
                 <FaInstagram className="mr-1" /> Instagram
@@ -41,14 +41,14 @@ export default function Footer() {
             </div>
             <div className="">
               <a
-                href="#"
+                href="https://t.me/+mVIQOGf6owpiNWI1"
                 className="hover:text-gray-300 flex items-center
           font-Inter text-xl"
               >
                 <FaTelegram className="mr-1" /> Telegram
               </a>
               <a
-                href="#"
+                href="https://www.youtube.com/@istad7665"
                 className="hover:text-gray-300 flex items-center
           font-Inter text-xl mt-2"
               >

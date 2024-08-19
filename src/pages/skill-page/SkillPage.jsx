@@ -17,7 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Search from "../search/Seach";
 import LoadingSkill from "../../components/common/loading/LoadingSkill";
-
+import "../../pages/about-us/AboutUs/About-Us.css";
+import Aos from "aos";
 export default function SkillPage() {
   const img = [skillSpeaking, skillListening, skillWritting, skillReading];
   const title = [
@@ -30,6 +31,16 @@ export default function SkillPage() {
   const status = useSelector((state) => state.skill.status);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    Aos.init({ delay: 400, duration: 1200 });
+
+    const fetchData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     dispatch(fetchSkills());
@@ -87,21 +98,21 @@ export default function SkillPage() {
         <img
           src={imgicon}
           alt=""
-          className="lg:w-[150px] lg:h-[150px] md:w-[100px] md:h-[100px] w-[90px] h-[90px] object-cover"
+          className="lg:w-[150px] lg:h-[150px] md:w-[100px] md:h-[100px] w-[90px] h-[90px] object-cover animate-hand-point"
         />
       </div>
       <div className="absolute lg:left-[5rem] left-[1rem] opacity-8 mb-60 md:flex hidden ">
         <img
           src={imgicon1}
           alt=""
-          className="w-[150px] h-[150px] object-cover"
+          className="w-[150px] h-[150px] object-cover animate-hand-point"
         />
       </div>
       <div className="absolute left-[5rem] lg:flex hidden opacity-8 mt-40">
         <img
           src={imgicon3}
           alt=""
-          className="w-[150px] h-[200px] object-cover"
+          className="w-[150px] h-[200px] object-cover animate-hand-point"
         />
       </div>
       <section className="mt-20 ">

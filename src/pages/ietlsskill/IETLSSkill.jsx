@@ -67,24 +67,30 @@ export default function IELTSSkill() {
         <div>
           <h1 className="font-bold md:text-[30px] text-[18px] flex gap-5 justify-center my-10 text-primary items-center">
             <FaRegHandPointRight />
-            ចាប់ផ្តើមតេស្តអនុវត្តការអាន IELTS ឥឡូវនេះ
+            ចាប់ផ្តើមតេស្តអនុវត្ត IELTS ឥឡូវនេះ
           </h1>
         </div>
         <div className="mx-auto my-10 justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 w-[320px] md:w-[90%] exclude">
           {ieltsLevels?.map((selectNameLevel) => {
-            return selectNameLevel.exercises
+            const sortedExercises = selectNameLevel.exercises
               .slice()
-              .reverse()
-              .map((exercise, index) => {
-                console.log("exercise", exercise);
-                return (
-                  <LessonIETLSCard
-                    key={index}
-                    pic={exercise.thumbnail}
-                    title={exercise.title}
-                  />
-                );
+              .sort((a, b) => {
+                console.log(a);
+                // Sort by the numeric value that determines the order
+                return a.order - b.order; // Replace 'order' with the correct property
               });
+
+            console.log("Sorted exercises:", sortedExercises);
+
+            return sortedExercises.map((exercise, index) => {
+              return (
+                <LessonIETLSCard
+                  key={exercise.id || index} // Ensure unique keys
+                  pic={exercise.thumbnail}
+                  title={exercise.title}
+                />
+              );
+            });
           })}
         </div>
       </div>

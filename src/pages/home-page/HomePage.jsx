@@ -11,7 +11,6 @@ import skillSpeaking from "../../assets/img/Speaking1.jpg";
 import skillReading from "../../assets/img/Skill_Reading.png";
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     Aos.init({ delay: 400, duration: 1200 });
 

@@ -41,16 +41,18 @@ export default function SkillExerciseGrammar() {
     <div className="w-[90%] mx-auto">
       <section className="flex flex-col lg:flex-row mx-auto justify-evenly items-center mt-10 md:gap-10 gap-10">
         <div className="md:w-[100%] lg:w-[600px] relative overflow-hidden">
-          {grammarLevel.map((v) => {
+          {grammarLevel.map((v, index) => {
             return (
+              <div key={index}>
               <img className="object-cover" src={v.thumbnail} alt="Picture" />
+              </div>
             );
           })}
         </div>
         <div className="">
-          {grammarLevel.map((v) => {
+          {grammarLevel.map((v, index) => {
             return (
-              <>
+              <div key={index}>
                 <div>
                   <h1 className="text-blue-950  md:text-[1.8rem] lg:text-[2rem] text-[24px] font-bold flex  text-center">
                     <div className="">{title}</div>
@@ -60,7 +62,7 @@ export default function SkillExerciseGrammar() {
                 <div className="md:w-[100%] lg:w-[500px]  text-[18px] mt-5 leading-10 text-start">
                   <p className="text-grays">{parse(`${v.description}`)}</p>
                 </div>
-              </>
+              </div>
             );
           })}
         </div>
@@ -73,15 +75,18 @@ export default function SkillExerciseGrammar() {
       </div>
       <div className="mx-auto my-10 justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 w-[320px] md:w-[90%] exclude">
         {grammarLevel.map((selectNameLevel) => {
+          console.log("selectNameLevel:",selectNameLevel);
           // console.log("selectNameLevel", selectNameLevel);
-          return selectNameLevel.lessons.map((excersice, index) => {
+          return selectNameLevel.lessons.map((excersice) => {
             // console.log("excersice", excersice);
             return (
               <>
                 <Lessoncard
+                  key={excersice.uuid}
                   pic={parse(excersice.thumbnail)}
                   title={parse(excersice.lesson_title)}
                   des={parse(excersice.description)}
+                  uuid = {excersice.ex_uuid}
                 />
               </>
             );

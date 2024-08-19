@@ -199,11 +199,10 @@ export default function Navbar() {
                 )}
               </div>
               <div
-                class={`z-50 hidden my-4 text-base list-none bg-white ${
+                className={`z-50 hidden my-4 text-base list-none bg-white ${
                   getAccessToken() ? "divide-y divide-gray-100" : ""
                 } rounded shadow`}
-                id="dropdown-user"
-              >
+                id="dropdown-user">
                 <ul className="py-1" role="none">
                   {userContentList.map((content, index) => {
                     return (
@@ -286,9 +285,10 @@ export default function Navbar() {
               {searchInput && filteredResults.exercises?.length > 0 && (
                 <div className="absolute mt-2 w-full rounded-md shadow-lg bg-white dark:bg-gray-700 z-10">
                   <ul className="py-1 text-sm text-gray-700 dark:text-gray-200 h-[300px] overflow-y-auto z-50">
-                    {filteredResults.exercises.map((element) => (
+                    {filteredResults.exercises.map((element, index) => (
                       <li
-                        key={element.ex_uuid}
+                        // key={element.ex_uuid}
+                        key={index}
                         className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
                       >
                         <Link to="/searchs">{element.title}</Link>
@@ -331,7 +331,7 @@ export default function Navbar() {
                     id="dropdownHoverButton1"
                     data-dropdown-toggle="dropdownHover1"
                     data-dropdown-trigger="hover"
-                    class={`hidden group lg:flex group items-center justify-between w-full py-2 px-3 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:p-0 md:w-auto${
+                    className={`hidden group lg:flex group items-center justify-between w-full py-2 px-3 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:p-0 md:w-auto${
                       location.pathname.startsWith("/skills")
                         ? "text-primary"
                         : "text-grays hover:text-primary"
@@ -340,7 +340,7 @@ export default function Navbar() {
                     type="button"
                   >
                     <span
-                      class={`me-1 font-bold flex gap-1 ${
+                      className={`me-1 font-bold flex gap-1 ${
                         location.pathname.startsWith("/skills")
                           ? "group text-primary"
                           : "text-grays hover:text-primary"
@@ -360,7 +360,7 @@ export default function Navbar() {
                     type="button"
                   >
                     <span
-                      class={`font-bold w-full flex justify-between ${
+                      className={`font-bold w-full flex justify-between ${
                         location.pathname.startsWith("/skills")
                           ? "group text-primary"
                           : "text-grays hover:text-primary"
@@ -369,7 +369,7 @@ export default function Navbar() {
                       ជំនាញ
                       <FaAngleDown
                         onClick={toggleDropdown1}
-                        class={`mt-1 cursor-pointer transform transition-transform duration-300 ${
+                        className={`mt-1 cursor-pointer transform transition-transform duration-300 ${
                           isOpen1 ? "rotate-180" : ""
                         }`}
                       />
@@ -426,7 +426,7 @@ export default function Navbar() {
                     aria-current="page"
                   >
                     <span
-                      class={`me-1 font-bold flex gap-1 ${
+                      className={`me-1 font-bold flex gap-1 ${
                         location.pathname.startsWith("/grammar")
                           ? "group text-primary"
                           : "text-grays hover:text-primary"
@@ -446,7 +446,7 @@ export default function Navbar() {
                     aria-current="page"
                   >
                     <span
-                      class={`font-bold w-full flex justify-between ${
+                      className={`font-bold w-full flex justify-between ${
                         location.pathname.startsWith("/grammar")
                           ? "group text-primary"
                           : "text-grays hover:text-primary"
@@ -455,7 +455,7 @@ export default function Navbar() {
                       វេយ្យាករណ៍
                       <FaAngleDown
                         onClick={toggleDropdown2}
-                        class={`mt-1 cursor-pointer transform transition-transform duration-300 ${
+                        className={`mt-1 cursor-pointer transform transition-transform duration-300 ${
                           isOpen2 ? "rotate-180" : ""
                         }`}
                       />
@@ -512,7 +512,7 @@ export default function Navbar() {
                     aria-current="page"
                   >
                     <span
-                      class={`me-1 font-bold flex gap-1 ${
+                      className={`me-1 font-bold flex gap-1 ${
                         location.pathname.startsWith("/vocabulary")
                           ? "group text-primary"
                           : "text-grays hover:text-primary"
@@ -531,7 +531,7 @@ export default function Navbar() {
                     type="button"
                   >
                     <span
-                      class={`font-bold w-full flex justify-between ${
+                      className={`font-bold w-full flex justify-between ${
                         location.pathname.startsWith("/vocabulary")
                           ? "group text-primary"
                           : "text-grays hover:text-primary"
@@ -540,7 +540,7 @@ export default function Navbar() {
                       ពាក្យគន្លឹះ
                       <FaAngleDown
                         onClick={toggleDropdown3}
-                        class={`mt-1 cursor-pointer transform transition-transform duration-300 ${
+                        className={`mt-1 cursor-pointer transform transition-transform duration-300 ${
                           isOpen3 ? "rotate-180" : ""
                         }`}
                       />

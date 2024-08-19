@@ -25,7 +25,7 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   username: Yup.string().required("ឈ្មោះត្រូវបានទាមទារ"),
-  email: Yup.string().email("អុីមែលមិនត្រឹមត្រូវ").required("អុីមែលត្រូវបានទាមទារ"),
+  email: Yup.string().email("អ៊ីម៉ែលមិនត្រឹមត្រូវ").required("អ៊ីម៉ែលត្រូវបានទាមទារ"),
   password: Yup.string()
     .matches(
       strongPasswordRegex,
@@ -67,14 +67,14 @@ export default function Register() {
     dispatch(fetchCreateUser(values))
       .unwrap()
       .then(() => {
-        toast.success("អុីមែល ឬ លេខសម្ងាត់ ត្រឹមត្រូវ");
+        toast.success("អ៊ីម៉ែល ឬ លេខសម្ងាត់ ត្រឹមត្រូវ");
         setTimeout(() => {
           setSubmitting(false);
           navigate("/login", { state: { email } });
         }, 1500);
       })
       .catch((error) => {
-        toast.error("អុីមែល ឬ លេខសម្ងាត់ មិនត្រឹមត្រូវ");
+        toast.error("អ៊ីម៉ែល ឬ លេខសម្ងាត់ មិនត្រឹមត្រូវ");
         setSubmitting(false);
       });
     resetFrom();
@@ -154,14 +154,14 @@ export default function Register() {
                       htmlFor="email"
                       className="block mb-2 text-xl font-suwannaphum font-medium text-blues"
                     >
-                      អុីមែល<span className="text-second">*</span>
+                      អ៊ីម៉ែល<span className="text-second">*</span>
                     </label>
                     <Field
                       type="email"
                       id="email"
                       name="email"
                       className="w-full px-4 py-3 font-suwannaphum border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="បញ្ជូលអុីមែលរបស់អ្នក"
+                      placeholder="បញ្ជូលអ៊ីម៉ែលរបស់អ្នក"
                       required
                     />
                     <ErrorMessage

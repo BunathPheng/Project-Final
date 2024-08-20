@@ -21,7 +21,7 @@ export const fetchLessons = createAsyncThunk(
 export const fetchLessonsById = createAsyncThunk(
     "Lessons/fetchLessonsById",
     async (uuid) => {
-        const response = await fetch(`${BASE_URL}/lessons/detail/?uuid=${uuid}`);
+        const response = await fetch(`https://english-api.cstad.shop/lessons/detail/?uuid=${uuid}/`);
         const data = await response.json();
         return data.payload;
     }

@@ -8,12 +8,13 @@ const initialState = {
   status: "idle",
   error: null,
 };
+
+const apiUrl = import.meta.env.VITE_BASE_URL.replace(/^http:/, "https:");
+
 export const fetchvocabularys = createAsyncThunk(
   "vocabulary/fetchVocabulary",
   async () => {
-    const response = await fetch(
-      `https://english-api.cstad.shop/vocabularies/`
-    );
+    const response = await fetch(`${apiUrl}/vocabularies`);
     const data = await response.json();
     return data.payload;
   }
@@ -21,9 +22,7 @@ export const fetchvocabularys = createAsyncThunk(
 export const fetchVocabularysByLevel = createAsyncThunk(
   "vocabulary/fetchVocabularysByLevel", // Make sure this matches the slice name
   async (level) => {
-    const response = await fetch(
-      `https://english-api.cstad.shop/vocabularies/${level}/`
-    );
+    const response = await fetch(`${apiUrl}/vocabularies/${level}`);
     const data = await response.json();
     return data.payload;
   }

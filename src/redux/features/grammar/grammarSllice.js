@@ -25,6 +25,7 @@ export const fetchGrammarsByLevel = createAsyncThunk(
   "grammars/fetchGrammarsByLevel", // Make sure this matches the slice name
   async (level) => {
     const response = await fetch(`${apiUrl}/grammars/${level}/`);
+    console.log(`TestUrl:${apiUrl}/grammars/${level}/`);
     const data = await response.json();
     return data.payload;
   }

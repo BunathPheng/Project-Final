@@ -12,7 +12,7 @@ export const fetchvocabularys = createAsyncThunk(
   "vocabulary/fetchVocabulary",
   async () => {
     const response = await fetch(
-      `https://english-api.cstad.shop/vocabularies/`
+      `https://english-api.cstad.shop/vocabularies/`.replace(/^http:/, "https:")
     );
     const data = await response.json();
     return data.payload;

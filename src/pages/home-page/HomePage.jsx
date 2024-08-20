@@ -149,7 +149,7 @@ export default function HomePage() {
               </div>
               <div className="grid place-items-end order-first md:order-last">
                 <img
-                  src="src/assets/img/Learning-bro.png"
+                  src="https://english-api.cstad.shop/files/8bdd50ba-1871-44f2-a5fe-58e69a7e562a.png"
                   alt="Illustration 2"
                   className="w-[500px] object-cover"
                   data-aos="zoom-in-up"
@@ -160,7 +160,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
               <div className="grid place-items-start">
                 <img
-                  src="src/assets/img/Education-cuate.png"
+                  src="https://english-api.cstad.shop/files/54cd2c63-6e94-46c8-896b-eb7711aa1486.png"
                   alt="Illustration 1"
                   className="w-[500px] object-cover"
                   data-aos="zoom-in-up"

@@ -12,7 +12,7 @@ const initialState = {
 export const fetchLessons = createAsyncThunk(
     "Lessons/fetchLessons",
     async () => {
-        const response = await fetch(`${BASE_URL}/lessons`);
+        const response = await fetch(`https://english-api.cstad.shop/lessons/`);
         const data = await response.json();
         return data.payload;
     }

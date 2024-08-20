@@ -9,12 +9,14 @@ const initialState = {
   error: null,
 };
 
+const apiUrl = import.meta.env.VITE_BASE_URL.replace(/^http:/, "https:");
+
 export const fetchSubmitExercises = createAsyncThunk(
   "exerciseSubmit/fetchSubmitExercises",
   async ({ user_uuid, token }, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `https://english-api.cstad.shop/exercise/submit_answer/user?id=${user_uuid}/`,
+        `${apiUrl}/exercise/submit_answer/user?id=${user_uuid}/`,
         {
           method: "GET",
           headers: {
@@ -46,7 +48,7 @@ export const fetchSubmitExercisesByLevel = createAsyncThunk(
   async ({ user_uuid, token, level }, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `https://english-api.cstad.shop/exercise/submit_answer/userId=${user_uuid}/level=${level}/`,
+        `${apiUrl}/exercise/submit_answer/userId=${user_uuid}/level=${level}/`,
         {
           method: "GET",
           headers: {

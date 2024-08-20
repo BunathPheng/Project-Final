@@ -81,7 +81,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16 ">
               <div className="grid place-items-start">
                 <img
-                  src="src/assets/img/Nerd-amico.png"
+                  src="https://english-api.cstad.shop/files/436e5a2c-afb4-4af0-97c4-d5249894017d.png"
                   alt="Illustration 1"
                   className="w-[500px] object-cover"
                   data-aos="zoom-in-up"

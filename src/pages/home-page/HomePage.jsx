@@ -37,7 +37,10 @@ export default function HomePage() {
           loop
           preload="auto"
         >
-          <source src="src/assets/video/video_home_page.mp4" type="video/mp4" />
+          <source
+            src="https://english-api.cstad.shop/files/176fc750-d6e7-4e06-a9f2-f9ce37ddbc56.mp4"
+            type="video/mp4"
+          />
         </video>
         <div className="bg-black bg-opacity-40 w-full h-full absolute top-0 left-0"></div>
         <div className="z-10 p-4 text-center sm:text-left max-w-2xl">

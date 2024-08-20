@@ -41,7 +41,7 @@ export default function HomePage() {
         </video>
         <div className="bg-black bg-opacity-40 w-full h-full absolute top-0 left-0"></div>
         <div className="z-10 p-4 text-center sm:text-left max-w-2xl">
-          <h1 className="absolute text-4xl sm:text-4xl font-bold text-white mb-4 left-[11%] md:left-[60%] top-[18%] md:top-1/3 font-inter">
+          <h1 className="absolute text-4xl sm:text-4xl font-bold text-white mb-4 left-[6%] md:left-[60%] top-[18%] md:top-1/3 font-inter">
             <ReactTyped
               strings={["English Club"]}
               typeSpeed={200}
@@ -50,7 +50,7 @@ export default function HomePage() {
               showCursor={false}
             />
           </h1>
-          <p className="absolute w-[80%] md:w-1/3 left-[11%] md:left-[60%] top-[25%] md:top-[41%] text-start md:text-justify text-white text-[18px] leading-10 mb-4">
+          <p className="absolute w-[80%] md:w-1/3 left-[6%] md:left-[60%] top-[25%] md:top-[41%] text-start md:text-justify text-white text-[18px] leading-10 mb-4">
             គឺជាវេបសាយសម្រាប់ផ្តល់ឲ្យកូនខ្មែរគ្រប់បានសិក្សាភាសាអង់គ្លេសបានដោយមិនគិតថ្លៃនិងគ្រប់វគ្គព្រមទាំងផ្តល់ជូននូវការតេស្តភាសាអង់គ្លេសតាមប្រព័ន្ធ
             <span className="text-primary px-1 font-semibold">អនឡាញ</span>
             ដែលត្រូវបានបង្កើតឡើងដោយស្នាដៃរបស់និស្សិតដែលសិក្សានៅមជ្ឃមណ្ឌលអភិវឌ្ឃន៍វិទ្យាសាស្ត្រនិងបច្ចេកវិទ្យាកម្រិតខ្ពស់(CSTAD)។
@@ -63,7 +63,7 @@ export default function HomePage() {
         >
           <img
             className="mb-4 w-[90px] object-cover"
-            src="http://136.228.158.126:50005/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
+            src="https://english-api.cstad.shop/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
           />
           <p className="text-blues text-[18px]  leading-8 text-justify">
             រៀនភាសាអង់គ្លេសតាមអ៊ីនធឺណិតនិងបង្កើនជំនាញរបស់អ្នកតាមរយៈវគ្គសិក្សានិងធនធានដែលមានគុណភាពខ្ពស់របស់យើង។
@@ -73,12 +73,12 @@ export default function HomePage() {
 
       <section className="bg-gray-50 mt-16 px-2">
         <div className="bg-gray-50 py-10">
-          <div className="w-[90%] mx-auto px-4" data-aos="fade-right">
+          <div className="md:w-[90%] mx-auto px-4" data-aos="fade-right">
             <h2 className="text-center text-3xl md:text-4xl font-semibold text-green-600 mb-10">
               ចាប់ផ្តើមការរៀនភាសាអង់គ្លេសជាមួយ
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8 items-center mb-16 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16 ">
               <div className="grid place-items-start">
                 <img
                   src="src/assets/img/Nerd-amico.png"
@@ -203,7 +203,7 @@ export default function HomePage() {
             <h2 className="text-center text-3xl md:text-4xl font-bold text-blues mb-24 px-4">
               រៀនឥលូវនេះជាមួយវគ្គសិក្សាអនឡាញដែលមានការគាំទ្រច្រើន
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 px-10 place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-8 px-5 md:px-10 place-items-center">
               <CardContentUpdate
                 img={skillListening}
                 title="ការស្ដាប់/Listening"

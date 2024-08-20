@@ -23,7 +23,7 @@ export const fetchGrammarsByLevel = createAsyncThunk(
   "grammars/fetchGrammarsByLevel", // Make sure this matches the slice name
   async (level) => {
     const response = await fetch(
-      `https://english-api.cstad.shop/grammars/${level}/`
+      `https://english-api.cstad.shop/grammars/${level}/`.replace(/^http:/, "https:")
     );
     const data = await response.json();
     return data.payload;

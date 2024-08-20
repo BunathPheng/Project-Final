@@ -705,7 +705,7 @@ export default function Navbar() {
               <div className="grid grid-cols-1 p-4 md:p-5 text-center">
                 <div className="w-32 mx-auto object-cover mt-8 mb-4 text-gray-400 dark:text-gray-200">
                   <img
-                    src="http://136.228.158.126:50005/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
+                    src="https://english-api.cstad.shop/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
                     alt="logo/image"
                   />
                 </div>

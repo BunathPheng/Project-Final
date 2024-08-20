@@ -15,7 +15,7 @@ const apiUrl = import.meta.env.VITE_BASE_URL.replace(/^http:/, "https:");
 export const fetchGrammars = createAsyncThunk(
   "grammars/fetchGrammars", // Make sure this matches the slice name
   async () => {
-    const response = await fetch(`https://english-api.cstad.shop/grammars`);
+    const response = await fetch(`https://english-api.cstad.shop/grammars/`);
     const data = await response.json();
     return data.payload;
   }

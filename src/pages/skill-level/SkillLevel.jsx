@@ -62,6 +62,7 @@ export default function SkillLevel() {
   // console.log("param", param.skill_name);
   // console.log("param", param);
   const skill = useSelector(selectSkillByName);
+  console.log("skill", skill);
   const status = useSelector((state) => state.skill.status);
   const [skillLevels, setskillLevels] = useState([]);
   useEffect(() => {

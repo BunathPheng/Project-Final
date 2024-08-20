@@ -18,7 +18,7 @@ export const fetchSkills = createAsyncThunk("skill/fetchSkills", async () => {
 export const fetchSkillByName = createAsyncThunk(
   "skill/fetchSkillByName",
   async (name) => {
-    const res = await fetch(`https://english-api.cstad.shop/skills/${name}/`);
+    const res = await fetch(`http://english-api.cstad.shop/skills/${name}/`);
     const data = await res.json();
     //console.log("data1", data)
     return data.payload;

@@ -10,15 +10,17 @@ const initialState = {
   error: null,
 };
 
+const apiUrl = import.meta.env.VITE_BASE_URL.replace(/^http:/, "https:");
+
 export const fetchSkills = createAsyncThunk("skill/fetchSkills", async () => {
-  const response = await fetch(`https://english-api.cstad.shop/skills/`);
+  const response = await fetch(`${apiUrl}/skills`);
   const data = await response.json();
   return data.payload;
 });
 export const fetchSkillByName = createAsyncThunk(
   "skill/fetchSkillByName",
   async (name) => {
-    const res = await fetch(`https://english-api.cstad.shop/skills/${name}/`);
+    const res = await fetch(`${apiUrl}/skills/${name}`);
     const data = await res.json();
     //console.log("data1", data)
     return data.payload;

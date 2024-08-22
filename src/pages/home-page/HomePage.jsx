@@ -9,6 +9,7 @@ import skillListening from "../../assets/img/Listening2.png";
 import skillWritting from "../../assets/img/writting.png";
 import skillSpeaking from "../../assets/img/Speaking1.jpg";
 import skillReading from "../../assets/img/Skill_Reading.png";
+import videos from "../../assets/video/video_home_page.mp4";
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function HomePage() {
           loop
           preload="auto"
         >
-          <source src="src/assets/video/video_home_page.mp4" type="video/mp4" />
+          <source src={videos} type="video/mp4" />
         </video>
         <div className="bg-black bg-opacity-40 w-full h-full absolute top-0 left-0"></div>
         <div className="z-10 p-4 text-center sm:text-left max-w-2xl">

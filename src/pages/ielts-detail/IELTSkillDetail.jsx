@@ -55,7 +55,7 @@ import voicewin9 from "../../assets/video/win4.mp3";
 import voicewin10 from "../../assets/video/win5.mp3";
 import { NavLink } from "react-router-dom";
 import IELTSSkillExerciseComponent from "./IELTSSkillExerciseComponent";
-export default function LessonDetail() {
+export default function IELTSkillDetail() {
   const param = useParams();
   const newtitle = param.title.replace(/-/g, " ");
   const convert = newtitle.toUpperCase();
@@ -338,44 +338,43 @@ export default function LessonDetail() {
         >
           <div className="h-full px-3 w-[160px] overflow-y-auto bg-white pb-8 ">
             <ul className="space-y-4 font-bold text-grays">
-            {skillLevels.map((selectNameLevel) => {
-            // Sort exercises based on the number in the title
-            const sortedExercises = selectNameLevel.exercises
-              .slice()
-              .sort((a, b) => {
-                // Regular expression to match the number in the title
-                const getNumberFromTitle = (title) => {
-                  const match = title.match(/\d+/);
-                  return match ? parseInt(match[0], 10) : 0; // Return the number or 0 if no number is found
-                };
+              {skillLevels.map((selectNameLevel) => {
+                // Sort exercises based on the number in the title
+                const sortedExercises = selectNameLevel.exercises
+                  .slice()
+                  .sort((a, b) => {
+                    // Regular expression to match the number in the title
+                    const getNumberFromTitle = (title) => {
+                      const match = title.match(/\d+/);
+                      return match ? parseInt(match[0], 10) : 0; // Return the number or 0 if no number is found
+                    };
 
-                // Extract numbers from titles
-                const numberA = getNumberFromTitle(a.title);
-                const numberB = getNumberFromTitle(b.title);
+                    // Extract numbers from titles
+                    const numberA = getNumberFromTitle(a.title);
+                    const numberB = getNumberFromTitle(b.title);
 
-                // Sort in ascending order based on the number
-                return numberA - numberB;
-              });
+                    // Sort in ascending order based on the number
+                    return numberA - numberB;
+                  });
 
-            return sortedExercises.map((exercise) => {
-              const name = exercise.title.toLowerCase();
-              const formattedTitle = name.replace(/\s+/g, "-");
+                return sortedExercises.map((exercise) => {
+                  const name = exercise.title.toLowerCase();
+                  const formattedTitle = name.replace(/\s+/g, "-");
 
-    return (
-      <li key={exercise.id}>
-        <NavLink
-          to={`/ielts/${param["ielts-name"]}/${formattedTitle}`}
-          className={({ isActive }) =>
-            `${isActive ? "text-primary" : "text-grays"}`
-          }
-        >
-          {exercise.title}
-        </NavLink>
-      </li>
-    );
-  });
-})}
-
+                  return (
+                    <li key={exercise.id}>
+                      <NavLink
+                        to={`/ielts/${param["ielts-name"]}/${formattedTitle}`}
+                        className={({ isActive }) =>
+                          `${isActive ? "text-primary" : "text-grays"}`
+                        }
+                      >
+                        {exercise.title}
+                      </NavLink>
+                    </li>
+                  );
+                });
+              })}
             </ul>
           </div>
         </aside>

@@ -83,9 +83,13 @@ export default function Navbar() {
     navigate(`/searchs?query=${encodeURIComponent(title)}`); // Navigate with query parameter
   };
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-
+  const [isSidebarOpen1, setSidebarOpen1] = useState(false);
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleSidebar1 = () => {
+    setSidebarOpen1(!isSidebarOpen1);
   };
 
   const closeSidebar = () => {
@@ -112,6 +116,7 @@ export default function Navbar() {
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
   const toggleDropdown1 = () => {
     setIsOpen1(!isOpen1);
   };
@@ -120,6 +125,9 @@ export default function Navbar() {
   };
   const toggleDropdown3 = () => {
     setIsOpen3(!isOpen3);
+  };
+  const toggleDropdown4 = () => {
+    setIsOpen4(!isOpen4);
   };
   const skillList = [
     { data: "ការស្ដាប់", nav: "/skills/listening" },
@@ -196,13 +204,13 @@ export default function Navbar() {
                       type="button"
                       className="flex text-smrounded-full "
                       aria-expanded="false"
-                      data-dropdown-toggle="dropdown-user"
+                      onClick={toggleDropdown4}
                     >
                       <span className="sr-only">Open user menu</span>
                       <div
                         className="ms-2"
-                        data-dropdown-toggle="dropdown-user"
                         data-dropdown-placement="bottom-start"
+                        onClick={toggleDropdown4}
                       >
                         <div
                           tabIndex="-1"
@@ -225,10 +233,17 @@ export default function Navbar() {
                 )}
               </div>
               <div
-                className={`z-50 hidden my-4 text-base list-none bg-white ${
+                className={`z-50 ${
+                  isOpen4 ? "block" : "hidden"
+                } my-4 text-base list-none bg-white ${
                   getAccessToken() ? "divide-y divide-gray-100" : ""
                 } rounded shadow`}
-                id="dropdown-user"
+                style={{
+                  position: "absolute",
+                  right: "0px", // Align to the right side of the parent container
+                  top: "100%", // Place the dropdown below the icon
+                  marginTop: "0", // Add space between the icon and the dropdown
+                }}
               >
                 <ul className="py-1" role="none">
                   {userContentList.map((content, index) => {
@@ -420,8 +435,9 @@ export default function Navbar() {
                   </button>
                 </Link>
                 <ul
-                  id="dropdown-example1"
-                  className="hidden lg:hidden text-grays py-2 space-y-2 font-normal"
+                  className={` ${
+                    isOpen1 ? "block" : "hidden"
+                  } lg:hidden text-grays py-2 space-y-2 font-normal`}
                 >
                   {skillList.map((skill, index) => {
                     return (
@@ -705,7 +721,7 @@ export default function Navbar() {
               <div className="grid grid-cols-1 p-4 md:p-5 text-center">
                 <div className="w-32 mx-auto object-cover mt-8 mb-4 text-gray-400 dark:text-gray-200">
                   <img
-                    src="http://136.228.158.126:50005/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
+                    src="https://english-api.cstad.shop/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
                     alt="logo/image"
                   />
                 </div>

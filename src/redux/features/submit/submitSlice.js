@@ -6,7 +6,7 @@ export const submitAnswer = createAsyncThunk(
         const { uuid, ...body } = data;
         //console.log("data:" , data);
         try {
-            const response = await fetch(`http://136.228.158.126:50005/exercise/${uuid}/submit_answer/`, {
+            const response = await fetch(`https://english-api.cstad.shop/exercise/${uuid}/submit_answer/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

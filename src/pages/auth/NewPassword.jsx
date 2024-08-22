@@ -80,7 +80,7 @@ export default function NewPassword() {
       <div className="flex justify-center items-center flex-col lg:flex-row w-full py-8 lg:w-4/5 bg-gray-100 rounded-tr-[50px] md:rounded-tr-[100px] rounded-bl-[50px]  md:rounded-bl-[100px]  overflow-hidden">
         <div className="flex w-full lg:w-1/2 items-center justify-center bg-gray-100 py-2">
           <img
-            src="http://136.228.158.126:50005/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
+            src="https://english-api.cstad.shop/files/077018c8-ccc4-4a1a-bb45-30deafd41b8e.png"
             alt="English Club Logo"
             className="w-3/4 lg:w-3/5 md:w-1/2"
           />

@@ -61,7 +61,7 @@ export const fetchVerifyEmail = createAsyncThunk(
             email,
         });
         const response = await fetch(
-            `${BASE_URL}/request/reset-password?email=${email}`, {
+            `https://english-api.cstad.shop/request/reset-password?email=${email}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export const fetchEmailOtp = createAsyncThunk(
     "user/fetchEmailOtp",
     async({ email, otp }) => {
         const response = await axios.post(
-            `${BASE_URL}/request/reset-password/otp-verify`, {
+            `https://english-api.cstad.shop/request/reset-password/otp-verify`, {
                 email,
                 otp,
             }, {
@@ -101,7 +101,7 @@ export const fetchNewPassword = createAsyncThunk(
             new_password,
             confirm_password,
         });
-        const response = await fetch(`${BASE_URL}/reset-password`, {
+        const response = await fetch(`https://english-api.cstad.shop/reset-password/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export const fetchUserLogin = createAsyncThunk(
             email,
             password,
         });
-        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/login`, {
+        const response = await fetch(`https://english-api.cstad.shop/login/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -149,7 +149,7 @@ export const fetchUpdateUserInfo = createAsyncThunk(
             bio
         });
 
-        const response = await fetch(`${BASE_URL}/users/${user_uuid}`, {
+        const response = await fetch(`https://english-api.cstad.shop/users/${user_uuid}/`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${token}`,

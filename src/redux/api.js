@@ -1,1 +1,1 @@
-export const BASE_URL = "http://136.228.158.126:50005";
+export const BASE_URL = "https://english-api.cstad.shop";

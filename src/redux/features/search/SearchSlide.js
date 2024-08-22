@@ -14,7 +14,7 @@ export const fetchSearch = createAsyncThunk(
   async (searchInput, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://136.228.158.126:50005/search?title=${searchInput}`
+        `https://english-api.cstad.shop/search?title=${searchInput}/`
       );
       return response.data.payload || [];
     } catch (error) {

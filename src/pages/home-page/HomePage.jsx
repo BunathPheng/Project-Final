@@ -38,7 +38,14 @@ export default function HomePage() {
           loop
           preload="auto"
         >
+<<<<<<< HEAD
           <source src={videos} type="video/mp4" />
+=======
+          <source
+            src="https://english-api.cstad.shop/files/176fc750-d6e7-4e06-a9f2-f9ce37ddbc56.mp4"
+            type="video/mp4"
+          />
+>>>>>>> ccca4de3b6f47b5b481ef84aced19aa5c58ac8e5
         </video>
         <div className="bg-black bg-opacity-40 w-full h-full absolute top-0 left-0"></div>
         <div className="z-10 p-4 text-center sm:text-left max-w-2xl">
@@ -82,7 +89,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16 ">
               <div className="grid place-items-start">
                 <img
-                  src="src/assets/img/Nerd-amico.png"
+                  src="https://english-api.cstad.shop/files/436e5a2c-afb4-4af0-97c4-d5249894017d.png"
                   alt="Illustration 1"
                   className="w-[500px] object-cover"
                   data-aos="zoom-in-up"
@@ -150,7 +157,7 @@ export default function HomePage() {
               </div>
               <div className="grid place-items-end order-first md:order-last">
                 <img
-                  src="src/assets/img/Learning-bro.png"
+                  src="https://english-api.cstad.shop/files/8bdd50ba-1871-44f2-a5fe-58e69a7e562a.png"
                   alt="Illustration 2"
                   className="w-[500px] object-cover"
                   data-aos="zoom-in-up"
@@ -161,7 +168,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
               <div className="grid place-items-start">
                 <img
-                  src="src/assets/img/Education-cuate.png"
+                  src="https://english-api.cstad.shop/files/54cd2c63-6e94-46c8-896b-eb7711aa1486.png"
                   alt="Illustration 1"
                   className="w-[500px] object-cover"
                   data-aos="zoom-in-up"

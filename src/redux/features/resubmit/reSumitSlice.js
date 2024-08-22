@@ -19,7 +19,7 @@ export const fetchResubmitExercise = createAsyncThunk(
         });
 
         try {
-            const response = await fetch(`${BASE_URL}/exercise/submit_answer/try_again`, {
+            const response = await fetch(`https://english-api.cstad.shop/exercise/submit_answer/try_again/`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
